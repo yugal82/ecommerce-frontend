@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, MagnifyingGlassIcon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 const user = {
   name: 'Tom Cook',
@@ -9,11 +10,8 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 };
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
+  { name: 'Login', href: '/login', current: false },
+  { name: 'Signup', href: '/signup', current: false },
 ];
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -34,16 +32,26 @@ const Navbar = () => {
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
-                  <div className="flex items-center">
+                  <div className="w-full flex items-center justify-between">
                     <div className="flex-shrink-0">
-                      <span className="text-white font-semibold text-2xl">Ecommerce</span>
+                      <Link to="/" className="text-white font-semibold text-2xl">
+                        Ecommerce
+                      </Link>
+                    </div>
+                    <div className="relative">
+                      <MagnifyingGlassIcon className="absolute top-2 right-1 w-5 h-5 text-gray-500" />
+                      <input
+                        type="text"
+                        placeholder="Search items"
+                        className="text-black outline-none block rounded-md border-0 py-1.5 pr-28 focus:ring-0"
+                      />
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
-                          <a
+                          <Link
                             key={item.name}
-                            href={item.href}
+                            to={item.href}
                             className={classNames(
                               item.current ? 'bg-black text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                               'rounded-md px-3 py-2 text-sm font-medium'
@@ -51,7 +59,7 @@ const Navbar = () => {
                             aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -83,15 +91,15 @@ const Navbar = () => {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a
-                                    href={item.href}
+                                  <Link
+                                    to={item.href}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
                                     )}
                                   >
                                     {item.name}
-                                  </a>
+                                  </Link>
                                 )}
                               </Menu.Item>
                             ))}
@@ -118,8 +126,8 @@ const Navbar = () => {
                   {navigation.map((item) => (
                     <Disclosure.Button
                       key={item.name}
-                      as="a"
-                      href={item.href}
+                      as="Link"
+                      to={item.href}
                       className={classNames(
                         item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                         'block rounded-md px-3 py-2 text-base font-medium'
@@ -151,8 +159,8 @@ const Navbar = () => {
                     {userNavigation.map((item) => (
                       <Disclosure.Button
                         key={item.name}
-                        as="a"
-                        href={item.href}
+                        as="Link"
+                        to={item.href}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
                         {item.name}
