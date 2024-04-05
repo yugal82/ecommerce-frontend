@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
-    <div className="flex h-screen flex-1 flex-col justify-center p-6 lg:px-8">
+    <div className="p-6 lg:px-8 h-screen">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-white">Log in to your account</h2>
-      </div>
-
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6" action="#" method="POST">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-white">Log in to your account</h2>
+        </div>
+        <form className="space-y-6 mt-6" action="#" method="POST">
           <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-white">
               Email address
