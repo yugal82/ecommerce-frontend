@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
-    <div className="bg-[#191919] flex h-screen flex-1 flex-col justify-center p-6 lg:px-8">
+    <div className="flex h-screen flex-1 flex-col justify-center p-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-white">Log in to your account</h2>
       </div>

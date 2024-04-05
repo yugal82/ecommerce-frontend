@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Signup = () => {
   return (
-    <div className="bg-[#191919] flex min-h-screen flex-1 flex-col justify-center p-6 lg:px-8">
+    <div className="flex min-h-screen flex-1 flex-col justify-center p-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
           Create your new account

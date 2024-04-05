@@ -30,7 +30,7 @@ const Navbar = () => {
         <Disclosure as="nav" className="bg-black">
           {({ open }) => (
             <>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                   <div className="w-full flex items-center justify-between">
                     <div className="flex-shrink-0">
@@ -66,10 +66,12 @@ const Navbar = () => {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-4 w-full flex items-center md:ml-6">
-                      <button type="button" className="relative rounded-full p-1 text-gray-400 hover:text-white">
-                        <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                        <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">1</span>
-                      </button>
+                      <Link to="/cart">
+                        <button type="button" className="relative rounded-full p-1 text-gray-400 hover:text-white">
+                          <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                          <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">1</span>
+                        </button>
+                      </Link>
 
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
@@ -110,7 +112,7 @@ const Navbar = () => {
                   </div>
                   <div className="-mr-2 flex md:hidden">
                     {/* Mobile menu button */}
-                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-black p-2 text-gray-100 hover:text-white">
+                    <Disclosure.Button className="relative py-2 inline-flex items-center justify-center rounded-md bg-black p-2 text-gray-100 hover:text-white">
                       {open ? (
                         <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                       ) : (
@@ -147,12 +149,15 @@ const Navbar = () => {
                       <div className="text-base font-medium leading-none text-white">{user.name}</div>
                       <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
                     </div>
+
                     <button
                       type="button"
                       className="relative ml-auto flex-shrink-0 rounded-full p-1 text-gray-400 hover:text-white"
                     >
-                      <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">1</span>
-                      <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                      <Link to="/cart">
+                        <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">1</span>
+                        <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                      </Link>
                     </button>
                   </div>
                   <div className="mt-3 space-y-1 px-2">

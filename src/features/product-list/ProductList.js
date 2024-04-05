@@ -108,7 +108,7 @@ const ProductList = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
-    <div className="bg-[#191919]">
+    <div className="">
       <div>
         {/* Mobile filter dialog */}
         <FilterSidebarMobile
