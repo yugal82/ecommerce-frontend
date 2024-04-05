@@ -4,8 +4,7 @@ import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
 
 const FilterSidebar = ({ filters }) => {
   return (
-    <form className="hidden lg:block">
-      <h3 className="sr-only">Categories</h3>
+    <form className="hidden lg:block w-2/12">
       {filters.map((section) => (
         <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
           {({ open }) => (

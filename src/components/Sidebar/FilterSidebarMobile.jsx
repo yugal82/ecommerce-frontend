@@ -37,15 +37,12 @@ const FilterSidebarMobile = ({ filters, mobileFiltersOpen, setMobileFiltersOpen 
                   className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md p-2 text-white outline-none"
                   onClick={() => setMobileFiltersOpen(false)}
                 >
-                  <span className="sr-only">Close menu</span>
                   <XMarkIcon className="h-6 w-6 outline-none" aria-hidden="true" />
                 </button>
               </div>
 
               {/* Filters */}
               <form className="mt-4 border-t border-gray-200">
-                <h3 className="sr-only">Categories</h3>
-
                 {filters.map((section) => (
                   <Disclosure as="div" key={section.id} className="border-t border-gray-200 px-4 py-6">
                     {({ open }) => (
