@@ -1,11 +1,11 @@
 import React, { useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, incrementAsync, selectCount } from './productListSlice';
+import { increment, incrementAsync, selectCount } from '../productSlice';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon, Squares2X2Icon } from '@heroicons/react/20/solid';
-import ProductsGrid from '../../components/product-components/Products-grid';
-import FilterSidebar from '../../components/Sidebar/FilterSidebar';
-import FilterSidebarMobile from '../../components/Sidebar/FilterSidebarMobile';
+import ProductsGrid from './ProductsGrid';
+import FilterSidebar from '../../../components/Sidebar/FilterSidebar';
+import FilterSidebarMobile from '../../../components/Sidebar/FilterSidebarMobile';
 
 // color - #43a08f
 // bg-color - #191919
