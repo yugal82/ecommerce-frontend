@@ -27,14 +27,17 @@ const Navbar = () => {
   return (
     <>
       <div className="min-h-full">
-        <Disclosure as="nav" className="bg-black">
+        <Disclosure as="nav" className="bg-black backdrop-filter backdrop-blur shadow-2xl">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl py-2 px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                   <div className="w-full flex items-center justify-between">
                     <div className="flex-shrink-0">
-                      <Link to="/" className="text-white font-semibold text-2xl">
+                      <Link
+                        to="/"
+                        className="text-transparent bg-clip-text bg-gradient-to-r from-[#43a08f] to-[#2d7a6c] font-bold text-2xl md:text-3xl"
+                      >
                         Ecommerce
                       </Link>
                     </div>
@@ -126,18 +129,19 @@ const Navbar = () => {
               <Disclosure.Panel className="md:hidden bg-black">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map((item) => (
-                    <Disclosure.Button
-                      key={item.name}
-                      as="Link"
-                      to={item.href}
-                      className={classNames(
-                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                        'block rounded-md px-3 py-2 text-base font-medium'
-                      )}
-                      aria-current={item.current ? 'page' : undefined}
-                    >
-                      {item.name}
-                    </Disclosure.Button>
+                    <Link to={item?.href}>
+                      <Disclosure.Button
+                        key={item.name}
+                        as="div"
+                        className={classNames(
+                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'block rounded-md px-3 py-2 text-base font-medium'
+                        )}
+                        aria-current={item.current ? 'page' : undefined}
+                      >
+                        {item.name}
+                      </Disclosure.Button>
+                    </Link>
                   ))}
                 </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">

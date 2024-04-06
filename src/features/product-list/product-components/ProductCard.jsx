@@ -2,8 +2,8 @@ import React from 'react';
 
 const ProductCard = ({ product }) => {
   return (
-    <div key={product.id} className="group relative bg-[#121212] cursor-pointer hover:shadow-sm hover:shadow-[#3e3e3e]">
-      <div className="aspect-h-1 aspect-w-1 px-2 w-full overflow-hidden  lg:h-80">
+    <div key={product.id} className="bg-[#121212] cursor-pointer hover:shadow-sm hover:shadow-[#3e3e3e] rounded-xl">
+      <div className="w-full lg:h-76">
         <img
           src={product.imageSrc}
           alt={product.imageAlt}
