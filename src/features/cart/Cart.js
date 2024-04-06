@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const products = [
   {
     id: 1,
@@ -98,12 +100,12 @@ const Cart = () => {
           </div>
           <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
           <div className="mt-6 flex items-center justify-end">
-            <a
-              href="#"
+            <Link
+              to="/checkout"
               className="rounded-md border border-transparent bg-[#43a08f] px-6 py-3 text-base font-semibold text-white shadow-sm"
             >
               Checkout
-            </a>
+            </Link>
           </div>
         </div>
       </div>
