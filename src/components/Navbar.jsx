@@ -41,7 +41,7 @@ const Navbar = () => {
                         Ecommerce
                       </Link>
                     </div>
-                    <div className="relative">
+                    <div className="relative hidden md:block">
                       <MagnifyingGlassIcon className="absolute top-2 right-1 w-5 h-5 text-gray-500" />
                       <input
                         type="text"
@@ -127,6 +127,14 @@ const Navbar = () => {
               </div>
 
               <Disclosure.Panel className="md:hidden bg-black">
+                <div className="relative px-2">
+                  <MagnifyingGlassIcon className="absolute top-2 right-4 w-5 h-5 text-gray-500" />
+                  <input
+                    type="text"
+                    placeholder="Search items"
+                    className="w-full bg-transparent text-[#43a08f] outline-none block rounded-md border border-gray-500 py-1.5 pr-0 sm:pr-28 focus:ring-0 focus:border-[#43a08f]"
+                  />
+                </div>
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map((item) => (
                     <Link to={item?.href}>

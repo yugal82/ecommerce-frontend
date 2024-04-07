@@ -2,18 +2,10 @@ import React from 'react';
 
 const ProductCard = ({ product }) => {
   return (
-    // <div key={product.id} className="bg-[#121212] h-full  cursor-pointer hover:shadow-sm hover:shadow-[#3e3e3e]">
-    //   <div className="w-full">
-    //     <img src={product.imageSrc} alt={product.imageAlt} className="min-h-56 max-h-60 w-full" />
-    //   </div>
-
-    //   <div className="p-2 text-base font-semibold text-white">{product.name}</div>
-    //   <div className="w-full p-2 bg-[#121212] flex items-end justify-between">
-    //     <div className="mt-1 text-sm text-gray-400">Black</div>
-    //     <p className="text-base font-semibold text-white">{product.price}</p>
-    //   </div>
-    // </div>
-    <div key={product.id} className="group relative bg-[#121212] rounded-md">
+    <div
+      key={product.id}
+      className="group relative bg-[#1c1c1c] rounded-md shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
+    >
       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 max-h-76">
         <img
           src={product.imageSrc}
