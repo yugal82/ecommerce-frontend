@@ -6,6 +6,7 @@ import { ChevronDownIcon, FunnelIcon, Squares2X2Icon } from '@heroicons/react/20
 import ProductsGrid from './ProductsGrid';
 import FilterSidebar from '../../../components/Sidebar/FilterSidebar';
 import FilterSidebarMobile from '../../../components/Sidebar/FilterSidebarMobile';
+import { products } from '../constant';
 
 // color - #43a08f
 // bg-color - #191919
@@ -60,44 +61,44 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const products = [
-  {
-    id: 1,
-    name: 'Basic Tee',
-    href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
-  },
-  {
-    id: 2,
-    name: 'Basic Tee',
-    href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
-  },
-  {
-    id: 3,
-    name: 'Basic Tee',
-    href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
-  },
-  {
-    id: 4,
-    name: 'Basic Tee',
-    href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: '$35',
-    color: 'Black',
-  },
-];
+// const products = [
+//   {
+//     id: 1,
+//     name: 'Basic Tee',
+//     href: '#',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+//     imageAlt: "Front of men's Basic Tee in black.",
+//     price: '$35',
+//     color: 'Black',
+//   },
+//   {
+//     id: 2,
+//     name: 'Basic Tee',
+//     href: '#',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+//     imageAlt: "Front of men's Basic Tee in black.",
+//     price: '$35',
+//     color: 'Black',
+//   },
+//   {
+//     id: 3,
+//     name: 'Basic Tee',
+//     href: '#',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+//     imageAlt: "Front of men's Basic Tee in black.",
+//     price: '$35',
+//     color: 'Black',
+//   },
+//   {
+//     id: 4,
+//     name: 'Basic Tee',
+//     href: '#',
+//     imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+//     imageAlt: "Front of men's Basic Tee in black.",
+//     price: '$35',
+//     color: 'Black',
+//   },
+// ];
 
 const ProductList = () => {
   // redux states and dispatch

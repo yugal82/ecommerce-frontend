@@ -1,10 +1,10 @@
 import React from 'react';
-import ProductList from '../features/product-list/product-components/ProductList';
+import Products from '../features/product-list/product-components/Products';
 
 const Home = () => {
   return (
     <>
-      <ProductList />
+      <Products />
     </>
   );
 };
