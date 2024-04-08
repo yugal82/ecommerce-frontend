@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
 
-const FilterSidebar = ({ filters }) => {
+const FilterSidebar = ({ filters, getProductsByFiltersAsync, dispatch }) => {
+  const [queryFilters, setQueryFilters] = useState({});
+
+  const handleFilters = (e, section, option) => {
+    const newFilters = { ...queryFilters, [section.id]: option.value };
+    setQueryFilters(newFilters);
+    dispatch(getProductsByFiltersAsync(newFilters));
+  };
+
   return (
     <form className="hidden lg:block w-3/12">
       {filters.map((section) => (
@@ -31,9 +39,13 @@ const FilterSidebar = ({ filters }) => {
                         defaultValue={option.value}
                         type="checkbox"
                         defaultChecked={option.checked}
+                        onChange={(e) => handleFilters(e, section, option)}
                         className="h-4 w-4 rounded border-gray-300 text-[#43a08f]"
                       />
-                      <label htmlFor={`filter-${section.id}-${optionIdx}`} className="ml-3 text-sm text-white">
+                      <label
+                        htmlFor={`filter-${section.id}-${optionIdx}`}
+                        className="capitalize ml-3 text-sm text-white"
+                      >
                         {option.label}
                       </label>
                     </div>

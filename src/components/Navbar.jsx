@@ -136,8 +136,8 @@ const Navbar = () => {
                   />
                 </div>
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                  {navigation.map((item) => (
-                    <Link to={item?.href}>
+                  {navigation.map((item, idx) => (
+                    <Link key={idx} to={item?.href}>
                       <Disclosure.Button
                         key={item.name}
                         as="div"

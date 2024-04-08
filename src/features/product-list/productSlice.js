@@ -1,24 +1,26 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchCount } from './productAPI';
+import { getAllProducts, getProductsByFilters } from './productAPI';
 
+// initial states
 const initialState = {
-  value: 0,
+  products: [],
   status: 'idle',
 };
 
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched. Thunks are
-// typically used to make async requests.
-export const incrementAsync = createAsyncThunk('counter/fetchCount', async (amount) => {
-  const response = await fetchCount(amount);
-  // The value we return becomes the `fulfilled` action payload
+// async thunk - used for getting the status of API calls.
+export const getAllProductsAsync = createAsyncThunk('product/getAllProducts', async () => {
+  const response = await getAllProducts();
   return response.data;
 });
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const getProductsByFiltersAsync = createAsyncThunk('product/getProductsByFilters', async (filters) => {
+  const response = await getProductsByFilters(filters);
+  return response.data;
+});
+
+// slice
+export const productSlice = createSlice({
+  name: 'product',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -28,21 +30,23 @@ export const counterSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(incrementAsync.pending, (state) => {
+      .addCase(getAllProductsAsync.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(incrementAsync.fulfilled, (state, action) => {
+      .addCase(getAllProductsAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.value += action.payload;
+        state.products = action.payload;
+      })
+      .addCase(getProductsByFiltersAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getProductsByFiltersAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        state.products = action.payload;
       });
   },
 });
 
-export const { increment } = counterSlice.actions;
+export const selectAllProducts = (state) => state.products.products;
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectCount = (state) => state.counter.value;
-
-export default counterSlice.reducer;
+export default productSlice.reducer;

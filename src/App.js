@@ -9,6 +9,9 @@ import Signup from './components/auth/Signup';
 import Checkout from './features/checkout/Checkout';
 import ProductDetails from './features/product-list/product-components/ProductDetails';
 
+// color - #43a08f
+// bg-color - #191919
+
 function App() {
   return (
     <div className="App bg-[#2d2d2d]">

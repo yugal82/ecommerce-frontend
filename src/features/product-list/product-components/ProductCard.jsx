@@ -4,9 +4,9 @@ const ProductCard = ({ product }) => {
   return (
     <div
       key={product.id}
-      className="group relative bg-[#1c1c1c] rounded-md shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
+      className="group relative bg-[#1c1c1c] rounded-md shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out border-none outline-none"
     >
-      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 max-h-76">
+      <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-60 border-none outline-none">
         <img
           src={product.imageSrc}
           alt={product.imageAlt}
@@ -24,8 +24,11 @@ const ProductCard = ({ product }) => {
           <p className="mt-1 text-sm text-white">{product.color}</p>
         </div>
         <div className="flex items-center">
-          <p className="text-base font-semibold text-white">${product.price}</p>
-          <p className="text-sm ml-1 font-medium text-gray-400 line-through">${product.price}</p>
+          <p className="text-base font-semibold text-white">
+            ${Math.round(product.price * (1 - product.discountPercentage / 100))}
+          </p>
+          <p className=" text-sm ml-1 font-medium text-gray-400 line-through">${product.price}</p>
+          <small className="text-xs font-semibold ml-1 text-[#43a08f]">{product?.discountPercentage}% Off</small>
         </div>
       </div>
     </div>

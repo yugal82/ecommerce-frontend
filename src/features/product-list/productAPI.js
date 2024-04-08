@@ -1,9 +1,29 @@
-const fetchCount = (amount = 1) => {
-  return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080');
-    const result = await response.json();
-    resolve({ result });
-  });
+import axios from 'axios';
+
+const getAllProducts = async () => {
+  try {
+    const url = 'http://localhost:8080/products';
+    const response = await axios.get(url);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export { fetchCount };
+const getProductsByFilters = async (filters) => {
+  try {
+    // filter = {"category": "smartphone"}
+    // currently we only support one query at a time. TODO: while implementing the backend, we should be able to add multiple filters.
+    let queryString = '';
+    for (let key in filters) {
+      queryString += `${key}=${filters[key]}&`;
+    }
+    const url = `http://localhost:8080/products?` + queryString;
+    const response = await axios.get(url);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getAllProducts, getProductsByFilters };
