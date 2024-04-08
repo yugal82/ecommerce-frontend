@@ -1,9 +1,23 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Dialog, Disclosure, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { MinusIcon, PlusIcon } from '@heroicons/react/20/solid';
 
-const FilterSidebarMobile = ({ filters, mobileFiltersOpen, setMobileFiltersOpen }) => {
+const FilterSidebarMobile = ({
+  filters,
+  mobileFiltersOpen,
+  setMobileFiltersOpen,
+  getProductsByFiltersAsync,
+  dispatch,
+}) => {
+  const [queryFilters, setQueryFilters] = useState({});
+
+  const handleFilters = (e, section, option) => {
+    const newFilters = { ...queryFilters, [section.id]: option.value };
+    setQueryFilters(newFilters);
+    dispatch(getProductsByFiltersAsync(newFilters));
+  };
+
   return (
     <Transition.Root show={mobileFiltersOpen} as={Fragment}>
       <Dialog as="div" className="relative z-40 lg:hidden" onClose={setMobileFiltersOpen}>
@@ -69,6 +83,7 @@ const FilterSidebarMobile = ({ filters, mobileFiltersOpen, setMobileFiltersOpen 
                                   defaultValue={option.value}
                                   type="checkbox"
                                   defaultChecked={option.checked}
+                                  onChange={(e) => handleFilters(e, section, option)}
                                   className="h-4 w-4 rounded border-gray-300 text-[#43a08f]"
                                 />
                                 <label

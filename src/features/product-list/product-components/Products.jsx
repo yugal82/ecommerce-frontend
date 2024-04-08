@@ -5,14 +5,17 @@ import { ChevronDownIcon, FunnelIcon, Squares2X2Icon } from '@heroicons/react/20
 import ProductsGrid from './ProductsGrid';
 import FilterSidebar from '../../../components/Sidebar/FilterSidebar';
 import FilterSidebarMobile from '../../../components/Sidebar/FilterSidebarMobile';
-import { getAllProductsAsync, getProductsByFiltersAsync, selectAllProducts } from '../productSlice';
+import {
+  getAllProductsAsync,
+  getProductsByFiltersAsync,
+  selectAllProducts,
+  getProductsBySortFilterAsync,
+} from '../productSlice';
 
 const sortOptions = [
-  { name: 'Most Popular', href: '#', current: true },
-  { name: 'Best Rating', href: '#', current: false },
-  { name: 'Newest', href: '#', current: false },
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
+  { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
+  { name: 'Price: Low to High', sort: 'price', order: 'asc', current: false },
+  { name: 'Price: High to Low', sort: 'price', order: 'desc', current: false },
 ];
 
 const filters = [
@@ -66,6 +69,10 @@ const ProductList = () => {
   // states
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
+  const handleSortFilterClick = (e, option) => {
+    dispatch(getProductsBySortFilterAsync(option));
+  };
+
   useEffect(() => {
     dispatch(getAllProductsAsync());
   }, []);
@@ -78,6 +85,8 @@ const ProductList = () => {
           filters={filters}
           mobileFiltersOpen={mobileFiltersOpen}
           setMobileFiltersOpen={setMobileFiltersOpen}
+          getProductsByFiltersAsync={getProductsByFiltersAsync}
+          dispatch={dispatch}
         />
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-end border-b border-gray-200 py-10">
@@ -107,8 +116,8 @@ const ProductList = () => {
                       {sortOptions.map((option) => (
                         <Menu.Item key={option.name}>
                           {({ active }) => (
-                            <a
-                              href={option.href}
+                            <span
+                              onClick={(e) => handleSortFilterClick(e, option)}
                               className={classNames(
                                 option.current ? 'font-medium text-gray-900' : 'text-gray-500',
                                 active ? 'bg-gray-100' : '',
@@ -116,7 +125,7 @@ const ProductList = () => {
                               )}
                             >
                               {option.name}
-                            </a>
+                            </span>
                           )}
                         </Menu.Item>
                       ))}
