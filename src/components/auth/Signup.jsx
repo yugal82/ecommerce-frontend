@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { createUserAsync, selectLoggedInUser } from '../../features/auth/authSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Signup = () => {
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
+
   const {
     register,
     handleSubmit,
@@ -11,10 +16,9 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  console.log(errors);
-
   return (
     <div className="p-6 lg:px-8 h-screen">
+      {user?.email}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-white">
@@ -24,7 +28,7 @@ const Signup = () => {
         <form
           className="space-y-6 mt-6"
           onSubmit={handleSubmit((data) => {
-            console.log(data);
+            // dispatch(createUserAsync({ email: data.email, password: data.password }));
             reset({ email: '', password: '', confirmPassword: '' });
           })}
         >
