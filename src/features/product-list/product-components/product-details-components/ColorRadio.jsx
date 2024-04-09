@@ -20,7 +20,7 @@ const ColorRadio = ({ selectedColor, setSelectedColor, product }) => {
               className={({ active, checked }) =>
                 classNames(
                   color.selectedClass,
-                  active && checked ? 'ring ring-[#43a08f] ring-offset-1' : '',
+                  active && checked ? 'ring ring-primary ring-offset-1' : '',
                   !active && checked ? 'ring-2' : '',
                   'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
                 )

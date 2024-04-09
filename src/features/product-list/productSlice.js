@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getAllProducts, getProductsByFilters, getProductsBySortFilter } from './productAPI';
+import { getProductsByFilters, getProductsBySortFilter } from './productAPI';
 
 // initial states
 const initialState = {
@@ -8,11 +8,6 @@ const initialState = {
 };
 
 // async thunk - used for getting the status of API calls.
-export const getAllProductsAsync = createAsyncThunk('product/getAllProducts', async () => {
-  const response = await getAllProducts();
-  return response.data;
-});
-
 export const getProductsByFiltersAsync = createAsyncThunk('product/getProductsByFilters', async (filters) => {
   const response = await getProductsByFilters(filters);
   return response.data;
@@ -35,13 +30,6 @@ export const productSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getAllProductsAsync.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(getAllProductsAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.products = action.payload;
-      })
       .addCase(getProductsByFiltersAsync.pending, (state) => {
         state.status = 'loading';
       })

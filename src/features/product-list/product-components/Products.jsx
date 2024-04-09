@@ -1,16 +1,11 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon, Squares2X2Icon } from '@heroicons/react/20/solid';
 import ProductsGrid from './ProductsGrid';
 import FilterSidebar from '../../../components/Sidebar/FilterSidebar';
 import FilterSidebarMobile from '../../../components/Sidebar/FilterSidebarMobile';
-import {
-  getAllProductsAsync,
-  getProductsByFiltersAsync,
-  selectAllProducts,
-  getProductsBySortFilterAsync,
-} from '../productSlice';
+import { getProductsByFiltersAsync, selectAllProducts, getProductsBySortFilterAsync } from '../productSlice';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -73,9 +68,9 @@ const ProductList = () => {
     dispatch(getProductsBySortFilterAsync(option));
   };
 
-  useEffect(() => {
-    dispatch(getAllProductsAsync());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllProductsAsync());
+  // }, [dispatch]);
 
   return (
     <div className="">

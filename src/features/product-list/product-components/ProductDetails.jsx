@@ -88,7 +88,7 @@ const ProductDetails = () => {
                     <StarIcon
                       key={rating}
                       className={classNames(
-                        reviews.average > rating ? 'text-[#43a08f]' : 'text-white',
+                        reviews.average > rating ? 'text-primary' : 'text-white',
                         'h-5 w-5 flex-shrink-0'
                       )}
                       aria-hidden="true"
@@ -96,7 +96,7 @@ const ProductDetails = () => {
                   ))}
                 </div>
                 <p className="sr-only">{reviews.average} out of 5 stars</p>
-                <a href={reviews.href} className="ml-3 text-sm font-medium text-[#43a08f]">
+                <a href={reviews.href} className="ml-3 text-sm font-medium text-primary">
                   {reviews.totalCount} reviews
                 </a>
               </div>
@@ -111,7 +111,7 @@ const ProductDetails = () => {
 
               <button
                 type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-[#43a08f] px-8 py-3 text-base font-medium text-white"
+                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white"
               >
                 Add to cart
               </button>

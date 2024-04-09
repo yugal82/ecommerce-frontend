@@ -102,7 +102,7 @@ const Cart = () => {
           <div className="mt-6 flex items-center justify-end">
             <Link
               to="/checkout"
-              className="rounded-md border border-transparent bg-[#43a08f] px-6 py-3 text-base font-semibold text-white shadow-sm"
+              className="rounded-md border border-transparent bg-primary px-6 py-3 text-base font-semibold text-white shadow-sm"
             >
               Checkout
             </Link>

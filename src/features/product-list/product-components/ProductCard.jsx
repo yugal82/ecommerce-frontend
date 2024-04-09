@@ -28,7 +28,7 @@ const ProductCard = ({ product }) => {
             ${Math.round(product.price * (1 - product.discountPercentage / 100))}
           </p>
           <p className=" text-sm ml-1 font-medium text-gray-400 line-through">${product.price}</p>
-          <small className="text-xs font-semibold ml-1 text-[#43a08f]">{product?.discountPercentage}% Off</small>
+          <small className="text-xs font-semibold ml-1 text-primary">{product?.discountPercentage}% Off</small>
         </div>
       </div>
     </div>

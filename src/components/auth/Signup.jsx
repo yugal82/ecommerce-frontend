@@ -66,7 +66,7 @@ const Signup = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-[#43a08f] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm"
+              className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm"
             >
               Create account
             </button>
@@ -74,7 +74,7 @@ const Signup = () => {
         </form>
         <p className="mt-10 text-center text-sm text-gray-500">
           Already a member?{' '}
-          <Link to="/login" className="font-semibold leading-6 text-[#43a08f] hover:text-[#2e6358]">
+          <Link to="/login" className="font-semibold leading-6 text-primary hover:text-secondary">
             Log in here
           </Link>
         </p>

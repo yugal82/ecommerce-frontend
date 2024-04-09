@@ -27,7 +27,7 @@ const AddressList = () => {
                 <Listbox.Option
                   key={idx}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 pl-10 pr-4 text-gray-900 ${active ? 'bg-[#43a08f]' : ''}`
+                    `relative cursor-default select-none py-2 pl-10 pr-4 text-gray-900 ${active ? 'bg-primary' : ''}`
                   }
                   value={address}
                 >

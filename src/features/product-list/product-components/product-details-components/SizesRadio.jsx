@@ -10,7 +10,7 @@ const SizesRadio = ({ selectedSize, setSelectedSize, product }) => {
     <div className="mt-6">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium text-white">Size</h3>
-        <span className="text-sm font-medium text-[#43a08f]">Size guide</span>
+        <span className="text-sm font-medium text-primary">Size guide</span>
       </div>
 
       <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
@@ -24,8 +24,8 @@ const SizesRadio = ({ selectedSize, setSelectedSize, product }) => {
               className={({ active }) =>
                 classNames(
                   size.inStock
-                    ? 'cursor-pointer bg-white text-[#43a08f] shadow-sm'
-                    : 'cursor-not-allowed bg-gray-50 text-[#43a08f]',
+                    ? 'cursor-pointer bg-white text-primary shadow-sm'
+                    : 'cursor-not-allowed bg-gray-50 text-primary',
                   'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
                 )
               }
@@ -37,7 +37,7 @@ const SizesRadio = ({ selectedSize, setSelectedSize, product }) => {
                     <span
                       className={classNames(
                         active ? 'border' : 'border-2',
-                        checked ? 'border-[#43a08f]' : 'border-transparent',
+                        checked ? 'border-primary' : 'border-transparent',
                         'pointer-events-none absolute -inset-px rounded-md'
                       )}
                       aria-hidden="true"

@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const getAllProducts = async () => {
-  try {
-    const url = 'http://localhost:8080/products';
-    const response = await axios.get(url);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const getAllProducts = async () => {
+//   try {
+//     const url = 'http://localhost:8080/products';
+//     const response = await axios.get(url);
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 const getProductsByFilters = async (filters) => {
   try {
@@ -36,4 +36,4 @@ const getProductsBySortFilter = async (sortFilter) => {
   }
 };
 
-export { getAllProducts, getProductsByFilters, getProductsBySortFilter };
+export { getProductsByFilters, getProductsBySortFilter };

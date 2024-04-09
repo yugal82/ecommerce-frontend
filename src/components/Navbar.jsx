@@ -36,7 +36,7 @@ const Navbar = () => {
                     <div className="flex-shrink-0">
                       <Link
                         to="/"
-                        className="text-transparent bg-clip-text bg-gradient-to-r from-[#43a08f] to-[#2d7a6c] font-bold text-2xl md:text-3xl"
+                        className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-bold text-2xl md:text-3xl"
                       >
                         Ecommerce
                       </Link>
@@ -132,7 +132,7 @@ const Navbar = () => {
                   <input
                     type="text"
                     placeholder="Search items"
-                    className="w-full bg-transparent text-[#43a08f] outline-none block rounded-md border border-gray-500 py-1.5 pr-0 sm:pr-28 focus:ring-0 focus:border-[#43a08f]"
+                    className="w-full bg-transparent text-primary outline-none block rounded-md border border-gray-500 py-1.5 pr-0 sm:pr-28 focus:ring-0 focus:border-primary"
                   />
                 </div>
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">

@@ -84,7 +84,7 @@ const FilterSidebarMobile = ({
                                   type="checkbox"
                                   defaultChecked={option.checked}
                                   onChange={(e) => handleFilters(e, section, option)}
-                                  className="h-4 w-4 rounded border-gray-300 text-[#43a08f]"
+                                  className="h-4 w-4 rounded border-gray-300 text-primary"
                                 />
                                 <label
                                   htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
