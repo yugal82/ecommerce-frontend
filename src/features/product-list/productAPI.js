@@ -36,4 +36,24 @@ const getProductsBySortFilter = async (sortFilter) => {
   }
 };
 
-export { getProductsByFilters, getProductsBySortFilter };
+const getCategories = async () => {
+  try {
+    const url = 'http://localhost:8080/categories';
+    const response = await axios.get(url);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getBrands = async () => {
+  try {
+    const url = 'http://localhost:8080/brands';
+    const response = await axios.get(url);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getProductsByFilters, getProductsBySortFilter, getCategories, getBrands };

@@ -1,55 +1,24 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon, Squares2X2Icon } from '@heroicons/react/20/solid';
 import ProductsGrid from './ProductsGrid';
 import FilterSidebar from '../../../components/Sidebar/FilterSidebar';
 import FilterSidebarMobile from '../../../components/Sidebar/FilterSidebarMobile';
-import { getProductsByFiltersAsync, selectAllProducts, getProductsBySortFilterAsync } from '../productSlice';
+import {
+  getProductsByFiltersAsync,
+  selectAllProducts,
+  getProductsBySortFilterAsync,
+  selectAllBrands,
+  selectAllCategories,
+  getBrandsAsync,
+  getCategoriesAsync,
+} from '../productSlice';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
   { name: 'Price: Low to High', sort: 'price', order: 'asc', current: false },
   { name: 'Price: High to Low', sort: 'price', order: 'desc', current: false },
-];
-
-const filters = [
-  {
-    id: 'color',
-    name: 'Color',
-    options: [
-      { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: false },
-      { value: 'brown', label: 'Brown', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
-    ],
-  },
-  {
-    id: 'category',
-    name: 'Category',
-    options: [
-      { value: 'smartphones', label: 'smartphones', checked: false },
-      { value: 'laptops', label: 'laptops', checked: false },
-      { value: 'fragrances', label: 'fragrances', checked: false },
-      { value: 'skincare', label: 'skincare', checked: false },
-      { value: 'groceries', label: 'groceries', checked: false },
-      { value: 'home-decoration', label: 'home decoration', checked: false },
-    ],
-  },
-  // {
-  //   id: 'size',
-  //   name: 'Size',
-  //   options: [
-  //     { value: '2l', label: '2L', checked: false },
-  //     { value: '6l', label: '6L', checked: false },
-  //     { value: '12l', label: '12L', checked: false },
-  //     { value: '18l', label: '18L', checked: false },
-  //     { value: '20l', label: '20L', checked: false },
-  //     { value: '40l', label: '40L', checked: true },
-  //   ],
-  // },
 ];
 
 function classNames(...classes) {
@@ -60,6 +29,8 @@ const ProductList = () => {
   // redux states and dispatch
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
+  const brands = useSelector(selectAllBrands);
+  const categories = useSelector(selectAllCategories);
 
   // states
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -68,9 +39,35 @@ const ProductList = () => {
     dispatch(getProductsBySortFilterAsync(option));
   };
 
-  // useEffect(() => {
-  //   dispatch(getAllProductsAsync());
-  // }, [dispatch]);
+  const filters = [
+    {
+      id: 'color',
+      name: 'Color',
+      options: [
+        { value: 'white', label: 'White', checked: false },
+        { value: 'beige', label: 'Beige', checked: false },
+        { value: 'blue', label: 'Blue', checked: false },
+        { value: 'brown', label: 'Brown', checked: false },
+        { value: 'green', label: 'Green', checked: false },
+        { value: 'purple', label: 'Purple', checked: false },
+      ],
+    },
+    {
+      id: 'category',
+      name: 'Category',
+      options: categories,
+    },
+    {
+      id: 'brand',
+      name: 'Brands',
+      options: brands,
+    },
+  ];
+
+  useEffect(() => {
+    dispatch(getBrandsAsync());
+    dispatch(getCategoriesAsync());
+  }, []);
 
   return (
     <div className="">
