@@ -4,15 +4,11 @@ import ImageSlider from './product-details-components/ImageSlider';
 import SizesRadio from './product-details-components/SizesRadio';
 import ColorRadio from './product-details-components/ColorRadio';
 import ProductDesc from './product-details-components/ProductDesc';
+import { useLocation } from 'react-router-dom';
 
 const product = {
   name: 'Basic Tee 6-Pack',
   price: '$192',
-  href: '#',
-  breadcrumbs: [
-    { id: 1, name: 'Men', href: '#' },
-    { id: 2, name: 'Clothing', href: '#' },
-  ],
   images: [
     {
       src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
@@ -67,6 +63,7 @@ const ProductDetails = () => {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
 
+  const { state } = useLocation();
   return (
     <div className="">
       <div className="pt-6 px-8">
