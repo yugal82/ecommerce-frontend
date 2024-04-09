@@ -1,14 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   return (
     <div className="p-6 lg:px-8 h-screen">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-white">Log in to your account</h2>
         </div>
-        <form className="space-y-6 mt-6" action="#" method="POST">
+        <form
+          className="space-y-6 mt-6"
+          onSubmit={handleSubmit((data) => {
+            console.log(data);
+            reset({ email: '', password: '' });
+          })}
+        >
           <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-white">
               Email address
@@ -16,12 +30,14 @@ const Login = () => {
             <div className="mt-2">
               <input
                 id="email"
-                name="email"
+                {...register('email', {
+                  required: 'Email is a mandatory field',
+                  pattern: { value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi, message: 'Email not valid' },
+                })}
                 type="email"
-                autoComplete="email"
-                required
                 className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm sm:text-sm sm:leading-6"
               />
+              <p className="text-red-500 font-semibold text-sm">{errors?.email?.message}</p>
             </div>
           </div>
 
@@ -39,12 +55,19 @@ const Login = () => {
             <div className="mt-2">
               <input
                 id="password"
-                name="password"
+                {...register('password', {
+                  required: 'Password is a mandatory field',
+                  pattern: {
+                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
+                    message: `- at least 8 characters\n
+                    - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
+                    - Can contain special characters\n`,
+                  },
+                })}
                 type="password"
-                autoComplete="current-password"
-                required
                 className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm sm:text-sm sm:leading-6"
               />
+              <p className="text-red-500 font-semibold text-sm">{errors?.password?.message}</p>
             </div>
           </div>
 

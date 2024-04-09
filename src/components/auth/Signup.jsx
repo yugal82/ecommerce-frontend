@@ -1,7 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 const Signup = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  console.log(errors);
+
   return (
     <div className="p-6 lg:px-8 h-screen">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -10,7 +21,13 @@ const Signup = () => {
             Create your new account
           </h2>
         </div>
-        <form className="space-y-6 mt-6" action="#" method="POST">
+        <form
+          className="space-y-6 mt-6"
+          onSubmit={handleSubmit((data) => {
+            console.log(data);
+            reset({ email: '', password: '', confirmPassword: '' });
+          })}
+        >
           <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-white">
               Email address
@@ -18,12 +35,14 @@ const Signup = () => {
             <div className="mt-2">
               <input
                 id="email"
-                name="email"
+                {...register('email', {
+                  required: 'Email is a mandatory field',
+                  pattern: { value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi, message: 'Email not valid' },
+                })}
                 type="email"
-                autoComplete="email"
-                required
-                className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
               />
+              <p className="text-red-500 font-semibold text-sm">{errors?.email?.message}</p>
             </div>
           </div>
 
@@ -36,37 +55,46 @@ const Signup = () => {
             <div className="mt-2">
               <input
                 id="password"
-                name="password"
+                {...register('password', {
+                  required: 'Password is a mandatory field',
+                  pattern: {
+                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
+                    message: `- at least 8 characters\n
+                    - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
+                    - Can contain special characters\n`,
+                  },
+                })}
                 type="password"
-                autoComplete="current-password"
-                required
-                className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
               />
+              <p className="text-red-500 font-semibold text-sm">{errors?.password?.message}</p>
             </div>
           </div>
 
           <div>
             <div className="flex items-center justify-between">
-              <label htmlFor="confirm-password" className="block text-sm font-medium leading-6 text-white">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium leading-6 text-white">
                 Confirm Password
               </label>
             </div>
             <div className="mt-2">
               <input
-                id="confirm-password"
-                name="confirm-password"
+                id="confirmPassword"
+                {...register('confirmPassword', {
+                  required: 'Please confirm your password.',
+                  validate: (value, formValue) => value === formValue.password || 'Password not matching',
+                })}
                 type="password"
-                autoComplete="current-password"
-                required
-                className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
               />
+              <p className="text-red-500 font-semibold text-sm">{errors?.confirmPassword?.message}</p>
             </div>
           </div>
 
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm"
+              className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm"
             >
               Create account
             </button>
