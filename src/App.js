@@ -8,6 +8,7 @@ import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import Checkout from './features/checkout/Checkout';
 import ProductDetails from './features/product-list/product-components/ProductDetails';
+import Protected from './components/auth/Protected';
 
 function App() {
   return (
@@ -17,8 +18,24 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/cart" element={<Cart />} />
-        <Route exact path="/checkout" element={<Checkout />} />
+        <Route
+          exact
+          path="/cart"
+          element={
+            <Protected>
+              <Cart />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/checkout"
+          element={
+            <Protected>
+              <Checkout />
+            </Protected>
+          }
+        />
         <Route exact path="/product-details/:id" element={<ProductDetails />} />
       </Routes>
     </div>
