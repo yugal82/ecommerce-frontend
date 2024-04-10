@@ -5,6 +5,9 @@ import SizesRadio from './product-details-components/SizesRadio';
 import ColorRadio from './product-details-components/ColorRadio';
 import ProductDesc from './product-details-components/ProductDesc';
 import { useLocation } from 'react-router-dom';
+import { addItemInCartAsync } from '../../cart/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectLoggedInUser } from '../../auth/authSlice';
 
 const product = {
   name: 'Basic Tee 6-Pack',
@@ -60,8 +63,10 @@ function classNames(...classes) {
 }
 
 const ProductDetails = () => {
+  const dispatch = useDispatch();
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const user = useSelector(selectLoggedInUser);
 
   const { state } = useLocation();
   return (
@@ -99,7 +104,13 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            <form className="mt-6">
+            <form
+              className="mt-6"
+              onSubmit={(e) => {
+                e.preventDefault();
+                dispatch(addItemInCartAsync({ item: state.product, quantity: 1, userId: user?.id }));
+              }}
+            >
               {/* Colors */}
               <ColorRadio selectedColor={selectedColor} setSelectedColor={setSelectedColor} product={product} />
 
