@@ -15,7 +15,7 @@ const addItemInCart = async (item) => {
 // Add all necessary changes in cartSlice.js file while building real backend server. Also keep in mind that the cart items should be dispatched (loaded) as soon as the app is loaded. i.e dispatch the corresponding thunk action in App.js
 const getItemsByUser = async (userId) => {
   try {
-    const url = `${BASE_URL}cart?user=${userId}`;
+    const url = `${BASE_URL}cart?userId=${userId}`;
     const response = await axios.get(url);
     return response;
   } catch (error) {
@@ -23,8 +23,6 @@ const getItemsByUser = async (userId) => {
   }
 };
 
-// the below function is only defined for now. It is not yet being used anywhere. However, while updating the quantity or any data of any item in the cart, we will require this function
-// Add all necessary changes in cartSlice.js fill necessary changes in carle while building real backend server.
 const updateItemInCart = async (item) => {
   try {
     const url = `${BASE_URL}cart/${item.id}`;
@@ -35,10 +33,10 @@ const updateItemInCart = async (item) => {
   }
 };
 
-// the below function is only defined for now. It is not yet being used anywhere. However, while deleting the item from the cart, we will require this function. Add all necessary changes in cartSlice.js fill necessary changes in carle while building real backend server.
 const deleteItemFromCart = async (itemId) => {
   try {
     const url = `${BASE_URL}cart/${itemId}`;
+    console.log(url);
     const response = await axios.delete(url);
     return response;
   } catch (error) {

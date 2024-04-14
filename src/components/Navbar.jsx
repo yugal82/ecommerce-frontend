@@ -2,6 +2,8 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../features/cart/cartSlice';
 
 const user = {
   name: 'Tom Cook',
@@ -24,6 +26,8 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
+  const cartItems = useSelector(selectCartItems);
+
   return (
     <>
       <div className="min-h-full">
@@ -72,7 +76,11 @@ const Navbar = () => {
                       <Link to="/cart">
                         <button type="button" className="relative rounded-full p-1 text-gray-400 hover:text-white">
                           <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                          <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">1</span>
+                          {cartItems.length > 0 && (
+                            <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">
+                              {cartItems.length}
+                            </span>
+                          )}
                         </button>
                       </Link>
 
@@ -167,7 +175,11 @@ const Navbar = () => {
                       className="relative ml-auto flex-shrink-0 rounded-full p-1 text-gray-400 hover:text-white"
                     >
                       <Link to="/cart">
-                        <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">1</span>
+                        {cartItems.length > 0 && (
+                          <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">
+                            {cartItems.length}
+                          </span>
+                        )}
                         <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                       </Link>
                     </button>
