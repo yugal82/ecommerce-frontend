@@ -34,10 +34,11 @@ const products = [
   },
 ];
 
-const Cart = () => {
+const Cart = ({ isCheckout }) => {
+  // here the quantity of the product is hardcoded. Once the user increases the quantity, we are not handling that API yet. But while implementing, again watch 'Cart Add/Update/Remove items' section of the tutorial.
   return (
     <div className="w-full px-8">
-      <div className="shadow-xl">
+      <div>
         <div className="px-4 py-6 sm:px-6">
           <div className="flex items-start justify-between">
             <h2 className="text-lg font-medium text-white">Shopping cart</h2>
@@ -72,9 +73,7 @@ const Cart = () => {
                             Quantity:
                           </label>
                           <select className="ml-2 text-xs py-1 px-6 mt-1">
-                            <option className="" value="1">
-                              1
-                            </option>
+                            <option value="1">1</option>
                             <option value="2">2</option>
                           </select>
                         </div>
@@ -100,12 +99,14 @@ const Cart = () => {
           </div>
           <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
           <div className="mt-6 flex items-center justify-end">
-            <Link
-              to="/checkout"
-              className="rounded-md border border-transparent bg-primary px-6 py-3 text-base font-semibold text-white shadow-sm"
-            >
-              Checkout
-            </Link>
+            {!isCheckout && (
+              <Link
+                to="/checkout"
+                className="rounded-md border border-transparent bg-primary px-6 py-3 text-base font-semibold text-white shadow-sm"
+              >
+                Checkout
+              </Link>
+            )}
           </div>
         </div>
       </div>

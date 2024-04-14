@@ -36,7 +36,7 @@ const Login = () => {
                   pattern: { value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi, message: 'Email not valid' },
                 })}
                 type="email"
-                className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm sm:text-sm sm:leading-6"
               />
               <p className="text-red-500 font-semibold text-sm">{errors?.email?.message}</p>
             </div>
@@ -66,7 +66,7 @@ const Login = () => {
                   },
                 })}
                 type="password"
-                className="block w-full rounded-md border-0 py-1.5 text-white shadow-sm sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm sm:text-sm sm:leading-6"
               />
               <p className="text-red-500 font-semibold text-sm">{errors?.password?.message}</p>
             </div>

@@ -3,3 +3,4 @@ MAKE THE ECOMMERCE PLATFORM PURELY FOR CLOTHING.
 2. For filtering, for now we can only send one query filter, that is because of dummy server. When we build the server in Nodejs, we should be able to send multiple queries.
 3. The details of a particular product is sent via react-router-dom 'state' parameter, but the format of the data taken from Tailwind template is different from the format that we are storing on the dummy server. So design a concrete schema for product and display accordingly.
 4. User should be able to login
+5. If the chosen payment method is Card - then we should be display a form with input fields that ask for card details.

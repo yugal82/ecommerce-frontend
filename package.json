@@ -24,6 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "backend": "npx json-server ./src/app/data.json --port 8080",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
