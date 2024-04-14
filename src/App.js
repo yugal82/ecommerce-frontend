@@ -22,18 +22,18 @@ function App() {
           exact
           path="/cart"
           element={
-            // <Protected>
-            <Cart />
-            // </Protected>
+            <Protected>
+              <Cart />
+            </Protected>
           }
         />
         <Route
           exact
           path="/checkout"
           element={
-            // <Protected>
-            <Checkout />
-            // </Protected>
+            <Protected>
+              <Checkout />
+            </Protected>
           }
         />
         <Route exact path="/product-details/:id" element={<ProductDetails />} />

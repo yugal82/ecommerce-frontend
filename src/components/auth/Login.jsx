@@ -1,18 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAsync, selectError, selectLoggedInUser } from '../../features/auth/authSlice';
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const error = useSelector(selectError);
+  const user = useSelector(selectLoggedInUser);
+
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm();
 
   return (
     <div className="p-6 lg:px-8 h-screen">
+      {user && <Navigate to="/" replace={true} />}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-white">Log in to your account</h2>
@@ -20,7 +26,7 @@ const Login = () => {
         <form
           className="space-y-6 mt-6"
           onSubmit={handleSubmit((data) => {
-            console.log(data);
+            dispatch(loginAsync(data));
             reset({ email: '', password: '' });
           })}
         >
@@ -31,10 +37,7 @@ const Login = () => {
             <div className="mt-2">
               <input
                 id="email"
-                {...register('email', {
-                  required: 'Email is a mandatory field',
-                  pattern: { value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/gi, message: 'Email not valid' },
-                })}
+                {...register('email', { required: 'Email is a mandatory field' })}
                 type="email"
                 className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm sm:text-sm sm:leading-6"
               />
@@ -69,6 +72,7 @@ const Login = () => {
                 className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm sm:text-sm sm:leading-6"
               />
               <p className="text-red-500 font-semibold text-sm">{errors?.password?.message}</p>
+              {error && <p className="text-red-500 font-semibold text-sm">{error.message}</p>}
             </div>
           </div>
 

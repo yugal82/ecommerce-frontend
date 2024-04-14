@@ -6,6 +6,7 @@ import AddressList from './AdressList';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser, updateUserAsync } from '../auth/authSlice';
+import { createOrderAsync } from '../orders/ordersSlice';
 
 const addresses = [
   { address: 'A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, Pune-37' },
@@ -32,7 +33,10 @@ const Checkout = () => {
   const onAddressChange = (address) => setSelectedAddress(address.address);
   const onPaymentChange = (payment) => setSelectedPaymentMethod(payment);
 
-  const handleOrderClick = (e) => {};
+  const handleOrderClick = (e) => {
+    const order = {};
+    dispatch(createOrderAsync(order));
+  };
 
   return (
     <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">

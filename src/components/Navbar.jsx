@@ -14,9 +14,9 @@ const navigation = [
   { name: 'Signup', href: '/signup', current: false },
 ];
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Your Profile', link: '/profile' },
+  { name: 'Your Orders', link: '/order' },
+  { name: 'Sign out', link: '/login' },
 ];
 
 function classNames(...classes) {
@@ -97,7 +97,7 @@ const Navbar = () => {
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
                                   <Link
-                                    to={item.href}
+                                    to={item.link}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
@@ -177,7 +177,7 @@ const Navbar = () => {
                       <Disclosure.Button
                         key={item.name}
                         as="Link"
-                        to={item.href}
+                        to={item.link}
                         className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                       >
                         {item.name}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { createUserAsync, selectLoggedInUser } from '../../features/auth/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,14 +11,13 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm();
 
   return (
     <div className="p-6 lg:px-8 h-screen">
-      {user?.email}
+      {user && <Navigate to="/" replace={true} />}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-white">
@@ -26,6 +25,7 @@ const Signup = () => {
           </h2>
         </div>
         <form
+          noValidate
           className="space-y-6 mt-6"
           onSubmit={handleSubmit((data) => {
             dispatch(createUserAsync({ email: data.email, password: data.password }));
