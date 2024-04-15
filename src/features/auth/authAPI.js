@@ -37,7 +37,8 @@ const login = async (loginInfo) => {
 
 const updateUser = async (user) => {
   try {
-    const url = `${BASE_URL}user/update-user/${user.id}`;
+    const url = `${BASE_URL}user/${user.id}`;
+    // const url = `${BASE_URL}user/update-user/${user.id}`;
     const response = await axios.patch(url, user, { headers: { 'Content-Type': 'application/json' } });
     return response;
   } catch (error) {

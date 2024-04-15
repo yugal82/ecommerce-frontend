@@ -36,7 +36,6 @@ const updateItemInCart = async (item) => {
 const deleteItemFromCart = async (itemId) => {
   try {
     const url = `${BASE_URL}cart/${itemId}`;
-    console.log(url);
     const response = await axios.delete(url);
     return response;
   } catch (error) {

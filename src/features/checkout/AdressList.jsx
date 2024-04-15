@@ -21,7 +21,7 @@ const AddressList = ({ addresses, onAddressChange, selectedAddress }) => {
           </Listbox.Button>
           <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg sm:text-sm">
-              {addresses.map((address, idx) => (
+              {addresses?.map((address, idx) => (
                 <Listbox.Option
                   key={idx}
                   className={({ active }) =>
