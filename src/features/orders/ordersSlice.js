@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createOrder, fetchCount } from './ordersAPI';
+import { createOrder } from './ordersAPI';
 
 const initialState = {
-  value: 0,
   orders: [],
+  latestOrder: null,
   status: 'idle',
 };
 
@@ -15,6 +15,11 @@ export const createOrderAsync = createAsyncThunk('order/createOrder', async (ord
 export const orderSlicer = createSlice({
   name: 'order',
   initialState,
+  reducers: {
+    resetLatestOrder: (state) => {
+      state.latestOrder = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createOrderAsync.pending, (state) => {
@@ -23,10 +28,14 @@ export const orderSlicer = createSlice({
       .addCase(createOrderAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.orders.push(action.payload);
+        state.latestOrder = action.payload;
       });
   },
 });
 
-export const orders = (state) => state.order.orders;
+export const { resetLatestOrder } = orderSlicer.actions;
+
+export const selectOrders = (state) => state.order.orders;
+export const selectLatestOrder = (state) => state.order.latestOrder;
 
 export default orderSlicer.reducer;

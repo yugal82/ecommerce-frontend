@@ -43,4 +43,16 @@ const deleteItemFromCart = async (itemId) => {
   }
 };
 
-export { addItemInCart, getItemsByUser, updateItemInCart, deleteItemFromCart };
+const resetCart = async (userId) => {
+  try {
+    const response = await getItemsByUser(userId);
+    const items = response.data;
+    for (let item of items) {
+      await deleteItemFromCart(item.id);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { addItemInCart, getItemsByUser, updateItemInCart, deleteItemFromCart, resetCart };

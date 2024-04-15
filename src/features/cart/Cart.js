@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { deleteItemFromCartAsync, selectCartItems, updateCartAsync } from './cartSlice';
 
 const Cart = ({ isCheckout }) => {
@@ -14,9 +14,9 @@ const Cart = ({ isCheckout }) => {
   };
 
   return (
-    <div className="w-full px-8 h-screen">
+    <div className="w-full px-8">
       {cartProducts.length === 0 ? (
-        <div className="py-6 text-white">
+        <div className="py-6 text-white h-screen">
           <div className="flex items-center justify-center text-xl font-semibold">
             <h2>The cart is empty. Nothing to show here!</h2>
           </div>
@@ -25,7 +25,7 @@ const Cart = ({ isCheckout }) => {
           </Link>
         </div>
       ) : (
-        <div>
+        <div className="">
           <div className="px-4 py-6 sm:px-6">
             <div className="flex items-start justify-between">
               <h2 className="text-lg font-medium text-white">Shopping cart</h2>
@@ -37,7 +37,11 @@ const Cart = ({ isCheckout }) => {
                   {cartProducts.map((product) => (
                     <li key={product.item.id} className="flex py-6">
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                        <img src={product.item.imageSrc} className="h-full w-full object-cover object-center" />
+                        <img
+                          src={product.item.imageSrc}
+                          alt="product"
+                          className="h-full w-full object-cover object-center"
+                        />
                       </div>
 
                       <div className="ml-4 flex flex-1 flex-col">

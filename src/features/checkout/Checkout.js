@@ -5,36 +5,56 @@ import AddressList from './AdressList';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser, updateUserAsync } from '../auth/authSlice';
-import { createOrderAsync } from '../orders/ordersSlice';
+import { createOrderAsync, selectLatestOrder } from '../orders/ordersSlice';
 import { selectCartItems } from '../cart/cartSlice';
+import { Navigate } from 'react-router-dom';
 
 const Checkout = () => {
   // redux-toolkit
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
   const cartProducts = useSelector(selectCartItems);
-
+  let latestOrder = useSelector(selectLatestOrder);
+  console.log(latestOrder);
   // states
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onAddressChange = (address) => setSelectedAddress(address.address);
   const onPaymentChange = (payment) => setSelectedPaymentMethod(payment);
 
   const handleOrderClick = (e) => {
-    const order = {};
-    dispatch(createOrderAsync(order));
+    if (selectedAddress === null) {
+      alert('Select mailing address');
+    }
+    if (selectedPaymentMethod === null) {
+      alert('Please select payment method');
+    }
+
+    if (selectedPaymentMethod && selectedAddress) {
+      const totalAmount = cartProducts.reduce(
+        (amount, product) => product?.item?.price * product?.quantity + amount,
+        0
+      );
+      const order = {
+        items: cartProducts,
+        user,
+        selectedPaymentMethod,
+        selectedAddress,
+        totalAmount,
+        status: 'pending',
+      };
+      dispatch(createOrderAsync(order));
+    }
+    setSelectedAddress(null);
+    setSelectedPaymentMethod(null);
   };
 
   return (
     <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
+      {latestOrder && <Navigate to={`/order-success/${latestOrder?.id}`} replace={true} />}
       <div className="lg:col-span-3 mt-8">
         <form
           noValidate

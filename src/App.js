@@ -12,6 +12,7 @@ import Protected from './components/auth/Protected';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from './features/auth/authSlice';
 import { getItemsByUserAsync } from './features/cart/cartSlice';
+import OrderSuccess from './features/orders/OrderSuccess';
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
           }
         />
         <Route exact path="/product-details/:id" element={<ProductDetails />} />
+        <Route exact path="/order-success/:id" element={<OrderSuccess />} />
       </Routes>
     </div>
   );

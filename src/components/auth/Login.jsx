@@ -51,9 +51,7 @@ const Login = () => {
                 Password
               </label>
               <div className="text-sm">
-                <a href="#" className="font-semibold text-primary hover:text-secondary">
-                  Forgot password?
-                </a>
+                <Link className="font-semibold text-primary hover:text-secondary">Forgot password?</Link>
               </div>
             </div>
             <div className="mt-2">

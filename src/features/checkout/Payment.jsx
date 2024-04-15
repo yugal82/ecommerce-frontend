@@ -16,6 +16,7 @@ const Payment = ({ onPaymentChange, selectedPaymentMethod }) => {
             type="radio"
             className="h-4 w-4 text-primary"
             value="card"
+            checked={selectedPaymentMethod === 'card'}
           />
           <label htmlFor="card" className="block text-sm font-medium leading-6 text-white">
             Credit Card/Debit Card
@@ -29,6 +30,7 @@ const Payment = ({ onPaymentChange, selectedPaymentMethod }) => {
             type="radio"
             className="h-4 w-4  text-primary"
             value="cash"
+            checked={selectedPaymentMethod === 'cash'}
           />
           <label htmlFor="cash" className="block text-sm font-medium leading-6 text-white">
             Cash
