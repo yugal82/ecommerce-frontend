@@ -35,15 +35,11 @@ const login = async (loginInfo) => {
   }
 };
 
-const updateUser = async (user) => {
-  try {
-    const url = `${BASE_URL}user/${user.id}`;
-    // const url = `${BASE_URL}user/update-user/${user.id}`;
-    const response = await axios.patch(url, user, { headers: { 'Content-Type': 'application/json' } });
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
+const logout = async (user) => {
+  // here we need to take care of sessions using real backend server. Now as it is a dummy json server, we just resolve the Promise created here and send a 'user logged out' message.
+  return new Promise((resolve, reject) => {
+    resolve({ msg: 'user logged out' });
+  });
 };
 
-export { createUser, login, updateUser };
+export { createUser, login, logout };

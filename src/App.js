@@ -13,6 +13,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from './features/auth/authSlice';
 import { getItemsByUserAsync } from './features/cart/cartSlice';
 import OrderSuccess from './features/orders/OrderSuccess';
+import UserOrders from './features/user/UserOrders';
+import UserProfile from './features/user/UserProfile';
+import Logout from './components/auth/Logout';
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +52,25 @@ function App() {
         />
         <Route exact path="/product-details/:id" element={<ProductDetails />} />
         <Route exact path="/order-success/:id" element={<OrderSuccess />} />
+        <Route
+          exact
+          path="/profile"
+          element={
+            <Protected>
+              <UserProfile />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/profile/my-orders"
+          element={
+            <Protected>
+              <UserOrders />
+            </Protected>
+          }
+        />
+        <Route exact path="/logout" element={<Logout />} />
       </Routes>
     </div>
   );
