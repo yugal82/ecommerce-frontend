@@ -16,6 +16,10 @@ import OrderSuccess from './features/orders/OrderSuccess';
 import UserOrders from './features/user/UserOrders';
 import UserProfile from './features/user/UserProfile';
 import Logout from './components/auth/Logout';
+import ForgotPassword from './components/auth/ForgotPassword';
+import AdminProtected from './components/auth/AdminProtected';
+import AdminProducts from './features/admin/AdminProducts';
+import AdminProductDetails from './features/admin/AdminProductDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -71,6 +75,27 @@ function App() {
           }
         />
         <Route exact path="/logout" element={<Logout />} />
+        <Route exact path="/forgot-password" element={<ForgotPassword />} />
+
+        {/* Admin routes */}
+        <Route
+          exact
+          path="/admin"
+          element={
+            <AdminProtected>
+              <AdminProducts />
+            </AdminProtected>
+          }
+        />
+        <Route
+          exact
+          path="/admin/product-details/:id"
+          element={
+            <AdminProtected>
+              <AdminProductDetails />
+            </AdminProtected>
+          }
+        />
       </Routes>
     </div>
   );

@@ -3,11 +3,7 @@ const BASE_URL = 'http://localhost:8080/';
 const createUser = async (userData) => {
   try {
     const url = `${BASE_URL}user`;
-    const response = await axios.post(
-      url,
-      { email: userData.email, password: userData.password },
-      { headers: { 'Content-Type': 'application/json' } }
-    );
+    const response = await axios.post(url, userData, { headers: { 'Content-Type': 'application/json' } });
     return response;
   } catch (error) {
     console.log(error);

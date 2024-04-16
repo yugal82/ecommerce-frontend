@@ -1154,33 +1154,18 @@
         {
           "address": "411037, Maharashtra, Pune, A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, 8567463, Yugal Khanter, "
         }
-      ]
-    }
-  ],
-  "cart": [
+      ],
+      "role": "user"
+    },
     {
-      "id": "7e52",
-      "item": {
-        "id": "2",
-        "name": "iPhone X",
-        "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-        "price": 899,
-        "discountPercentage": 17.94,
-        "rating": 4.44,
-        "stock": 34,
-        "brand": "Apple",
-        "category": "smartphones",
-        "imageSrc": "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
-        "images": [
-          "https://cdn.dummyjson.com/product-images/2/1.jpg",
-          "https://cdn.dummyjson.com/product-images/2/2.jpg",
-          "https://cdn.dummyjson.com/product-images/2/3.jpg",
-          "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg"
-        ]
-      },
-      "quantity": 1
+      "id": "78ae",
+      "email": "admin@gmail.com",
+      "password": "Admin123",
+      "addresses": [],
+      "role": "admin"
     }
   ],
+  "cart": [],
   "order": [
     {
       "id": "9f6b",
@@ -1214,7 +1199,8 @@
           {
             "address": "411037, Maharashtra, Pune, A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, 8567463, Yugal Khanter, "
           }
-        ]
+        ],
+        "role": "user"
       },
       "selectedPaymentMethod": "cash",
       "selectedAddress": "411037, Maharashtra, Pune, A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, 8567463, Yugal Khanter, ",
@@ -1256,7 +1242,8 @@
           {
             "address": "411037, Maharashtra, Pune, A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, 8567463, Yugal Khanter, "
           }
-        ]
+        ],
+        "role": "user"
       },
       "selectedPaymentMethod": "cash",
       "selectedAddress": "411037, Maharashtra, Pune, A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, 8567463, Yugal Khanter, ",
@@ -1322,7 +1309,8 @@
           {
             "address": "411037, Maharashtra, Pune, A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, 8567463, Yugal Khanter, "
           }
-        ]
+        ],
+        "role": "user"
       },
       "selectedPaymentMethod": "cash",
       "selectedAddress": "411037, Maharashtra, Pune, A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, 8567463, Yugal Khanter, ",
