@@ -4,8 +4,6 @@ import { getBrands, getCategories, getProductsByFilters, getProductsBySortFilter
 // initial states
 const initialState = {
   products: [],
-  brands: [],
-  categories: [],
   status: 'idle',
 };
 
@@ -20,26 +18,12 @@ export const getProductsBySortFilterAsync = createAsyncThunk('product/getProduct
   return response.data;
 });
 
-export const getBrandsAsync = createAsyncThunk('product/getBrands', async () => {
-  const response = await getBrands();
-  return response.data;
-});
-
-export const getCategoriesAsync = createAsyncThunk('product/getCategories', async () => {
-  const response = await getCategories();
-  return response.data;
-});
-
 // slice
 export const productSlice = createSlice({
   name: 'product',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getProductsByFiltersAsync.pending, (state) => {
@@ -55,26 +39,10 @@ export const productSlice = createSlice({
       .addCase(getProductsBySortFilterAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.products = action.payload;
-      })
-      .addCase(getBrandsAsync.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(getBrandsAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.brands = action.payload;
-      })
-      .addCase(getCategoriesAsync.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(getCategoriesAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.categories = action.payload;
       });
   },
 });
 
 export const selectAllProducts = (state) => state.product.products;
-export const selectAllBrands = (state) => state.product.brands;
-export const selectAllCategories = (state) => state.product.categories;
 
 export default productSlice.reducer;

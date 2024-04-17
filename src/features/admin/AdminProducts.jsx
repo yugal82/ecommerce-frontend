@@ -9,16 +9,38 @@ import {
   getProductsByFiltersAsync,
   selectAllProducts,
   getProductsBySortFilterAsync,
-  selectAllBrands,
-  selectAllCategories,
-  getBrandsAsync,
-  getCategoriesAsync,
 } from '../product-list/productSlice';
+import { categories, brands } from '../../utils/constant';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
   { name: 'Price: Low to High', sort: 'price', order: 'asc', current: false },
   { name: 'Price: High to Low', sort: 'price', order: 'desc', current: false },
+];
+
+const filters = [
+  {
+    id: 'color',
+    name: 'Color',
+    options: [
+      { value: 'white', label: 'White', checked: false },
+      { value: 'beige', label: 'Beige', checked: false },
+      { value: 'blue', label: 'Blue', checked: false },
+      { value: 'brown', label: 'Brown', checked: false },
+      { value: 'green', label: 'Green', checked: false },
+      { value: 'purple', label: 'Purple', checked: false },
+    ],
+  },
+  {
+    id: 'category',
+    name: 'Category',
+    options: categories,
+  },
+  {
+    id: 'brand',
+    name: 'Brands',
+    options: brands,
+  },
 ];
 
 function classNames(...classes) {
@@ -29,8 +51,6 @@ const AdminProducts = () => {
   // redux states and dispatch
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
-  const brands = useSelector(selectAllBrands);
-  const categories = useSelector(selectAllCategories);
 
   // states
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -38,36 +58,6 @@ const AdminProducts = () => {
   const handleSortFilterClick = (e, option) => {
     dispatch(getProductsBySortFilterAsync(option));
   };
-
-  const filters = [
-    {
-      id: 'color',
-      name: 'Color',
-      options: [
-        { value: 'white', label: 'White', checked: false },
-        { value: 'beige', label: 'Beige', checked: false },
-        { value: 'blue', label: 'Blue', checked: false },
-        { value: 'brown', label: 'Brown', checked: false },
-        { value: 'green', label: 'Green', checked: false },
-        { value: 'purple', label: 'Purple', checked: false },
-      ],
-    },
-    {
-      id: 'category',
-      name: 'Category',
-      options: categories,
-    },
-    {
-      id: 'brand',
-      name: 'Brands',
-      options: brands,
-    },
-  ];
-
-  useEffect(() => {
-    dispatch(getBrandsAsync());
-    dispatch(getCategoriesAsync());
-  }, []);
 
   return (
     <div className="">

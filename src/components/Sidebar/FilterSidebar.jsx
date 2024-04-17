@@ -9,7 +9,7 @@ const FilterSidebar = ({ filters, getProductsByFiltersAsync, dispatch }) => {
     const isChecked = e.target.checked;
     let newFilters = { ...queryFilters };
     if (isChecked) {
-      newFilters[section.id] = option.value;
+      newFilters[section.id] = option;
     } else {
       delete newFilters[section.id];
     }
@@ -42,13 +42,12 @@ const FilterSidebar = ({ filters, getProductsByFiltersAsync, dispatch }) => {
               <Disclosure.Panel className="pt-6">
                 <div className="space-y-4">
                   {section.options.map((option, optionIdx) => (
-                    <div key={option.value} className="flex items-center">
+                    <div key={optionIdx} className="flex items-center">
                       <input
                         id={`filter-${section.id}-${optionIdx}`}
                         name={`${section.id}[]`}
-                        defaultValue={option.value}
+                        defaultValue={option}
                         type="checkbox"
-                        defaultChecked={option.checked}
                         onClick={(e) => handleFilters(e, section, option)}
                         className="h-4 w-4 rounded border-gray-300 text-primary"
                       />
@@ -56,7 +55,7 @@ const FilterSidebar = ({ filters, getProductsByFiltersAsync, dispatch }) => {
                         htmlFor={`filter-${section.id}-${optionIdx}`}
                         className="capitalize ml-3 text-sm text-white"
                       >
-                        {option.label}
+                        {option}
                       </label>
                     </div>
                   ))}

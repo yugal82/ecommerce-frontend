@@ -7,3 +7,7 @@ MAKE THE ECOMMERCE PLATFORM PURELY FOR CLOTHING.
     - In profile page, the user should be able to delete an address
     - Add an address
     - display all the added address.
+
+- Add color checkboxes in admin product create form
+- Remove redux Slice actions for fetching Category, Brands, Colors on Home page
+- Add preview in admin product create form, onChange of file, change the preview
