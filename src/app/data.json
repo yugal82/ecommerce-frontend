@@ -49,9 +49,7 @@
       "brand": "Samsung",
       "category": "smartphones",
       "imageSrc": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/3/1.jpg"
-      ],
+      "images": ["https://cdn.dummyjson.com/product-images/3/1.jpg"],
       "deleted": true
     },
     {
@@ -1155,6 +1153,9 @@
       "addresses": [
         {
           "address": "411037, Maharashtra, Pune, A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, 8567463, Yugal Khanter, "
+        },
+        {
+          "address": "121, Solapur Bazaar, near Pulgate Bus stop, Camp, Pune - 411001, Yugal Khanter"
         }
       ],
       "role": "user"
@@ -1185,9 +1186,7 @@
             "brand": "Samsung",
             "category": "smartphones",
             "imageSrc": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg",
-            "images": [
-              "https://cdn.dummyjson.com/product-images/3/1.jpg"
-            ]
+            "images": ["https://cdn.dummyjson.com/product-images/3/1.jpg"]
           },
           "quantity": 1,
           "userId": "255b"
