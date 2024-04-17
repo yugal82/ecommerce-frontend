@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { createProduct, getProductsByFilters, getProductsBySortFilter } from '../product-list/productAPI';
+import {
+  createProduct,
+  deleteProduct,
+  getProductsByFilters,
+  getProductsBySortFilter,
+} from '../product-list/productAPI';
 
 // initial states
 const initialState = {
@@ -20,6 +25,12 @@ export const getProductsBySortFilterAsync = createAsyncThunk('product/getProduct
 
 export const createProductAsync = createAsyncThunk('product/createProduct', async (product) => {
   const response = await createProduct(product);
+  return response.data;
+});
+
+export const deleteProductAsync = createAsyncThunk('product/deleteProduct', async (product) => {
+  const response = await deleteProduct(product);
+  console.log(response);
   return response.data;
 });
 
@@ -51,6 +62,14 @@ export const productSlice = createSlice({
       .addCase(createProductAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.products.push(action.payload);
+      })
+      .addCase(deleteProductAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteProductAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        const idx = state.products.findIndex((item) => item.id === action.payload.id);
+        state.products[idx] = action.payload;
       });
   },
 });

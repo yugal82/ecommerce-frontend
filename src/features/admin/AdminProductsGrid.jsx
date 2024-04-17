@@ -1,8 +1,18 @@
 import React from 'react';
 import AdminProductCard from './AdminProductCard';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deleteProductAsync } from '../product-list/productSlice';
 
 const AdminProductsGrid = ({ products }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = (product) => {
+    const selectedProduct = { ...product };
+    selectedProduct.deleted = true;
+    dispatch(deleteProductAsync(selectedProduct));
+  };
+
   return (
     /* Product grid */
     <div className="w-full lg:col-span-3">
@@ -17,9 +27,16 @@ const AdminProductsGrid = ({ products }) => {
                 <Link key={idx} to={`/admin/product-details/${product?.id}`} state={{ product }}>
                   <AdminProductCard product={product} />
                 </Link>
-                <div className="py-2 mt-1">
-                  <button className="text-white bg-primary px-2 py-1 rounded text-sm font-semibold">
+                {product.deleted && <div className="text-sm text-red-700 font-bold">Product is deleted</div>}
+                <div className="mt-2 flex items-center justify-between">
+                  <button className="text-white bg-primary px-2 py-1 rounded text-xs font-semibold">
                     Edit product
+                  </button>
+                  <button
+                    onClick={() => handleDelete(product)}
+                    className="text-white bg-red-700 px-2 py-1 rounded text-xs font-semibold"
+                  >
+                    Delete product
                   </button>
                 </div>
               </div>

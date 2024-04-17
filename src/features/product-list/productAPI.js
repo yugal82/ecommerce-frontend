@@ -47,4 +47,14 @@ const createProduct = async (product) => {
   }
 };
 
-export { getProductsByFilters, getProductsBySortFilter, createProduct };
+const deleteProduct = async (product) => {
+  try {
+    const url = `${BASE_URL}products/${product.id}`;
+    const response = await axios.patch(url, product, { headers: { 'Content-Type': 'application/json' } });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getProductsByFilters, getProductsBySortFilter, createProduct, deleteProduct };
