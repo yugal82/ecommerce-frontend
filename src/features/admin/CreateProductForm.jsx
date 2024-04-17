@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import { brands, categories, sizes, convertImageToBase64 } from '../../utils/constant';
 import { useForm } from 'react-hook-form';
 import ImageUploader from './ImageUploader';
+import { useDispatch } from 'react-redux';
+import { createProductAsync } from '../product-list/productSlice';
 
 const CreateProductForm = () => {
+  const dispatch = useDispatch();
+
   //states
   const [imageSrc, setImageSrc] = useState(null);
   const [image1, setImage1] = useState(null);
@@ -26,25 +29,10 @@ const CreateProductForm = () => {
   } = useForm();
 
   const handleFormSumbit = async (data) => {
-    // convert files to base64 to store them as strings on the backend
     data = await convertAllImgToB64(data);
-    console.log(data);
-    //   dispatch the create product API here
-    reset({
-      name: '',
-      price: '',
-      stock: '',
-      imageSrc: null,
-      image1: null,
-      image2: null,
-      image3: null,
-      image4: null,
-      discount: '',
-      description: '',
-      category: '',
-      brand: '',
-      size: '',
-    });
+    data = converStringToNumber(data);
+    dispatch(createProductAsync(data));
+    reset();
 
     setImagesAndPreview();
   };
@@ -71,6 +59,14 @@ const CreateProductForm = () => {
       }
     });
     data.images = images;
+
+    return data;
+  };
+
+  const converStringToNumber = (data) => {
+    data.price = Number(data.price);
+    data.discount = Number(data.discount);
+    data.stock = Number(data.stock);
 
     return data;
   };

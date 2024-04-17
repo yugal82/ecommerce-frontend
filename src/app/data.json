@@ -48,9 +48,7 @@
       "brand": "Samsung",
       "category": "smartphones",
       "imageSrc": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/3/1.jpg"
-      ]
+      "images": ["https://cdn.dummyjson.com/product-images/3/1.jpg"]
     },
     {
       "id": "4",
@@ -1183,9 +1181,7 @@
             "brand": "Samsung",
             "category": "smartphones",
             "imageSrc": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg",
-            "images": [
-              "https://cdn.dummyjson.com/product-images/3/1.jpg"
-            ]
+            "images": ["https://cdn.dummyjson.com/product-images/3/1.jpg"]
           },
           "quantity": 1,
           "userId": "255b"

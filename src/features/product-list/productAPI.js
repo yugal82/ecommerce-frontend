@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+const BASE_URL = 'http://localhost:8080/';
 // const getAllProducts = async () => {
 //   try {
 //     const url = 'http://localhost:8080/products';
@@ -18,7 +18,7 @@ const getProductsByFilters = async (filters) => {
     for (let key in filters) {
       queryString += `${key}=${filters[key]}&`;
     }
-    const url = `http://localhost:8080/products?` + queryString;
+    const url = `${BASE_URL}products?` + queryString;
     const response = await axios.get(url);
     return response;
   } catch (error) {
@@ -28,7 +28,7 @@ const getProductsByFilters = async (filters) => {
 
 const getProductsBySortFilter = async (sortFilter) => {
   try {
-    const url = `http://localhost:8080/products?_sort=${sortFilter?.sort}`;
+    const url = `${BASE_URL}products?_sort=${sortFilter?.sort}`;
     const response = await axios.get(url);
     return response;
   } catch (error) {
@@ -36,24 +36,15 @@ const getProductsBySortFilter = async (sortFilter) => {
   }
 };
 
-const getCategories = async () => {
+const createProduct = async (product) => {
   try {
-    const url = 'http://localhost:8080/categories';
-    const response = await axios.get(url);
+    // console.log(product);
+    const url = `${BASE_URL}products`;
+    const response = await axios.post(url, product, { headers: { 'Content-Type': 'application/json' } });
     return response;
   } catch (error) {
     console.log(error);
   }
 };
 
-const getBrands = async () => {
-  try {
-    const url = 'http://localhost:8080/brands';
-    const response = await axios.get(url);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export { getProductsByFilters, getProductsBySortFilter, getCategories, getBrands };
+export { getProductsByFilters, getProductsBySortFilter, createProduct };
