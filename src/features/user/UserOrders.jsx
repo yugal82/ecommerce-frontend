@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserOrdersAsync, selectUserOrders } from './userSlice';
 import { selectLoggedInUser } from '../auth/authSlice';
+import { discountedPrice } from '../../utils/constant';
 
 const UserOrders = () => {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ const UserOrders = () => {
                           <div>
                             <div className="text-base font-medium">
                               <p>{item?.item?.name}</p>
-                              <p>${item?.item?.price}</p>
+                              <p>${discountedPrice(item?.item)}</p>
                             </div>
                             <div className="text-gray-300">
                               <p className="text-sm font-medium leading-6">Quantity: {item?.quantity}</p>

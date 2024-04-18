@@ -73,7 +73,7 @@ const AdminProducts = () => {
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-end border-b border-gray-200 py-10">
             <div className="flex items-center">
-              <Menu as="div" className="relative inline-block text-left z-0">
+              <Menu as="div" className="relative inline-block text-left z-10">
                 <div>
                   <Menu.Button className="group inline-flex items-center justify-center text-base font-medium text-gray-200 px-4">
                     Sort

@@ -23,7 +23,7 @@ const ImageSlider = ({ images }) => {
       >
         {images?.map((img, idx) => (
           <SwiperSlide className="sm:max-h-[28rem] w-full" key={idx}>
-            <img src={img.src} alt={img.alt} className="" />
+            <img src={img} alt={img} className="" />
           </SwiperSlide>
         ))}
       </Swiper>

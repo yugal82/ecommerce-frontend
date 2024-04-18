@@ -8,6 +8,7 @@ import { selectLoggedInUser, updateUserAsync } from '../auth/authSlice';
 import { createOrderAsync, selectLatestOrder } from '../orders/ordersSlice';
 import { selectCartItems } from '../cart/cartSlice';
 import { Navigate } from 'react-router-dom';
+import { discountedPrice } from '../../utils/constant';
 
 const Checkout = () => {
   // redux-toolkit
@@ -35,7 +36,7 @@ const Checkout = () => {
 
     if (selectedPaymentMethod && selectedAddress) {
       const totalAmount = cartProducts.reduce(
-        (amount, product) => product?.item?.price * product?.quantity + amount,
+        (amount, product) => discountedPrice(product?.item) * product?.quantity + amount,
         0
       );
       const order = {

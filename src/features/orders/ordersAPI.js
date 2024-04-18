@@ -12,4 +12,14 @@ const createOrder = async (order) => {
   }
 };
 
-export { createOrder };
+const getAllOrders = async () => {
+  try {
+    const url = `${BASE_URL}order`;
+    const response = await axios.get(url);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { createOrder, getAllOrders };

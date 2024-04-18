@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteItemFromCartAsync, selectCartItems, updateCartAsync } from './cartSlice';
+import { discountedPrice } from '../../utils/constant';
 
 const Cart = ({ isCheckout }) => {
   // here the quantity of the product is hardcoded. Once the user increases the quantity, we are not handling that API yet. But while implementing, again watch 'Cart Add/Update/Remove items' section of the tutorial.
 
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectCartItems);
-  const totalAmount = cartProducts.reduce((amount, product) => product?.item?.price * product?.quantity + amount, 0);
+  const totalAmount = cartProducts.reduce(
+    (amount, product) => discountedPrice(product?.item) * product?.quantity + amount,
+    0
+  );
 
   const onQuantityChange = (e, product) => {
     dispatch(updateCartAsync({ ...product, quantity: +e.target.value }));
@@ -50,7 +54,7 @@ const Cart = ({ isCheckout }) => {
                             <h3>
                               <span>{product.item.name}</span>
                             </h3>
-                            <p className="ml-4">${product.item.price}</p>
+                            <p className="ml-4">${discountedPrice(product.item)}</p>
                           </div>
                           {/* <p className="mt-1 text-sm text-white">{product.item.color}</p> */}
                         </div>

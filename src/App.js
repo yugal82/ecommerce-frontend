@@ -21,6 +21,7 @@ import AdminProtected from './components/auth/AdminProtected';
 import AdminProducts from './features/admin/AdminProducts';
 import AdminProductDetails from './features/admin/AdminProductDetails';
 import CreateProductForm from './features/admin/CreateProductForm';
+import AdminOrders from './features/admin/AdminOrders';
 
 function App() {
   const dispatch = useDispatch();
@@ -103,6 +104,15 @@ function App() {
           element={
             <AdminProtected>
               <CreateProductForm />
+            </AdminProtected>
+          }
+        />
+        <Route
+          exact
+          path="/admin/orders"
+          element={
+            <AdminProtected>
+              <AdminOrders />
             </AdminProtected>
           }
         />

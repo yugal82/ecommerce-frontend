@@ -49,7 +49,9 @@
       "brand": "Samsung",
       "category": "smartphones",
       "imageSrc": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg",
-      "images": ["https://cdn.dummyjson.com/product-images/3/1.jpg"],
+      "images": [
+        "https://cdn.dummyjson.com/product-images/3/1.jpg"
+      ],
       "deleted": true
     },
     {
@@ -1186,7 +1188,9 @@
             "brand": "Samsung",
             "category": "smartphones",
             "imageSrc": "https://cdn.dummyjson.com/product-images/3/thumbnail.jpg",
-            "images": ["https://cdn.dummyjson.com/product-images/3/1.jpg"]
+            "images": [
+              "https://cdn.dummyjson.com/product-images/3/1.jpg"
+            ]
           },
           "quantity": 1,
           "userId": "255b"
@@ -1316,6 +1320,53 @@
       "selectedPaymentMethod": "cash",
       "selectedAddress": "411037, Maharashtra, Pune, A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, 8567463, Yugal Khanter, ",
       "totalAmount": 1448,
+      "status": "pending"
+    },
+    {
+      "id": "cb39",
+      "items": [
+        {
+          "id": "031b",
+          "item": {
+            "id": "13",
+            "name": "Fog Scent Xpressio Perfume",
+            "description": "Product details of Best Fog Scent Xpressio Perfume 100ml For Men cool long lasting perfumes for Men",
+            "price": 13,
+            "discountPercentage": 8.14,
+            "rating": 4.59,
+            "stock": 61,
+            "brand": "Fog Scent Xpressio",
+            "category": "fragrances",
+            "imageSrc": "https://cdn.dummyjson.com/product-images/13/thumbnail.webp",
+            "images": [
+              "https://cdn.dummyjson.com/product-images/13/1.jpg",
+              "https://cdn.dummyjson.com/product-images/13/2.png",
+              "https://cdn.dummyjson.com/product-images/13/3.jpg",
+              "https://cdn.dummyjson.com/product-images/13/4.jpg",
+              "https://cdn.dummyjson.com/product-images/13/thumbnail.webp"
+            ]
+          },
+          "quantity": 1,
+          "userId": "255b"
+        }
+      ],
+      "user": {
+        "id": "255b",
+        "email": "test@gmail.com",
+        "password": "Qwerty123",
+        "addresses": [
+          {
+            "address": "411037, Maharashtra, Pune, A2/201, Basil Homes Society, near Terapanth Bhavan, Bibvewadi, 8567463, Yugal Khanter, "
+          },
+          {
+            "address": "121, Solapur Bazaar, near Pulgate Bus stop, Camp, Pune - 411001, Yugal Khanter"
+          }
+        ],
+        "role": "user"
+      },
+      "selectedPaymentMethod": "cash",
+      "selectedAddress": "121, Solapur Bazaar, near Pulgate Bus stop, Camp, Pune - 411001, Yugal Khanter",
+      "totalAmount": 12,
       "status": "pending"
     }
   ]

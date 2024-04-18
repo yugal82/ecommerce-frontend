@@ -94,3 +94,7 @@ export const convertImageToBase64 = (file) => {
     fileReader.onerror = (err) => reject(err);
   });
 };
+
+export const discountedPrice = (product) => {
+  return Math.round(product.price * (1 - product.discountPercentage / 100), 2);
+};

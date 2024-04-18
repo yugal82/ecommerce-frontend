@@ -13,7 +13,7 @@ const ColorRadio = ({ selectedColor, setSelectedColor, product }) => {
       <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-2">
         <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
         <div className="flex items-center space-x-3">
-          {product.colors.map((color) => (
+          {product?.colors?.map((color) => (
             <RadioGroup.Option
               key={color.name}
               value={color}

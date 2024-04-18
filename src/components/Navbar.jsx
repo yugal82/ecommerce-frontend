@@ -77,12 +77,20 @@ const Navbar = () => {
                       </div>
                     )}
                     {user?.role === 'admin' && (
-                      <Link
-                        to="/admin"
-                        className="hidden sm:block text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-                      >
-                        Admin Panel
-                      </Link>
+                      <div className="flex">
+                        <Link
+                          to="/admin"
+                          className="hidden sm:block text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                        >
+                          Admin Panel
+                        </Link>
+                        <Link
+                          to="/admin/orders"
+                          className="hidden sm:block text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                        >
+                          Admin Orders
+                        </Link>
+                      </div>
                     )}
                   </div>
                   <div className="hidden md:block">
@@ -181,12 +189,20 @@ const Navbar = () => {
                     </>
                   )}
                   {user?.role === 'admin' && (
-                    <Link
-                      to="/admin"
-                      className="sm:hidden text-gray-300 hover:bg-gray-700 hover:text-white inline-block rounded-md p-3 text-base font-medium"
-                    >
-                      Admin Panel
-                    </Link>
+                    <>
+                      <Link
+                        to="/admin"
+                        className="sm:hidden text-gray-300 hover:bg-gray-700 hover:text-white inline-block rounded-md p-3 text-base font-medium"
+                      >
+                        Admin Panel
+                      </Link>
+                      <Link
+                        to="/admin/orders"
+                        className="sm:hidden text-gray-300 hover:bg-gray-700 hover:text-white inline-block rounded-md p-3 text-base font-medium"
+                      >
+                        Admin Orders
+                      </Link>
+                    </>
                   )}
                 </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">
