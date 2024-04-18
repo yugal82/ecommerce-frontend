@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
-import ImageSlider from './product-details-components/ImageSlider';
-import SizesRadio from './product-details-components/SizesRadio';
-import ColorRadio from './product-details-components/ColorRadio';
-import ProductDesc from './product-details-components/ProductDesc';
+import ImageSlider from '../../../components/product-details-components/ImageSlider';
+import SizesRadio from '../../../components/product-details-components/SizesRadio';
+import ColorRadio from '../../../components/product-details-components/ColorRadio';
+import ProductDesc from '../../../components/product-details-components/ProductDesc';
 import { useLocation } from 'react-router-dom';
 import { addItemInCartAsync } from '../../cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';

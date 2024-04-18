@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import '../../../../App.css';
+import '../../App.css';
 
 const ImageSlider = ({ images }) => {
   return (
@@ -23,7 +23,7 @@ const ImageSlider = ({ images }) => {
       >
         {images?.map((img, idx) => (
           <SwiperSlide className="sm:max-h-[28rem] w-full" key={idx}>
-            <img src={img} alt={img} className="w-full object-cover object-center" />
+            <img src={img} alt={img} className="" />
           </SwiperSlide>
         ))}
       </Swiper>
