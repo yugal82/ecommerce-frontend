@@ -5,7 +5,7 @@ import SizesRadio from '../../../components/product-details-components/SizesRadi
 import ColorRadio from '../../../components/product-details-components/ColorRadio';
 import ProductDesc from '../../../components/product-details-components/ProductDesc';
 import { useLocation } from 'react-router-dom';
-import { addItemInCartAsync } from '../../cart/cartSlice';
+import { addItemInCartAsync, selectCartItems } from '../../cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from '../../auth/authSlice';
 import { discountedPrice } from '../../../utils/constant';
@@ -21,8 +21,19 @@ const ProductDetails = () => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const user = useSelector(selectLoggedInUser);
+  const cart = useSelector(selectCartItems);
 
   const { state } = useLocation();
+
+  const handleAddItemInCart = (e, product) => {
+    e.preventDefault();
+    if (cart.findIndex((item) => item?.productId === product.id) < 0) {
+      dispatch(addItemInCartAsync({ item: product, productId: product.id, quantity: 1, userId: user?.id }));
+    } else {
+      // that means the product has already been added to cart
+      alert('Product already added in cart');
+    }
+  };
   return (
     <div className="">
       <div className="pt-6 px-8">
@@ -59,13 +70,7 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            <form
-              className="mt-6"
-              onSubmit={(e) => {
-                e.preventDefault();
-                dispatch(addItemInCartAsync({ item: state.product, quantity: 1, userId: user?.id }));
-              }}
-            >
+            <form className="mt-6" onSubmit={(e) => handleAddItemInCart(e, state?.product)}>
               {/* Colors */}
               <ColorRadio selectedColor={selectedColor} setSelectedColor={setSelectedColor} product={state?.product} />
 

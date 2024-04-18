@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllOrdersAsync, selectOrders } from '../orders/ordersSlice';
+import { getAllOrdersAsync, selectOrders, updateOrderAsync } from '../orders/ordersSlice';
 import { selectLoggedInUser } from '../auth/authSlice';
 import { PencilIcon } from '@heroicons/react/20/solid';
 
@@ -8,6 +8,32 @@ const AdminOrders = () => {
   const dispatch = useDispatch();
   const orders = useSelector(selectOrders);
   const user = useSelector(selectLoggedInUser);
+
+  const [editableOrderId, setEditableOrderId] = useState(-1);
+
+  const handleEditClick = (e, order) => {
+    if (order.id === editableOrderId) setEditableOrderId(-1);
+    else setEditableOrderId(order.id);
+  };
+
+  const onStatusChange = (e, order) => {
+    const updatedOrder = { ...order, status: e.target.value };
+    dispatch(updateOrderAsync(updatedOrder));
+    setEditableOrderId(-1);
+  };
+
+  const statusColor = (status) => {
+    switch (status) {
+      case 'pending':
+        return 'bg-red-200 text-red-700';
+      case 'dispatched':
+        return 'bg-yellow-200 text-yellow-600';
+      case 'delivered':
+        return 'bg-primary text-white';
+      case 'cancelled':
+        return 'bg-red-500 text-white';
+    }
+  };
 
   useEffect(() => {
     if (user?.role === 'admin') dispatch(getAllOrdersAsync());
@@ -69,13 +95,35 @@ const AdminOrders = () => {
                         </div>
                       </td>
                       <td className="p-4 text-sm whitespace-nowrap">
-                        <div className="text-white font-semibold capitalize bg-yellow-300 py-1 rounded-md bg-opacity-80 text-center">
-                          {order?.status}
-                        </div>
+                        {order?.id !== editableOrderId ? (
+                          <div
+                            className={`font-semibold capitalize ${statusColor(
+                              order?.status
+                            )} py-1 rounded-md text-center`}
+                          >
+                            {order?.status}
+                          </div>
+                        ) : (
+                          <select
+                            className="px-6 py-1 rounded-full"
+                            onChange={(e) => onStatusChange(e, order)}
+                            name="status"
+                            id="status"
+                          >
+                            <option value="">Choose status</option>
+                            <option value="pending">Pending</option>
+                            <option value="dispatched">Dispatched</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                          </select>
+                        )}
                       </td>
                       <td className="px-4 py-4 text-sm whitespace-nowrap">
                         <div className="flex items-center justify-center">
-                          <PencilIcon className="w-4 text-primary cursor-pointer" />
+                          <PencilIcon
+                            onClick={(e) => handleEditClick(e, order)}
+                            className="w-4 text-primary cursor-pointer"
+                          />
                         </div>
                       </td>
                     </tr>

@@ -22,4 +22,14 @@ const getAllOrders = async () => {
   }
 };
 
-export { createOrder, getAllOrders };
+const updateOrder = async (order) => {
+  try {
+    const url = `${BASE_URL}order/${order.id}`;
+    const response = await axios.patch(url, order, { headers: { 'Content-Type': 'application/json' } });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { createOrder, getAllOrders, updateOrder };
