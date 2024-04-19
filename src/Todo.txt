@@ -2,10 +2,6 @@ MAKE THE ECOMMERCE PLATFORM PURELY FOR CLOTHING.
 - For filtering, for now we can only send one query filter, that is because of dummy server. When we build the server in Nodejs, we should be able to send multiple queries.
 - If the chosen payment method is Card - then we should be display a form with input fields that ask for card details.
 - Forgot password functionality not yet implemented. Implement through backend.
-- User profile page not yet implemented.
-    - In profile page, the user should be able to delete an address
-    - Add an address
-    - display all the added address.
-
 - Add color checkboxes in admin product create form
 - Edit product functionality by admin.
+- Add wishlist feature.

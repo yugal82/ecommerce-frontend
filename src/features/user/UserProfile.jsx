@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateUserAsync } from './userSlice';
+import { getLoggedInUserAsync, selectUserInfo, updateUserAsync } from './userSlice';
 import { selectLoggedInUser } from '../auth/authSlice';
 import { useForm } from 'react-hook-form';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
+  const userInfo = useSelector(selectUserInfo);
   const [selectedEditIndex, setSelectedEditIndex] = useState(-1);
   const [showAddAddressForm, setShowAddAddressForm] = useState(false);
 
@@ -19,56 +20,53 @@ const UserProfile = () => {
     formState: { errors },
   } = useForm();
 
-  // const handleEdit = (addressUpdate, index) => {
-  //   const newUser = { ...user, addresses: [...user.addresses] }; // for shallow copy issue
-  //   newUser.addresses.splice(index, 1, addressUpdate);
-  //   dispatch(updateUserAsync(newUser));
-  //   setSelectedEditIndex(-1);
-  // };
-  // const handleRemove = (e, index) => {
-  //   const newUser = { ...user, addresses: [...user.addresses] }; // for shallow copy issue
-  //   newUser.addresses.splice(index, 1);
-  //   dispatch(updateUserAsync(newUser));
-  // };
+  const handleEdit = (address, index) => {
+    const stringAddress = address?.street + ' ' + address?.city + ' ' + address?.state + ' ' + address?.pinCode;
+    const newUser = { ...user, addresses: [...user.addresses] };
+    newUser.addresses[index] = { address: stringAddress };
+    dispatch(updateUserAsync(newUser));
+    setSelectedEditIndex(-1);
+  };
+  const handleRemove = (e, index) => {
+    const newUser = { ...user, addresses: [...user.addresses] }; // for shallow copy issue
+    newUser.addresses.splice(index, 1);
+    dispatch(updateUserAsync(newUser));
+  };
 
-  // const handleEditForm = (index) => {
-  //   setSelectedEditIndex(index);
-  //   const address = user.addresses[index];
-  //   setValue('name', address.name);
-  //   setValue('email', address.email);
-  //   setValue('city', address.city);
-  //   setValue('state', address.state);
-  //   setValue('pinCode', address.pinCode);
-  //   setValue('phone', address.phone);
-  //   setValue('street', address.street);
-  // };
+  const handleAdd = (address) => {
+    const stringAddress = address?.street + ' ' + address?.city + ' ' + address?.state + ' ' + address?.pinCode;
+    const newUser = {
+      ...user,
+      addresses: [...user.addresses, { address: stringAddress }],
+    };
+    dispatch(updateUserAsync(newUser));
+    setShowAddAddressForm(false);
+  };
 
-  // const handleAdd = (address) => {
-  //   const newUser = { ...user, addresses: [...user.addresses, address] };
-  //   dispatch(updateUserAsync(newUser));
-  //   setShowAddAddressForm(false);
-  // };
+  useEffect(() => {
+    dispatch(getLoggedInUserAsync(user));
+  }, [dispatch, user]);
 
   return (
     <div>
       <div className="mx-auto mt-12 bg-background max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <h1 className="text-4xl my-5 font-bold tracking-tight text-white">
-            Name: {user?.name ? user?.name : 'New User'}
+            Name: {userInfo?.name ? userInfo?.name : 'New User'}
           </h1>
-          <h3 className="text-xl my-5 font-bold tracking-tight text-primary">Email address : {user?.email}</h3>
+          <h3 className="text-xl my-5 font-bold tracking-tight text-primary">Email address : {userInfo?.email}</h3>
         </div>
 
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <p className="mt-8 text-lg text-white">Your Addresses :</p>
-          {user?.addresses?.map((address, index) => (
+          {userInfo?.addresses?.map((address, index) => (
             <div className="mt-4">
               {selectedEditIndex === index ? (
                 <form
                   className="border-2 border-dashed px-5 py-12 mb-4"
                   noValidate
                   onSubmit={handleSubmit((data) => {
-                    // handleEdit(data, index);
+                    handleEdit(data, index);
                     reset();
                   })}
                 >
@@ -80,42 +78,8 @@ const UserProfile = () => {
                       </p>
 
                       <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                        <div className="sm:col-span-4">
-                          <label htmlFor="name" className="block text-sm font-medium leading-6 text-white">
-                            Full name
-                          </label>
-                          <div className="mt-2">
-                            <input
-                              type="text"
-                              {...register('name', {
-                                required: 'name is required',
-                              })}
-                              id="name"
-                              className="block w-full rounded-md border-0 py-1.5 text-black sm:text-sm sm:leading-6"
-                            />
-                            {errors.name && <p className="text-red-500">{errors.name.message}</p>}
-                          </div>
-                        </div>
-
-                        <div className="sm:col-span-3">
-                          <label htmlFor="phone" className="block text-sm font-medium leading-6 text-white">
-                            Phone
-                          </label>
-                          <div className="mt-2">
-                            <input
-                              id="phone"
-                              {...register('phone', {
-                                required: 'phone is required',
-                              })}
-                              type="tel"
-                              className="block w-full rounded-md border-0 py-1.5 text-black sm:text-sm sm:leading-6"
-                            />
-                            {errors.phone && <p className="text-red-500">{errors.phone.message}</p>}
-                          </div>
-                        </div>
-
                         <div className="col-span-full">
-                          <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-white">
+                          <label htmlFor="street" className="block text-sm font-medium leading-6 text-white">
                             Street address
                           </label>
                           <div className="mt-2">
@@ -218,11 +182,7 @@ const UserProfile = () => {
                   >
                     Edit
                   </button>
-                  <button
-                    // onClick={(e) => handleRemove(e, index)}
-                    type="button"
-                    className="font-semibold text-red-700"
-                  >
+                  <button onClick={(e) => handleRemove(e, index)} type="button" className="font-semibold text-red-700">
                     Remove
                   </button>
                 </div>
@@ -245,7 +205,7 @@ const UserProfile = () => {
               className="border-2 border-dashed px-5 py-12 mt-6"
               noValidate
               onSubmit={handleSubmit((data) => {
-                // handleAdd(data);
+                handleAdd(data);
                 reset();
               })}
             >
@@ -257,40 +217,6 @@ const UserProfile = () => {
                   </p>
 
                   <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div className="sm:col-span-3">
-                      <label htmlFor="name" className="block text-sm font-medium leading-6 text-white">
-                        Full name
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          type="text"
-                          {...register('name', {
-                            required: 'name is required',
-                          })}
-                          id="name"
-                          className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm  sm:text-sm sm:leading-6"
-                        />
-                        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-3">
-                      <label htmlFor="phone" className="block text-sm font-medium leading-6 text-white">
-                        Phone
-                      </label>
-                      <div className="mt-2">
-                        <input
-                          id="phone"
-                          {...register('phone', {
-                            required: 'phone is required',
-                          })}
-                          type="tel"
-                          className="block w-full rounded-md border-0 py-1.5 text-black sm:text-sm sm:leading-6"
-                        />
-                        {errors.phone && <p className="text-red-500">{errors.phone.message}</p>}
-                      </div>
-                    </div>
-
                     <div className="col-span-full">
                       <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-white">
                         Street address

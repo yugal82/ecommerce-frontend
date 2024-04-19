@@ -61,17 +61,9 @@ const Checkout = () => {
           noValidate
           onSubmit={handleSubmit((data) => {
             // this handleSubmit should call the API for updating a user. Since we are storing the list of address in user schema, we will update the user.
-            let address = '';
-            Object.values(data).map((val) => (address = val + ', ' + address));
-            dispatch(updateUserAsync({ ...user, addresses: [...user?.addresses, { address: address }] }));
-            reset({
-              name: '',
-              phone: '',
-              city: '',
-              region: '',
-              postalCode: '',
-              streetAddress: '',
-            });
+            const stringAddress = data?.street + ' ' + data?.city + ', ' + data?.state + ', ' + data?.pinCode;
+            dispatch(updateUserAsync({ ...user, addresses: [...user?.addresses, { address: stringAddress }] }));
+            reset();
           })}
         >
           <div className="w-full px-8">
@@ -109,19 +101,22 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                <div className="sm:col-span-full">
-                  <label htmlFor="streetAddress" className="block text-sm font-medium leading-6 text-white">
+                <div className="col-span-full">
+                  <label htmlFor="street" className="block text-sm font-medium leading-6 text-white">
                     Street address
                   </label>
                   <div className="mt-2">
                     <input
                       type="text"
-                      {...register('streetAddress')}
-                      id="streetAddress"
-                      className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm sm:text-sm sm:leading-6"
+                      {...register('street', {
+                        required: 'street is required',
+                      })}
+                      id="street"
+                      className="block w-full rounded-md border-0 py-1.5 text-black sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
+
                 <div className="sm:col-span-2 sm:col-start-1">
                   <label htmlFor="city" className="block text-sm font-medium leading-6 text-white">
                     City
@@ -129,35 +124,44 @@ const Checkout = () => {
                   <div className="mt-2">
                     <input
                       type="text"
-                      {...register('city')}
+                      {...register('city', {
+                        required: 'city is required',
+                      })}
                       id="city"
-                      className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm sm:text-sm sm:leading-6"
+                      autoComplete="address-level2"
+                      className="block w-full rounded-md border-0 py-1.5 text-black sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
+
                 <div className="sm:col-span-2">
-                  <label htmlFor="region" className="block text-sm font-medium leading-6 text-white">
+                  <label htmlFor="state" className="block text-sm font-medium leading-6 text-white">
                     State / Province
                   </label>
                   <div className="mt-2">
                     <input
                       type="text"
-                      {...register('region')}
-                      id="region"
-                      className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm sm:text-sm sm:leading-6"
+                      {...register('state', {
+                        required: 'state is required',
+                      })}
+                      id="state"
+                      className="block w-full rounded-md border-0 py-1.5 text-black sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
+
                 <div className="sm:col-span-2">
-                  <label htmlFor="postalCode" className="block text-sm font-medium leading-6 text-white">
+                  <label htmlFor="pinCode" className="block text-sm font-medium leading-6 text-white">
                     ZIP / Postal code
                   </label>
                   <div className="mt-2">
                     <input
                       type="text"
-                      {...register('postalCode')}
-                      id="postalCode"
-                      className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm sm:text-sm sm:leading-6"
+                      {...register('pinCode', {
+                        required: 'pinCode is required',
+                      })}
+                      id="pinCode"
+                      className="block w-full rounded-md border-0 py-1.5 text-black sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>

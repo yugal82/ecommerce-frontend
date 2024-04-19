@@ -16,7 +16,7 @@ const Signup = () => {
   } = useForm();
 
   return (
-    <div className="p-6 lg:px-8 h-screen">
+    <div className="p-6 lg:px-8">
       {user && <Navigate to="/" replace={true} />}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -28,10 +28,49 @@ const Signup = () => {
           noValidate
           className="space-y-6 mt-6"
           onSubmit={handleSubmit((data) => {
-            dispatch(createUserAsync({ email: data.email, password: data.password, addresses: [], role: 'user' }));
-            reset({ email: '', password: '', confirmPassword: '' });
+            const user = {
+              email: data.email,
+              name: data.name,
+              phone: data.phone,
+              password: data.password,
+              addresses: [],
+              role: 'user',
+            };
+            dispatch(createUserAsync(user));
+            reset();
           })}
         >
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium leading-6 text-white">
+                Name
+              </label>
+              <div className="mt-2">
+                <input
+                  id="name"
+                  {...register('name', { required: 'Name is a mandatory field' })}
+                  type="text"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
+                />
+                <p className="text-red-500 font-semibold text-sm">{errors?.name?.message}</p>
+              </div>
+            </div>
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium leading-6 text-white">
+                Phone
+              </label>
+              <div className="mt-2">
+                <input
+                  id="phone"
+                  {...register('phone', { required: 'Phone is a mandatory field' })}
+                  type="tel"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
+                />
+                <p className="text-red-500 font-semibold text-sm">{errors?.phone?.message}</p>
+              </div>
+            </div>
+          </div>
+
           <div>
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-white">
               Email address
@@ -50,48 +89,50 @@ const Signup = () => {
             </div>
           </div>
 
-          <div>
-            <div className="flex items-center justify-between">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-white">
-                Password
-              </label>
-            </div>
-            <div className="mt-2">
-              <input
-                id="password"
-                {...register('password', {
-                  required: 'Password is a mandatory field',
-                  pattern: {
-                    value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
-                    message: `- at least 8 characters\n
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+            <div>
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" className="block text-sm font-medium leading-6 text-white">
+                  Password
+                </label>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="password"
+                  {...register('password', {
+                    required: 'Password is a mandatory field',
+                    pattern: {
+                      value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
+                      message: `- at least 8 characters\n
                     - must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number\n
                     - Can contain special characters\n`,
-                  },
-                })}
-                type="password"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
-              />
-              <p className="text-red-500 font-semibold text-sm">{errors?.password?.message}</p>
+                    },
+                  })}
+                  type="password"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
+                />
+                <p className="text-red-500 font-semibold text-sm">{errors?.password?.message}</p>
+              </div>
             </div>
-          </div>
 
-          <div>
-            <div className="flex items-center justify-between">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium leading-6 text-white">
-                Confirm Password
-              </label>
-            </div>
-            <div className="mt-2">
-              <input
-                id="confirmPassword"
-                {...register('confirmPassword', {
-                  required: 'Please confirm your password.',
-                  validate: (value, formValue) => value === formValue.password || 'Password not matching',
-                })}
-                type="password"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
-              />
-              <p className="text-red-500 font-semibold text-sm">{errors?.confirmPassword?.message}</p>
+            <div>
+              <div className="flex items-center justify-between">
+                <label htmlFor="confirmPassword" className="block text-sm font-medium leading-6 text-white">
+                  Confirm Password
+                </label>
+              </div>
+              <div className="mt-2">
+                <input
+                  id="confirmPassword"
+                  {...register('confirmPassword', {
+                    required: 'Please confirm your password.',
+                    validate: (value, formValue) => value === formValue.password || 'Password not matching',
+                  })}
+                  type="password"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm sm:text-sm sm:leading-6"
+                />
+                <p className="text-red-500 font-semibold text-sm">{errors?.confirmPassword?.message}</p>
+              </div>
             </div>
           </div>
 
