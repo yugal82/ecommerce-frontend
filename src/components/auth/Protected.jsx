@@ -5,7 +5,13 @@ import { selectLoggedInUser } from '../../features/auth/authSlice';
 
 const Protected = ({ children }) => {
   const user = useSelector(selectLoggedInUser);
-  if (!user) return <Navigate to="/login" replace={true} />;
+  if (!user)
+    return (
+      <>
+        {alert('Please login')}
+        <Navigate to="/login" replace={true} />;
+      </>
+    );
 
   return children;
 };

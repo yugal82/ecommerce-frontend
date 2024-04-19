@@ -29,6 +29,10 @@ const ProductDetails = () => {
 
   const handleAddItemInCart = (e, product) => {
     e.preventDefault();
+    if (!user) {
+      alert('Log in to add item to cart');
+      return;
+    }
     if (cart.findIndex((item) => item?.productId === product.id) < 0) {
       dispatch(addItemInCartAsync({ item: product, productId: product.id, quantity: 1, userId: user?.id }));
     } else {
@@ -39,6 +43,10 @@ const ProductDetails = () => {
 
   const handleAddItemInWishlist = (e, product) => {
     e.preventDefault();
+    if (!user) {
+      alert('Login to add product to wishlist');
+      return;
+    }
     if (wishlistItems?.findIndex((item) => item?.productId === product.id) < 0) {
       dispatch(addItemInWishlistAsync({ item: product, productId: product.id, userId: user?.id }));
     } else {

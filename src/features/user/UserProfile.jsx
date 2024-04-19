@@ -55,6 +55,9 @@ const UserProfile = () => {
             Name: {userInfo?.name ? userInfo?.name : 'New User'}
           </h1>
           <h3 className="text-xl my-5 font-bold tracking-tight text-primary">Email address : {userInfo?.email}</h3>
+          {userInfo?.role === 'admin' && (
+            <h3 className="text-xl my-5 font-bold tracking-tight text-primary">Role : {userInfo?.role}</h3>
+          )}
         </div>
 
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">

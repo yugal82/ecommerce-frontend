@@ -32,6 +32,8 @@ const AdminOrders = () => {
         return 'bg-primary text-white';
       case 'cancelled':
         return 'bg-red-500 text-white';
+      default:
+        return '';
     }
   };
 
@@ -51,7 +53,11 @@ const AdminOrders = () => {
                   <tr>
                     {['Invoice No.', 'Total Amount', 'Payment Method', 'Customer', 'Items', 'Status', 'Actions'].map(
                       (heading) => (
-                        <th scope="col" className="py-3.5 px-4 text-sm font-normal rtl:text-right text-white">
+                        <th
+                          key={heading}
+                          scope="col"
+                          className="py-3.5 px-4 text-sm font-normal rtl:text-right text-white"
+                        >
                           <div className="flex items-center gap-x-3">
                             <span>{heading}</span>
                           </div>
@@ -105,16 +111,26 @@ const AdminOrders = () => {
                           </div>
                         ) : (
                           <select
-                            className="px-6 py-1 rounded-full"
+                            className="px-8 py-1 rounded-full bg-transparent text-white"
                             onChange={(e) => onStatusChange(e, order)}
                             name="status"
                             id="status"
                           >
-                            <option value="">Choose status</option>
-                            <option value="pending">Pending</option>
-                            <option value="dispatched">Dispatched</option>
-                            <option value="delivered">Delivered</option>
-                            <option value="cancelled">Cancelled</option>
+                            <option className="bg-background" value="">
+                              Choose status
+                            </option>
+                            <option className="bg-background" value="pending">
+                              Pending
+                            </option>
+                            <option className="bg-background" value="dispatched">
+                              Dispatched
+                            </option>
+                            <option className="bg-background" value="delivered">
+                              Delivered
+                            </option>
+                            <option className="bg-background" value="cancelled">
+                              Cancelled
+                            </option>
                           </select>
                         )}
                       </td>
