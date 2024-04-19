@@ -9,6 +9,7 @@ import { addItemInCartAsync, selectCartItems } from '../../cart/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from '../../auth/authSlice';
 import { discountedPrice } from '../../../utils/constant';
+import { addItemInWishlistAsync, selectWishlistItems } from '../../wishlist/wishlistSlice';
 
 const reviews = { href: '#', average: 4, totalCount: 117 };
 
@@ -22,6 +23,7 @@ const ProductDetails = () => {
   const [selectedSize, setSelectedSize] = useState(null);
   const user = useSelector(selectLoggedInUser);
   const cart = useSelector(selectCartItems);
+  const wishlistItems = useSelector(selectWishlistItems);
 
   const { state } = useLocation();
 
@@ -34,6 +36,16 @@ const ProductDetails = () => {
       alert('Product already added in cart');
     }
   };
+
+  const handleAddItemInWishlist = (e, product) => {
+    e.preventDefault();
+    if (wishlistItems?.findIndex((item) => item?.productId === product.id) < 0) {
+      dispatch(addItemInWishlistAsync({ item: product, productId: product.id, userId: user?.id }));
+    } else {
+      alert('Product already added in wishlist');
+    }
+  };
+
   return (
     <div className="">
       <div className="pt-6 px-8">
@@ -70,19 +82,29 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            <form className="mt-6" onSubmit={(e) => handleAddItemInCart(e, state?.product)}>
+            <form className="mt-6">
               {/* Colors */}
               <ColorRadio selectedColor={selectedColor} setSelectedColor={setSelectedColor} product={state?.product} />
 
               {/* Sizes */}
               <SizesRadio selectedSize={selectedSize} setSelectedSize={setSelectedSize} product={state?.product} />
 
-              <button
-                type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white"
-              >
-                Add to cart
-              </button>
+              <div className="mt-10">
+                <button
+                  type="button"
+                  onClick={(e) => handleAddItemInWishlist(e, state?.product)}
+                  className="flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white"
+                >
+                  Add to wishlist
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => handleAddItemInCart(e, state?.product)}
+                  className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white"
+                >
+                  Add to cart
+                </button>
+              </div>
             </form>
           </div>
         </div>

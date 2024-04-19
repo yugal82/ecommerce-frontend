@@ -6,7 +6,7 @@ import ProductsGrid from './ProductsGrid';
 import FilterSidebar from '../../../components/Sidebar/FilterSidebar';
 import FilterSidebarMobile from '../../../components/Sidebar/FilterSidebarMobile';
 import { getProductsByFiltersAsync, selectAllProducts, getProductsBySortFilterAsync } from '../productSlice';
-import { categories, brands } from '../../../utils/constant';
+import { categories, brands, colors } from '../../../utils/constant';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -18,14 +18,7 @@ const filters = [
   {
     id: 'color',
     name: 'Color',
-    options: [
-      { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: false },
-      { value: 'brown', label: 'Brown', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
-    ],
+    options: colors,
   },
   {
     id: 'category',

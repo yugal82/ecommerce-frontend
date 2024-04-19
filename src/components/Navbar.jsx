@@ -6,6 +6,7 @@ import {
   ShoppingCartIcon,
   XMarkIcon,
   UserCircleIcon,
+  HeartIcon,
 } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -95,6 +96,11 @@ const Navbar = () => {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-4 w-full flex items-center md:ml-6">
+                      <Link to="/wishlist">
+                        <button type="button" className="relative rounded-full p-1 text-gray-400 hover:text-white">
+                          <HeartIcon className="h-6 w-6" aria-hidden="true" />
+                        </button>
+                      </Link>
                       <Link to="/cart">
                         <button type="button" className="relative rounded-full p-1 text-gray-400 hover:text-white">
                           <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
@@ -206,28 +212,39 @@ const Navbar = () => {
                   )}
                 </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">
-                  <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user?.imageUrl} alt="" />
+                  <div className="flex items-center justify-between px-5">
+                    <div className="flex items-center">
+                      <div className="flex-shrink-0">
+                        <UserCircleIcon className="h-8 w-8 rounded-full bg-white" />
+                      </div>
+                      <div className="ml-3">
+                        <div className="text-base font-medium leading-none text-white">{user?.name}</div>
+                        <div className="text-sm font-medium leading-none text-gray-400">{user?.email}</div>
+                      </div>
                     </div>
-                    <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user?.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{user?.email}</div>
+                    <div>
+                      <button
+                        type="button"
+                        className="relative ml-auto flex-shrink-0 rounded-full p-1 text-gray-400 hover:text-white"
+                      >
+                        <Link to="/wishlist">
+                          <HeartIcon className="h-6 w-6" aria-hidden="true" />
+                        </Link>
+                      </button>
+                      <button
+                        type="button"
+                        className="relative ml-auto flex-shrink-0 rounded-full p-1 text-gray-400 hover:text-white"
+                      >
+                        <Link to="/cart">
+                          {cartItems.length > 0 && (
+                            <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">
+                              {cartItems.length}
+                            </span>
+                          )}
+                          <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                        </Link>
+                      </button>
                     </div>
-
-                    <button
-                      type="button"
-                      className="relative ml-auto flex-shrink-0 rounded-full p-1 text-gray-400 hover:text-white"
-                    >
-                      <Link to="/cart">
-                        {cartItems.length > 0 && (
-                          <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">
-                            {cartItems.length}
-                          </span>
-                        )}
-                        <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                      </Link>
-                    </button>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (

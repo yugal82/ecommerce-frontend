@@ -4,4 +4,3 @@ MAKE THE ECOMMERCE PLATFORM PURELY FOR CLOTHING.
 - Forgot password functionality not yet implemented. Implement through backend.
 - Add color checkboxes in admin product create form
 - Edit product functionality by admin.
-- Add wishlist feature.

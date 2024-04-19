@@ -22,6 +22,7 @@ import AdminProducts from './features/admin/AdminProducts';
 import AdminProductDetails from './features/admin/AdminProductDetails';
 import CreateProductForm from './features/admin/CreateProductForm';
 import AdminOrders from './features/admin/AdminOrders';
+import Wishlist from './features/wishlist/Wishlist';
 
 function App() {
   const dispatch = useDispatch();
@@ -78,6 +79,15 @@ function App() {
         />
         <Route exact path="/logout" element={<Logout />} />
         <Route exact path="/forgot-password" element={<ForgotPassword />} />
+        <Route
+          exact
+          path="/wishlist"
+          element={
+            <Protected>
+              <Wishlist />
+            </Protected>
+          }
+        />
 
         {/* Admin routes */}
         <Route
