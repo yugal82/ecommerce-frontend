@@ -16,10 +16,10 @@ const WishlistProductsGrid = ({ wishlistItems }) => {
           <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {wishlistItems?.map((item, idx) => (
               <div key={item}>
-                {!item?.item?.deleted && (
+                {!item?.deleted && (
                   <div>
-                    <Link key={idx} to={`/product-details/${item?.item?.id}`} state={{ product: item?.item }}>
-                      <ProductCard product={item?.item} />
+                    <Link key={idx} to={`/product-details/${item?.id}`} state={{ product: item }}>
+                      <ProductCard product={item?.productId} />
                     </Link>
                     <button
                       onClick={() => handleRemoveItem(item)}
