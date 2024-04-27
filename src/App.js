@@ -24,6 +24,7 @@ import CreateProductForm from './features/admin/CreateProductForm';
 import AdminOrders from './features/admin/AdminOrders';
 import Wishlist from './features/wishlist/Wishlist';
 import { getLoggedInUserAsync } from './features/user/userSlice';
+import AdminOrderDetails from './features/admin/AdminOrderDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -131,6 +132,15 @@ function App() {
           element={
             <AdminProtected>
               <AdminOrders />
+            </AdminProtected>
+          }
+        />
+        <Route
+          exact
+          path="/admin/orders/order-details/:id"
+          element={
+            <AdminProtected>
+              <AdminOrderDetails />
             </AdminProtected>
           }
         />

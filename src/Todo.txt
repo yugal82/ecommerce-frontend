@@ -5,3 +5,6 @@ MAKE THE ECOMMERCE PLATFORM PURELY FOR CLOTHING.
 - Add color checkboxes in admin product create form
 - Edit product functionality by admin.
 - Add proper alerts and popups for error messages and invalid routes.
+- Check filter product API functionality. (Cannot send multiple queries together)
+- Add Order details page for admin
+- Check create product error of payload too large.

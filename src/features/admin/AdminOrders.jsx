@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllOrdersAsync, selectOrders, updateOrderAsync } from '../orders/ordersSlice';
-import { PencilIcon } from '@heroicons/react/20/solid';
 import { selectUserInfo } from '../user/userSlice';
+import AdminOrderCard from './AdminOrderCard';
 
 const AdminOrders = () => {
   const dispatch = useDispatch();
@@ -42,110 +42,33 @@ const AdminOrders = () => {
   }, [dispatch, user]);
 
   return (
-    <section className="px-4 mx-auto">
-      <div className="flex flex-col">
-        <div className="">
-          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <h2 className="text-2xl text-white font-semibold py-6">All Orders</h2>
-            <div className="overflow-hidden md:rounded-lg shadow-md pb-12">
-              <table className="min-w-full">
-                <thead className="bg-primary">
-                  <tr>
-                    {['Invoice No.', 'Total Amount', 'Payment Method', 'Customer', 'Items', 'Status', 'Actions'].map(
-                      (heading) => (
-                        <th
-                          key={heading}
-                          scope="col"
-                          className="py-3.5 px-4 text-sm font-normal rtl:text-right text-white"
-                        >
-                          <div className="flex items-center gap-x-3">
-                            <span>{heading}</span>
-                          </div>
-                        </th>
-                      )
-                    )}
-                  </tr>
-                </thead>
-                <tbody className="bg-[#1c1c1c] divide-y divide-gray-600">
-                  {orders?.map((order) => (
-                    <tr key={order?.id}>
-                      <td className="px-4 py-4 text-sm font-medium text-gray-200 whitespace-nowrap">
-                        <div className="inline-flex items-center gap-x-3">
-                          <span>#{order?.id}</span>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-300 whitespace-nowrap">₹{order?.totalAmount}</td>
-                      <td className="px-4 py-4 text-sm font-medium whitespace-nowrap">
-                        <div className="text-primary">
-                          <h2 className="text-sm font-normal capitalize">{order?.selectedPaymentMethod}</h2>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-white dark:text-gray-300 whitespace-nowrap">
-                        <div className="flex items-center gap-x-2">
-                          <div>
-                            <h2 className="text-sm font-medium text-gray-800 dark:text-white ">
-                              {order?.user?.name ? order?.user?.name : 'Guest user'}
-                            </h2>
-                            <p className="text-xs font-normal text-gray-600 ">{order?.user?.email}</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-white dark:text-gray-300 whitespace-nowrap">
-                        <div className="">
-                          {order?.items?.map((item) => (
-                            <div className="flex items-center gap-x-2 pt-2">
-                              <img class="object-cover w-8 h-8 rounded-full" src={item?.imageSrc} alt="" />
-                              <p>{item?.item?.name}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </td>
-                      <td className="p-4 text-sm whitespace-nowrap">
-                        {order?.id !== editableOrderId ? (
-                          <div
-                            className={`font-semibold capitalize ${statusColor(
-                              order?.status
-                            )} py-1 rounded-md text-center`}
-                          >
-                            {order?.status}
-                          </div>
-                        ) : (
-                          <select
-                            className="px-8 py-1 rounded-full bg-transparent text-white"
-                            onChange={(e) => onStatusChange(e, order)}
-                            name="status"
-                            id="status"
-                          >
-                            <option className="bg-background" value="">
-                              Choose status
-                            </option>
-                            <option className="bg-background" value="pending">
-                              Pending
-                            </option>
-                            <option className="bg-background" value="dispatched">
-                              Dispatched
-                            </option>
-                            <option className="bg-background" value="delivered">
-                              Delivered
-                            </option>
-                            <option className="bg-background" value="cancelled">
-                              Cancelled
-                            </option>
-                          </select>
-                        )}
-                      </td>
-                      <td className="px-4 py-4 text-sm whitespace-nowrap">
-                        <div className="flex items-center justify-center">
-                          <PencilIcon
-                            onClick={(e) => handleEditClick(e, order)}
-                            className="w-4 text-primary cursor-pointer"
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+    <section className="mx-auto max-w-7xl py-6 sm:py-12 px-4">
+      <div className="">
+        <div className="inline-block w-full mx-auto py-2 align-middle md:px-6 lg:px-8">
+          <h2 className="text-2xl text-white font-semibold py-6">All Orders</h2>
+          <div className="overflow-hidden md:rounded-lg shadow-md pb-12">
+            <div className="">
+              <div className="bg-primary grid grid-cols-5 gap-2">
+                {['Invoice No.', 'Total Bill', 'Payment', 'Status', 'Actions'].map((heading) => (
+                  <div key={heading} className="py-3.5 px-1 text-sm font-normal text-white">
+                    <div className="flex items-center gap-x-3">
+                      <span>{heading}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-[#1c1c1c] divide-y divide-gray-600">
+                {orders?.map((order) => (
+                  <AdminOrderCard
+                    key={order?.id}
+                    order={order}
+                    handleEditClick={handleEditClick}
+                    onStatusChange={onStatusChange}
+                    statusColor={statusColor}
+                    editableOrderId={editableOrderId}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

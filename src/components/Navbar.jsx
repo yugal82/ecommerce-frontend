@@ -56,25 +56,27 @@ const Navbar = () => {
                         className="text-black outline-none block rounded-md border-0 py-1.5 pr-0 sm:pr-28 focus:ring-0"
                       />
                     </div>
-                    {/* {user != null && ( */}
-                    <div className="hidden md:block">
-                      <div className={`ml-10 flex items-baseline space-x-4 ${user != null ? 'hidden' : 'block'}`}>
-                        {navigation.map((item) => (
-                          <Link
-                            key={item.name}
-                            to={item.link}
-                            className={classNames(
-                              item.current ? 'bg-black text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                              'rounded-md px-3 py-2 text-sm font-medium'
-                            )}
-                            aria-current={item.current ? 'page' : undefined}
-                          >
-                            {item.name}
-                          </Link>
-                        ))}
+                    {user == null && (
+                      <div className="hidden md:block">
+                        <div className={`ml-10 flex items-baseline space-x-4`}>
+                          {navigation.map((item) => (
+                            <Link
+                              key={item.name}
+                              to={item.link}
+                              className={classNames(
+                                item.current
+                                  ? 'bg-black text-white'
+                                  : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                'rounded-md px-3 py-2 text-sm font-medium'
+                              )}
+                              aria-current={item.current ? 'page' : undefined}
+                            >
+                              {item.name}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                    {/* )} */}
+                    )}
                     {user?.role === 'admin' && (
                       <div className="flex">
                         <Link
@@ -171,7 +173,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                  {user != null && (
+                  {user == null && (
                     <div>
                       {navigation.map((item, idx) => (
                         <Link key={idx} to={item?.link}>
