@@ -28,7 +28,7 @@ const Signup = () => {
           noValidate
           className="space-y-6 mt-6"
           onSubmit={handleSubmit((data) => {
-            const user = {
+            const userData = {
               email: data.email,
               name: data.name,
               phone: data.phone,
@@ -36,7 +36,7 @@ const Signup = () => {
               addresses: [],
               role: 'user',
             };
-            dispatch(createUserAsync(user));
+            dispatch(createUserAsync(userData));
             reset();
           })}
         >

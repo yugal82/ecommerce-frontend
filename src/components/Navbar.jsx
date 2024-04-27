@@ -11,7 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCartItems } from '../features/cart/cartSlice';
-import { selectLoggedInUser } from '../features/auth/authSlice';
+import { selectUserInfo } from '../features/user/userSlice';
 
 const navigation = [
   { name: 'Login', link: '/login', user: true },
@@ -29,7 +29,7 @@ function classNames(...classes) {
 
 const Navbar = () => {
   const cartItems = useSelector(selectCartItems);
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectUserInfo);
 
   return (
     <>
@@ -56,27 +56,25 @@ const Navbar = () => {
                         className="text-black outline-none block rounded-md border-0 py-1.5 pr-0 sm:pr-28 focus:ring-0"
                       />
                     </div>
-                    {!user && (
-                      <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-4">
-                          {navigation.map((item) => (
-                            <Link
-                              key={item.name}
-                              to={item.link}
-                              className={classNames(
-                                item.current
-                                  ? 'bg-black text-white'
-                                  : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                'rounded-md px-3 py-2 text-sm font-medium'
-                              )}
-                              aria-current={item.current ? 'page' : undefined}
-                            >
-                              {item.name}
-                            </Link>
-                          ))}
-                        </div>
+                    {/* {user != null && ( */}
+                    <div className="hidden md:block">
+                      <div className={`ml-10 flex items-baseline space-x-4 ${user != null ? 'hidden' : 'block'}`}>
+                        {navigation.map((item) => (
+                          <Link
+                            key={item.name}
+                            to={item.link}
+                            className={classNames(
+                              item.current ? 'bg-black text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                              'rounded-md px-3 py-2 text-sm font-medium'
+                            )}
+                            aria-current={item.current ? 'page' : undefined}
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
                       </div>
-                    )}
+                    </div>
+                    {/* )} */}
                     {user?.role === 'admin' && (
                       <div className="flex">
                         <Link
@@ -104,9 +102,9 @@ const Navbar = () => {
                       <Link to="/cart">
                         <button type="button" className="relative rounded-full p-1 text-gray-400 hover:text-white">
                           <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                          {cartItems.length > 0 && (
+                          {cartItems?.length > 0 && (
                             <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">
-                              {cartItems.length}
+                              {cartItems?.length}
                             </span>
                           )}
                         </button>
@@ -173,8 +171,8 @@ const Navbar = () => {
                 </div>
 
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                  {!user && (
-                    <>
+                  {user != null && (
+                    <div>
                       {navigation.map((item, idx) => (
                         <Link key={idx} to={item?.link}>
                           <Disclosure.Button
@@ -192,7 +190,7 @@ const Navbar = () => {
                           </Disclosure.Button>
                         </Link>
                       ))}
-                    </>
+                    </div>
                   )}
                   {user?.role === 'admin' && (
                     <>
@@ -236,9 +234,9 @@ const Navbar = () => {
                         className="relative ml-auto flex-shrink-0 rounded-full p-1 text-gray-400 hover:text-white"
                       >
                         <Link to="/cart">
-                          {cartItems.length > 0 && (
+                          {cartItems?.length > 0 && (
                             <span class="absolute top-0 rounded-full bg-green-50 px-1 text-xs text-green-700">
-                              {cartItems.length}
+                              {cartItems?.length}
                             </span>
                           )}
                           <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />

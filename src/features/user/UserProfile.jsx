@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getLoggedInUserAsync, selectUserInfo, updateUserAsync } from './userSlice';
-import { selectLoggedInUser } from '../auth/authSlice';
+import { selectUserInfo, updateUserAsync } from './userSlice';
 import { useForm } from 'react-hook-form';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
   const userInfo = useSelector(selectUserInfo);
   const [selectedEditIndex, setSelectedEditIndex] = useState(-1);
   const [showAddAddressForm, setShowAddAddressForm] = useState(false);
@@ -22,13 +20,13 @@ const UserProfile = () => {
 
   const handleEdit = (address, index) => {
     const stringAddress = address?.street + ' ' + address?.city + ' ' + address?.state + ' ' + address?.pinCode;
-    const newUser = { ...user, addresses: [...user.addresses] };
-    newUser.addresses[index] = { address: stringAddress };
+    const newUser = { ...userInfo, addresses: [...userInfo.addresses] };
+    newUser.addresses[index] = stringAddress;
     dispatch(updateUserAsync(newUser));
     setSelectedEditIndex(-1);
   };
   const handleRemove = (e, index) => {
-    const newUser = { ...user, addresses: [...user.addresses] }; // for shallow copy issue
+    const newUser = { ...userInfo, addresses: [...userInfo.addresses] }; // for shallow copy issue
     newUser.addresses.splice(index, 1);
     dispatch(updateUserAsync(newUser));
   };
@@ -36,16 +34,13 @@ const UserProfile = () => {
   const handleAdd = (address) => {
     const stringAddress = address?.street + ' ' + address?.city + ' ' + address?.state + ' ' + address?.pinCode;
     const newUser = {
-      ...user,
-      addresses: [...user.addresses, { address: stringAddress }],
+      ...userInfo,
+      addresses: [...userInfo.addresses],
     };
+    newUser.addresses.push(stringAddress);
     dispatch(updateUserAsync(newUser));
     setShowAddAddressForm(false);
   };
-
-  useEffect(() => {
-    dispatch(getLoggedInUserAsync(user));
-  }, [dispatch, user]);
 
   return (
     <div>
@@ -175,7 +170,7 @@ const UserProfile = () => {
               ) : null}
               <div className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
                 <div className="min-w-0 flex-auto">
-                  <p className="text-sm font-semibold leading-6 text-white">{address.address}</p>
+                  <p className="text-sm font-semibold leading-6 text-white">{address}</p>
                 </div>
                 <div className="hidden sm:flex gap-x-4 sm:items-end">
                   <button

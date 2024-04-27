@@ -10,7 +10,7 @@ const UserOrders = () => {
   const user = useSelector(selectLoggedInUser);
 
   useEffect(() => {
-    dispatch(getUserOrdersAsync(user));
+    dispatch(getUserOrdersAsync());
   }, [dispatch, user]);
 
   return (
@@ -33,7 +33,7 @@ const UserOrders = () => {
                       <li key={item.id} className="flex items-center py-6 list-none">
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md shadow-md">
                           <img
-                            src={item?.item?.imageSrc}
+                            src={item?.imageSrc}
                             alt="product"
                             className="h-full w-full object-cover object-center"
                           />
@@ -42,8 +42,8 @@ const UserOrders = () => {
                         <div className="ml-4 content-center">
                           <div>
                             <div className="text-base font-medium">
-                              <p>{item?.item?.name}</p>
-                              <p>${discountedPrice(item?.item)}</p>
+                              <p>{item?.name}</p>
+                              <p>${discountedPrice(item)}</p>
                             </div>
                             <div className="text-gray-300">
                               <p className="text-sm font-medium leading-6">Quantity: {item?.quantity}</p>

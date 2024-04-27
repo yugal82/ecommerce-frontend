@@ -65,7 +65,7 @@ const CreateProductForm = () => {
 
   const converStringToNumber = (data) => {
     data.price = Number(data.price);
-    data.discount = Number(data.discount);
+    data.discountPercentage = Number(data.discountPercentage);
     data.stock = Number(data.stock);
 
     return data;
@@ -149,21 +149,21 @@ const CreateProductForm = () => {
                 </div>
               </div>
               <div className="sm:col-span-2">
-                <label htmlFor="discount" className="block text-sm font-medium leading-6 ">
+                <label htmlFor="discountPercentage" className="block text-sm font-medium leading-6 ">
                   Discount (in %)
                 </label>
                 <div className="mt-2">
                   <input
                     type="number"
-                    {...register('discount', {
+                    {...register('discountPercentage', {
                       required: 'Product must have a name. If no discount - then enter 0',
                       min: 0,
                       max: 100,
                     })}
-                    id="discount"
+                    id="discountPercentage"
                     className="block w-full rounded-md border-0 py-1.5  shadow-sm  text-black sm:text-sm sm:leading-6"
                   />
-                  <p className="text-red-500 font-semibold text-sm">{errors?.discount?.message}</p>
+                  <p className="text-red-500 font-semibold text-sm">{errors?.discountPercentage?.message}</p>
                 </div>
               </div>
               <div className="sm:col-span-2">

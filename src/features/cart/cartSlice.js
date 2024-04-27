@@ -11,8 +11,8 @@ export const addItemInCartAsync = createAsyncThunk('cart/addItemInCart', async (
   return response.data;
 });
 
-export const getItemsByUserAsync = createAsyncThunk('cart/getItemsByUser', async (userId) => {
-  const response = await getItemsByUser(userId);
+export const getItemsByUserAsync = createAsyncThunk('cart/getItemsByUser', async () => {
+  const response = await getItemsByUser();
   return response.data;
 });
 
@@ -26,8 +26,9 @@ export const deleteItemFromCartAsync = createAsyncThunk('cart/deleteItemFromCart
   return response.data;
 });
 
-export const resetCartAsync = createAsyncThunk('cart/resetCart', async (userId) => {
-  const response = await resetCart(userId);
+export const resetCartAsync = createAsyncThunk('cart/resetCart', async () => {
+  const response = await resetCart();
+  return response.data;
 });
 
 export const cartSlice = createSlice({

@@ -2,18 +2,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getLoggedInUser, getUserOrders, updateUser } from './userAPI';
 
 const initialState = {
-  userInfo: {},
+  userInfo: null,
   userOrders: [],
   status: 'idle',
 };
 
-export const getLoggedInUserAsync = createAsyncThunk('user/getLoggedInUser', async (user) => {
-  const response = await getLoggedInUser(user);
+export const getLoggedInUserAsync = createAsyncThunk('user/getLoggedInUser', async (userId) => {
+  const response = await getLoggedInUser(userId);
   return response.data;
 });
 
-export const getUserOrdersAsync = createAsyncThunk('user/getUserOrders', async (user) => {
-  const response = await getUserOrders(user);
+export const getUserOrdersAsync = createAsyncThunk('user/getUserOrders', async () => {
+  const response = await getUserOrders();
   return response.data;
 });
 

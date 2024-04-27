@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllOrdersAsync, selectOrders, updateOrderAsync } from '../orders/ordersSlice';
-import { selectLoggedInUser } from '../auth/authSlice';
 import { PencilIcon } from '@heroicons/react/20/solid';
+import { selectUserInfo } from '../user/userSlice';
 
 const AdminOrders = () => {
   const dispatch = useDispatch();
   const orders = useSelector(selectOrders);
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectUserInfo);
 
   const [editableOrderId, setEditableOrderId] = useState(-1);
 
@@ -94,7 +94,7 @@ const AdminOrders = () => {
                         <div className="">
                           {order?.items?.map((item) => (
                             <div className="flex items-center gap-x-2 pt-2">
-                              <img class="object-cover w-8 h-8 rounded-full" src={item?.item?.imageSrc} alt="" />
+                              <img class="object-cover w-8 h-8 rounded-full" src={item?.imageSrc} alt="" />
                               <p>{item?.item?.name}</p>
                             </div>
                           ))}

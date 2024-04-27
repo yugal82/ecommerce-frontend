@@ -6,7 +6,7 @@ import { selectLoggedInUser } from '../../features/auth/authSlice';
 const AdminProtected = ({ children }) => {
   const user = useSelector(selectLoggedInUser);
   if (!user) return <Navigate to="/login" replace={true} />;
-  if (!user && user.role !== 'admin') return <Navigate to="/" replace={true} />;
+  if (!user && user?.role !== 'admin') return <Navigate to="/" replace={true} />;
   return children;
 };
 

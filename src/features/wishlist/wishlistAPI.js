@@ -11,9 +11,9 @@ const addItemInWishlist = async (item) => {
   }
 };
 
-const getWishlistedItemsByUser = async (userId) => {
+const getWishlistedItemsByUser = async () => {
   try {
-    const url = `${BASE_URL}wishlist?userId=${userId}`;
+    const url = `${BASE_URL}wishlist`;
     const response = await axios.get(url);
     return response;
   } catch (error) {

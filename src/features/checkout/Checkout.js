@@ -4,26 +4,26 @@ import Payment from './Payment';
 import AddressList from './AdressList';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectLoggedInUser, updateUserAsync } from '../auth/authSlice';
 import { createOrderAsync, selectLatestOrder } from '../orders/ordersSlice';
 import { selectCartItems } from '../cart/cartSlice';
 import { Navigate } from 'react-router-dom';
 import { discountedPrice } from '../../utils/constant';
+import { selectUserInfo, updateUserAsync } from '../user/userSlice';
 
 const Checkout = () => {
   // redux-toolkit
   const dispatch = useDispatch();
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectUserInfo);
   const cartProducts = useSelector(selectCartItems);
   let latestOrder = useSelector(selectLatestOrder);
-  console.log(latestOrder);
+
   // states
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
   const { register, handleSubmit, reset } = useForm();
 
-  const onAddressChange = (address) => setSelectedAddress(address.address);
+  const onAddressChange = (address) => setSelectedAddress(address);
   const onPaymentChange = (payment) => setSelectedPaymentMethod(payment);
 
   const handleOrderClick = (e) => {
@@ -36,13 +36,17 @@ const Checkout = () => {
 
     if (selectedPaymentMethod && selectedAddress) {
       const totalAmount = cartProducts.reduce(
-        (amount, product) => discountedPrice(product?.item) * product?.quantity + amount,
+        (amount, product) => discountedPrice(product?.productId) * product?.quantity + amount,
         0
       );
+      const items = [];
+      cartProducts?.map((product) => {
+        items.push(product?.productId);
+      });
       const order = {
-        items: cartProducts,
-        user,
-        selectedPaymentMethod,
+        items: items,
+        userId: user?.id,
+        paymentMethod: selectedPaymentMethod,
         selectedAddress,
         totalAmount,
         status: 'pending',
@@ -60,9 +64,13 @@ const Checkout = () => {
         <form
           noValidate
           onSubmit={handleSubmit((data) => {
-            // this handleSubmit should call the API for updating a user. Since we are storing the list of address in user schema, we will update the user.
             const stringAddress = data?.street + ' ' + data?.city + ', ' + data?.state + ', ' + data?.pinCode;
-            dispatch(updateUserAsync({ ...user, addresses: [...user?.addresses, { address: stringAddress }] }));
+            const newUser = {
+              ...user,
+              addresses: [...user.addresses],
+            };
+            newUser.addresses.push(stringAddress);
+            dispatch(updateUserAsync(newUser));
             reset();
           })}
         >

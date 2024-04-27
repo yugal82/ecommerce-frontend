@@ -97,5 +97,5 @@ export const convertImageToBase64 = (file) => {
 };
 
 export const discountedPrice = (product) => {
-  return Math.round(product.price * (1 - product.discountPercentage / 100), 2);
+  return Math.round(product?.price * (1 - product?.discountPercentage / 100), 2);
 };

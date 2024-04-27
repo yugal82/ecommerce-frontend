@@ -18,9 +18,11 @@ const getProductsByFilters = async (filters) => {
     for (let key in filters) {
       queryString += `${key}=${filters[key]}&`;
     }
-    const url = `${BASE_URL}products?` + queryString;
+    // const url = `${BASE_URL}products?` + queryString;
+    const url = `http://localhost:8080/product?` + queryString;
     const response = await axios.get(url);
-    return response;
+    console.log(response);
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -28,8 +30,10 @@ const getProductsByFilters = async (filters) => {
 
 const getProductsBySortFilter = async (sortFilter) => {
   try {
-    const url = `${BASE_URL}products?_sort=${sortFilter?.sort}`;
+    // const url = `${BASE_URL}products?_sort=${sortFilter?.sort}`;
+    const url = `http://localhost:8080/product?sort=${sortFilter?.sort}`;
     const response = await axios.get(url);
+    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -39,7 +43,7 @@ const getProductsBySortFilter = async (sortFilter) => {
 const createProduct = async (product) => {
   try {
     // console.log(product);
-    const url = `${BASE_URL}products`;
+    const url = `http://localhost:8080/product/create-product`;
     const response = await axios.post(url, product, { headers: { 'Content-Type': 'application/json' } });
     return response;
   } catch (error) {
@@ -49,7 +53,8 @@ const createProduct = async (product) => {
 
 const deleteProduct = async (product) => {
   try {
-    const url = `${BASE_URL}products/${product.id}`;
+    // const url = `${BASE_URL}products/${product.id}`;
+    const url = `http://localhost:8080/product/${product.id}`;
     const response = await axios.patch(url, product, { headers: { 'Content-Type': 'application/json' } });
     return response;
   } catch (error) {

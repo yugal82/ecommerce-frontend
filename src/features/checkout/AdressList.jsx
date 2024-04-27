@@ -32,7 +32,7 @@ const AddressList = ({ addresses, onAddressChange, selectedAddress }) => {
                   {({ selectedAddress }) => (
                     <>
                       <span className={`block truncate ${selectedAddress ? 'font-medium' : 'font-normal'}`}>
-                        {address.address}
+                        {address}
                       </span>
                       {selectedAddress ? (
                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-900">

@@ -16,8 +16,8 @@ export const deleteItemFromWishlistAsync = createAsyncThunk('counter/deleteItemF
   return response.data;
 });
 
-export const getWishlistedItemsByUserAsync = createAsyncThunk('counter/getWishlistedItemsByUser', async (userId) => {
-  const response = await getWishlistedItemsByUser(userId);
+export const getWishlistedItemsByUserAsync = createAsyncThunk('counter/getWishlistedItemsByUser', async () => {
+  const response = await getWishlistedItemsByUser();
   return response.data;
 });
 

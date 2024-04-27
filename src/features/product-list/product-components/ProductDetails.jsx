@@ -34,7 +34,7 @@ const ProductDetails = () => {
       return;
     }
     if (cart.findIndex((item) => item?.productId === product.id) < 0) {
-      dispatch(addItemInCartAsync({ item: product, productId: product.id, quantity: 1, userId: user?.id }));
+      dispatch(addItemInCartAsync({ item: product, productId: product.id, quantity: 1 }));
     } else {
       // that means the product has already been added to cart
       alert('Product already added in cart');

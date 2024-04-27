@@ -23,13 +23,21 @@ import AdminProductDetails from './features/admin/AdminProductDetails';
 import CreateProductForm from './features/admin/CreateProductForm';
 import AdminOrders from './features/admin/AdminOrders';
 import Wishlist from './features/wishlist/Wishlist';
+import { getLoggedInUserAsync } from './features/user/userSlice';
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
 
   useEffect(() => {
-    if (user) dispatch(getItemsByUserAsync(user?.id));
+    // 'user' variable will now contain the JWT token that is sent by the backend server. Now we can get user from 'req.user' by token on backend, so no need to pass the user?.id in frontend.
+    if (user) {
+      dispatch(getItemsByUserAsync());
+    }
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    if (user) dispatch(getLoggedInUserAsync(user?.id));
   }, [dispatch, user]);
 
   return (

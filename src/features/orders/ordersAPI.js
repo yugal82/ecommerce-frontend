@@ -3,9 +3,9 @@ const BASE_URL = 'http://localhost:8080/';
 
 const createOrder = async (order) => {
   try {
-    // const url = `${BASE_URL}order/create-order`;
-    const url = `${BASE_URL}order`;
-    const response = await axios.post(url, order);
+    // const url = `${BASE_URL}order`;
+    const url = `http://localhost:8080/order/create-order`;
+    const response = await axios.post(url, order, { headers: { 'Content-Type': 'application/json' } });
     return response;
   } catch (error) {
     console.log(error);
@@ -14,9 +14,10 @@ const createOrder = async (order) => {
 
 const getAllOrders = async () => {
   try {
-    const url = `${BASE_URL}order`;
+    // const url = `${BASE_URL}order`;
+    const url = `http://localhost:8080/order`;
     const response = await axios.get(url);
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }
@@ -24,9 +25,9 @@ const getAllOrders = async () => {
 
 const updateOrder = async (order) => {
   try {
-    const url = `${BASE_URL}order/${order.id}`;
+    const url = `http://localhost:8080/order/update-order/${order.id}`;
     const response = await axios.patch(url, order, { headers: { 'Content-Type': 'application/json' } });
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }

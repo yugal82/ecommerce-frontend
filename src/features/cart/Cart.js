@@ -9,7 +9,7 @@ const Cart = ({ isCheckout }) => {
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectCartItems);
   const totalAmount = cartProducts.reduce(
-    (amount, product) => discountedPrice(product?.item) * product?.quantity + amount,
+    (amount, product) => discountedPrice(product?.productId) * product?.quantity + amount,
     0
   );
 
@@ -39,10 +39,10 @@ const Cart = ({ isCheckout }) => {
               <div className="flow-root">
                 <ul className="-my-6 divide-y divide-gray-200">
                   {cartProducts.map((product) => (
-                    <li key={product.item.id} className="flex py-6">
+                    <li key={product?.productId?.id} className="flex py-6">
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                         <img
-                          src={product.item.imageSrc}
+                          src={product?.productId?.imageSrc}
                           alt="product"
                           className="h-full w-full object-cover object-center"
                         />
@@ -52,9 +52,9 @@ const Cart = ({ isCheckout }) => {
                         <div>
                           <div className="flex justify-between text-base font-medium text-white">
                             <h3>
-                              <span>{product.item.name}</span>
+                              <span>{product?.productId?.name}</span>
                             </h3>
-                            <p className="ml-4">${discountedPrice(product.item)}</p>
+                            <p className="ml-4">${discountedPrice(product?.productId)}</p>
                           </div>
                           {/* <p className="mt-1 text-sm text-white">{product.item.color}</p> */}
                         </div>
@@ -66,7 +66,7 @@ const Cart = ({ isCheckout }) => {
                             <select
                               onChange={(e) => onQuantityChange(e, product)}
                               className="ml-2 text-xs py-1 px-6 mt-1"
-                              value={product.quantity}
+                              value={product?.quantity}
                             >
                               <option value="1">1</option>
                               <option value="2">2</option>

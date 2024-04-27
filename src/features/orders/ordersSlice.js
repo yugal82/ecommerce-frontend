@@ -8,6 +8,7 @@ const initialState = {
 };
 
 export const createOrderAsync = createAsyncThunk('order/createOrder', async (order) => {
+  console.log(order);
   const response = await createOrder(order);
   return response.data;
 });
@@ -38,7 +39,7 @@ export const orderSlice = createSlice({
       .addCase(createOrderAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.orders.push(action.payload);
-        state.latestOrder = action.payload;
+        state.latestOrder = action.payload.data;
       })
       .addCase(getAllOrdersAsync.pending, (state) => {
         state.status = 'loading';

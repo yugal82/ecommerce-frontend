@@ -11,9 +11,9 @@ const OrderSuccess = () => {
   const user = useSelector(selectLoggedInUser);
 
   useEffect(() => {
-    dispatch(resetCartAsync(user?.id));
+    dispatch(resetCartAsync());
     dispatch(resetLatestOrder());
-  }, [dispatch, user?.id]);
+  }, [dispatch, user]);
 
   return (
     <>
