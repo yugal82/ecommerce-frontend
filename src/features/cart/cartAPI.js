@@ -6,7 +6,7 @@ const addItemInCart = async (item) => {
     // const url = `${BASE_URL}cart`;
     const url = `http://localhost:8080/cart/add-item`;
     const response = await axios.post(url, item);
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }

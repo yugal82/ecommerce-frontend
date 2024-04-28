@@ -24,10 +24,13 @@ const login = async (loginInfo) => {
 };
 
 const logout = async (user) => {
-  // here we need to take care of sessions using real backend server. Now as it is a dummy json server, we just resolve the Promise created here and send a 'user logged out' message.
-  return new Promise((resolve, reject) => {
-    resolve({ msg: 'user logged out' });
-  });
+  try {
+    const url = `http://localhost:8080/user/logout`;
+    const response = await axios.post(url, user, { headers: { 'Content-Type': 'application/json' } });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export { createUser, login, logout };

@@ -14,9 +14,10 @@ const Cart = ({ isCheckout }) => {
   );
 
   const onQuantityChange = (e, product) => {
+    console.log('Called');
     dispatch(updateCartAsync({ ...product, quantity: +e.target.value }));
   };
-
+  console.log(cartProducts);
   return (
     <div className="w-full px-8">
       {cartProducts.length === 0 ? (
@@ -78,7 +79,7 @@ const Cart = ({ isCheckout }) => {
                           <div className="flex">
                             <button
                               onClick={() => {
-                                dispatch(deleteItemFromCartAsync(product.id));
+                                dispatch(deleteItemFromCartAsync(product?.id));
                               }}
                               type="button"
                               className="font-medium text-red-700 hover:scale-105"

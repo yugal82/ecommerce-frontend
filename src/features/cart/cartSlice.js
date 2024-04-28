@@ -17,6 +17,7 @@ export const getItemsByUserAsync = createAsyncThunk('cart/getItemsByUser', async
 });
 
 export const updateCartAsync = createAsyncThunk('cart/updateItemInCart', async (item) => {
+  console.log(item);
   const response = await updateItemInCart(item);
   return response.data;
 });
