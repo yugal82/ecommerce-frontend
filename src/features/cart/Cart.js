@@ -14,10 +14,15 @@ const Cart = ({ isCheckout }) => {
   );
 
   const onQuantityChange = (e, product) => {
-    console.log('Called');
-    dispatch(updateCartAsync({ ...product, quantity: +e.target.value }));
+    const newProduct = {
+      id: product.id,
+      productId: product.productId.id,
+      userId: product.userId.id,
+      quantity: e.target.value,
+    };
+    dispatch(updateCartAsync(newProduct));
   };
-  console.log(cartProducts);
+
   return (
     <div className="w-full px-8">
       {cartProducts.length === 0 ? (

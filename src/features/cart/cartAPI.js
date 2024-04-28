@@ -31,7 +31,7 @@ const updateItemInCart = async (item) => {
     // const url = `${BASE_URL}cart/${item.id}`;
     const url = `http://localhost:8080/cart/update-item/${item.id}`;
     const response = await axios.patch(url, item);
-    return response;
+    return response.data;
   } catch (error) {
     console.log(error);
   }
