@@ -30,7 +30,6 @@ export const createProductAsync = createAsyncThunk('product/createProduct', asyn
 
 export const deleteProductAsync = createAsyncThunk('product/deleteProduct', async (product) => {
   const response = await deleteProduct(product);
-  console.log(response);
   return response.data;
 });
 

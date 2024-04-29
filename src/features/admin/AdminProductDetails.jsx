@@ -64,7 +64,8 @@ const AdminProductDetails = () => {
               className="mt-6"
               onSubmit={(e) => {
                 e.preventDefault();
-                dispatch(addItemInCartAsync({ item: state.product, quantity: 1 }));
+                const newItem = { item: state.product, quantity: 1 };
+                dispatch(addItemInCartAsync({ newItem, user }));
               }}
             >
               {/* Colors */}

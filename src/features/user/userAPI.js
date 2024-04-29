@@ -12,21 +12,23 @@ const getLoggedInUser = async (userId) => {
   }
 };
 
-const getUserOrders = async () => {
+const getUserOrders = async (user) => {
   try {
     const url = `${BASE_URL}order/my-orders`;
-    const response = await axios.get(url);
+    const response = await axios.get(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
     return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-const updateUser = async (user) => {
+const updateUser = async (userData, user) => {
   try {
     // const url = `${BASE_URL}user/${user.id}`;
     const url = `http://localhost:8080/user/update-user`;
-    const response = await axios.patch(url, user, { headers: { 'Content-Type': 'application/json' } });
+    const response = await axios.patch(url, userData, {
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.jwtToken}` },
+    });
     return response.data;
   } catch (error) {
     console.log(error);

@@ -6,30 +6,29 @@ const initialState = {
   status: 'idle',
 };
 
-export const addItemInCartAsync = createAsyncThunk('cart/addItemInCart', async (item) => {
-  const response = await addItemInCart(item);
+export const addItemInCartAsync = createAsyncThunk('cart/addItemInCart', async (data) => {
+  const response = await addItemInCart(data.newItem, data.user);
   return response.data;
 });
 
-export const getItemsByUserAsync = createAsyncThunk('cart/getItemsByUser', async () => {
-  const response = await getItemsByUser();
+export const getItemsByUserAsync = createAsyncThunk('cart/getItemsByUser', async (user) => {
+  const response = await getItemsByUser(user);
   return response.data;
 });
 
-export const updateCartAsync = createAsyncThunk('cart/updateItemInCart', async (item) => {
-  console.log(item);
-  const response = await updateItemInCart(item);
+export const updateCartAsync = createAsyncThunk('cart/updateItemInCart', async (data) => {
+  const response = await updateItemInCart(data.newProduct, data.user);
   return response.data;
 });
 
-export const deleteItemFromCartAsync = createAsyncThunk('cart/deleteItemFromCart', async (item) => {
-  const response = await deleteItemFromCart(item);
+export const deleteItemFromCartAsync = createAsyncThunk('cart/deleteItemFromCart', async (data) => {
+  const response = await deleteItemFromCart(data.id, data.user);
   return response.data;
 });
 
-export const resetCartAsync = createAsyncThunk('cart/resetCart', async () => {
-  const response = await resetCart();
-  return response.data;
+export const resetCartAsync = createAsyncThunk('cart/resetCart', async (user) => {
+  await resetCart(user);
+  return;
 });
 
 export const cartSlice = createSlice({

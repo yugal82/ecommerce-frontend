@@ -28,14 +28,14 @@ const ProductDetails = () => {
   const { state } = useLocation();
 
   const handleAddItemInCart = (e, product) => {
-    console.log(product);
     e.preventDefault();
     if (!user) {
       alert('Log in to add item to cart');
       return;
     }
     if (cart.findIndex((item) => item?.productId.id === product.id) < 0) {
-      dispatch(addItemInCartAsync({ item: product, productId: product.id, quantity: 1 }));
+      const newItem = { item: product, productId: product.id, quantity: 1 };
+      dispatch(addItemInCartAsync({ newItem, user }));
     } else {
       // that means the product has already been added to cart
       alert('Product already added in cart');
@@ -49,7 +49,8 @@ const ProductDetails = () => {
       return;
     }
     if (wishlistItems?.findIndex((item) => item?.productId.id === product.id) < 0) {
-      dispatch(addItemInWishlistAsync({ item: product, productId: product.id, userId: user?.id }));
+      const item = { item: product, productId: product.id, userId: user?.id };
+      dispatch(addItemInWishlistAsync({ item, user }));
     } else {
       alert('Product already added in wishlist');
     }

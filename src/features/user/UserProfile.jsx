@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUserInfo, updateUserAsync } from './userSlice';
 import { useForm } from 'react-hook-form';
+import { selectLoggedInUser } from '../auth/authSlice';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
   const userInfo = useSelector(selectUserInfo);
   const [selectedEditIndex, setSelectedEditIndex] = useState(-1);
   const [showAddAddressForm, setShowAddAddressForm] = useState(false);
@@ -22,13 +24,13 @@ const UserProfile = () => {
     const stringAddress = address?.street + ' ' + address?.city + ' ' + address?.state + ' ' + address?.pinCode;
     const newUser = { ...userInfo, addresses: [...userInfo.addresses] };
     newUser.addresses[index] = stringAddress;
-    dispatch(updateUserAsync(newUser));
+    dispatch(updateUserAsync({ newUser, user }));
     setSelectedEditIndex(-1);
   };
   const handleRemove = (e, index) => {
     const newUser = { ...userInfo, addresses: [...userInfo.addresses] }; // for shallow copy issue
     newUser.addresses.splice(index, 1);
-    dispatch(updateUserAsync(newUser));
+    dispatch(updateUserAsync({ newUser, user }));
   };
 
   const handleAdd = (address) => {
@@ -38,7 +40,7 @@ const UserProfile = () => {
       addresses: [...userInfo.addresses],
     };
     newUser.addresses.push(stringAddress);
-    dispatch(updateUserAsync(newUser));
+    dispatch(updateUserAsync({ newUser, user }));
     setShowAddAddressForm(false);
   };
 

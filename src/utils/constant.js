@@ -85,6 +85,8 @@ export const brands = [
 export const sizes = [28, 30, 32, 34, 36, 38, 40, 42, 44, 46];
 export const colors = ['White', 'Beige', 'Blue', 'Brown', 'Green', 'Purple'];
 
+export const BASE_URL = 'http://localhost:8080/';
+
 export const convertImageToBase64 = (file) => {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();

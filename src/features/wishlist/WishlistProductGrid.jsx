@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../product-list/product-components/ProductCard';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteItemFromWishlistAsync } from './wishlistSlice';
+import { selectLoggedInUser } from '../auth/authSlice';
 
 const WishlistProductsGrid = ({ wishlistItems }) => {
   const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser);
 
-  const handleRemoveItem = (item) => dispatch(deleteItemFromWishlistAsync(item?.id));
+  const handleRemoveItem = (item) => dispatch(deleteItemFromWishlistAsync({ itemId: item?.id, user }));
 
   return (
     <div className="w-full lg:col-span-3">

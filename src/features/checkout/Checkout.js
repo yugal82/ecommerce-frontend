@@ -9,11 +9,13 @@ import { selectCartItems } from '../cart/cartSlice';
 import { Navigate } from 'react-router-dom';
 import { discountedPrice } from '../../utils/constant';
 import { selectUserInfo, updateUserAsync } from '../user/userSlice';
+import { selectLoggedInUser } from '../auth/authSlice';
 
 const Checkout = () => {
   // redux-toolkit
   const dispatch = useDispatch();
-  const user = useSelector(selectUserInfo);
+  const user = useSelector(selectLoggedInUser);
+  const userInfo = useSelector(selectUserInfo);
   const cartProducts = useSelector(selectCartItems);
   let latestOrder = useSelector(selectLatestOrder);
 
@@ -45,13 +47,13 @@ const Checkout = () => {
       });
       const order = {
         items: items,
-        userId: user?.id,
+        userId: userInfo?.id,
         paymentMethod: selectedPaymentMethod,
         selectedAddress,
         totalAmount,
         status: 'pending',
       };
-      dispatch(createOrderAsync(order));
+      dispatch(createOrderAsync({ order, user }));
     }
     setSelectedAddress(null);
     setSelectedPaymentMethod(null);
@@ -66,11 +68,11 @@ const Checkout = () => {
           onSubmit={handleSubmit((data) => {
             const stringAddress = data?.street + ' ' + data?.city + ', ' + data?.state + ', ' + data?.pinCode;
             const newUser = {
-              ...user,
-              addresses: [...user.addresses],
+              ...userInfo,
+              addresses: [...userInfo.addresses],
             };
             newUser.addresses.push(stringAddress);
-            dispatch(updateUserAsync(newUser));
+            dispatch(updateUserAsync({ newUser, user }));
             reset();
           })}
         >
@@ -195,7 +197,7 @@ const Checkout = () => {
                 <h2 className="text-base font-semibold leading-7 text-white">Address</h2>
                 <p className="mt-1 text-sm leading-6 text-gray-300">Choose from previously used address.</p>
                 <AddressList
-                  addresses={user?.addresses}
+                  addresses={userInfo?.addresses}
                   onAddressChange={onAddressChange}
                   selectedAddress={selectedAddress}
                 />

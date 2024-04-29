@@ -7,19 +7,18 @@ const initialState = {
   status: 'idle',
 };
 
-export const createOrderAsync = createAsyncThunk('order/createOrder', async (order) => {
-  console.log(order);
-  const response = await createOrder(order);
+export const createOrderAsync = createAsyncThunk('order/createOrder', async (data) => {
+  const response = await createOrder(data.order, data.user);
   return response.data;
 });
 
-export const getAllOrdersAsync = createAsyncThunk('order/getAllOrders', async () => {
-  const response = await getAllOrders();
+export const getAllOrdersAsync = createAsyncThunk('order/getAllOrders', async (user) => {
+  const response = await getAllOrders(user);
   return response.data;
 });
 
-export const updateOrderAsync = createAsyncThunk('order/updateOrder', async (order) => {
-  const response = await updateOrder(order);
+export const updateOrderAsync = createAsyncThunk('order/updateOrder', async (data) => {
+  const response = await updateOrder(data.updatedOrder, data.user);
   return response.data;
 });
 

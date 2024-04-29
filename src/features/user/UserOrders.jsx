@@ -10,7 +10,7 @@ const UserOrders = () => {
   const user = useSelector(selectLoggedInUser);
 
   useEffect(() => {
-    dispatch(getUserOrdersAsync());
+    dispatch(getUserOrdersAsync(user));
   }, [dispatch, user]);
 
   return (

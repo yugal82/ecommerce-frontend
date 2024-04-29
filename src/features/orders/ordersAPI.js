@@ -1,32 +1,34 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:8080/';
+import { BASE_URL } from '../../utils/constant';
 
-const createOrder = async (order) => {
+const createOrder = async (order, user) => {
   try {
-    // const url = `${BASE_URL}order`;
-    const url = `http://localhost:8080/order/create-order`;
-    const response = await axios.post(url, order, { headers: { 'Content-Type': 'application/json' } });
+    const url = `${BASE_URL}order/create-order`;
+    const response = await axios.post(url, order, {
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.jwtToken}` },
+    });
     return response;
   } catch (error) {
     console.log(error);
   }
 };
 
-const getAllOrders = async () => {
+const getAllOrders = async (user) => {
   try {
-    // const url = `${BASE_URL}order`;
-    const url = `http://localhost:8080/order`;
-    const response = await axios.get(url);
+    const url = `${BASE_URL}order`;
+    const response = await axios.get(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
     return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-const updateOrder = async (order) => {
+const updateOrder = async (order, user) => {
   try {
     const url = `http://localhost:8080/order/update-order/${order.id}`;
-    const response = await axios.patch(url, order, { headers: { 'Content-Type': 'application/json' } });
+    const response = await axios.patch(url, order, {
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.jwtToken}` },
+    });
     return response.data;
   } catch (error) {
     console.log(error);

@@ -21,7 +21,6 @@ const getProductsByFilters = async (filters) => {
     // const url = `${BASE_URL}products?` + queryString;
     const url = `http://localhost:8080/product?` + queryString;
     const response = await axios.get(url);
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -33,7 +32,6 @@ const getProductsBySortFilter = async (sortFilter) => {
     // const url = `${BASE_URL}products?_sort=${sortFilter?.sort}`;
     const url = `http://localhost:8080/product?sort=${sortFilter?.sort}`;
     const response = await axios.get(url);
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
@@ -42,7 +40,6 @@ const getProductsBySortFilter = async (sortFilter) => {
 
 const createProduct = async (product) => {
   try {
-    // console.log(product);
     const url = `http://localhost:8080/product/create-product`;
     const response = await axios.post(url, product, { headers: { 'Content-Type': 'application/json' } });
     return response;

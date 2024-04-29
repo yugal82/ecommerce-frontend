@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllOrdersAsync, selectOrders, updateOrderAsync } from '../orders/ordersSlice';
-import { selectUserInfo } from '../user/userSlice';
 import AdminOrderCard from './AdminOrderCard';
+import { selectLoggedInUser } from '../auth/authSlice';
 
 const AdminOrders = () => {
   const dispatch = useDispatch();
   const orders = useSelector(selectOrders);
-  const user = useSelector(selectUserInfo);
+  const user = useSelector(selectLoggedInUser);
 
   const [editableOrderId, setEditableOrderId] = useState(-1);
 
@@ -18,7 +18,7 @@ const AdminOrders = () => {
 
   const onStatusChange = (e, order) => {
     const updatedOrder = { ...order, status: e.target.value };
-    dispatch(updateOrderAsync(updatedOrder));
+    dispatch(updateOrderAsync({ updatedOrder, user }));
     setEditableOrderId(-1);
   };
 
@@ -38,7 +38,7 @@ const AdminOrders = () => {
   };
 
   useEffect(() => {
-    if (user?.role === 'admin') dispatch(getAllOrdersAsync());
+    if (user?.role === 'admin') dispatch(getAllOrdersAsync(user));
   }, [dispatch, user]);
 
   return (

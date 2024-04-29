@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     // 'user' variable will now contain the JWT token that is sent by the backend server. Now we can get user from 'req.user' by token on backend, so no need to pass the user?.id in frontend.
     if (user) {
-      dispatch(getItemsByUserAsync());
+      dispatch(getItemsByUserAsync(user));
     }
   }, [dispatch, user]);
 

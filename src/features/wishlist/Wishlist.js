@@ -11,7 +11,7 @@ const Wishlist = () => {
   const wishlistItems = useSelector(selectWishlistItems);
 
   useEffect(() => {
-    if (user) dispatch(getWishlistedItemsByUserAsync());
+    if (user) dispatch(getWishlistedItemsByUserAsync(user));
   }, [dispatch, user]);
 
   return (

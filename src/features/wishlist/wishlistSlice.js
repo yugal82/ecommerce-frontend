@@ -6,18 +6,18 @@ const initialState = {
   status: 'idle',
 };
 
-export const addItemInWishlistAsync = createAsyncThunk('counter/addItemInWishlist', async (item) => {
-  const response = await addItemInWishlist(item);
+export const addItemInWishlistAsync = createAsyncThunk('counter/addItemInWishlist', async (data) => {
+  const response = await addItemInWishlist(data.item, data.user);
   return response.data;
 });
 
-export const deleteItemFromWishlistAsync = createAsyncThunk('counter/deleteItemFromWishlist', async (itemId) => {
-  const response = await deleteItemFromWishlist(itemId);
+export const deleteItemFromWishlistAsync = createAsyncThunk('counter/deleteItemFromWishlist', async (data) => {
+  const response = await deleteItemFromWishlist(data.itemId, data.user);
   return response.data;
 });
 
-export const getWishlistedItemsByUserAsync = createAsyncThunk('counter/getWishlistedItemsByUser', async () => {
-  const response = await getWishlistedItemsByUser();
+export const getWishlistedItemsByUserAsync = createAsyncThunk('counter/getWishlistedItemsByUser', async (user) => {
+  const response = await getWishlistedItemsByUser(user);
   return response.data;
 });
 

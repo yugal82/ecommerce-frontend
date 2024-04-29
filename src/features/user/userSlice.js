@@ -12,13 +12,13 @@ export const getLoggedInUserAsync = createAsyncThunk('user/getLoggedInUser', asy
   return response.data;
 });
 
-export const getUserOrdersAsync = createAsyncThunk('user/getUserOrders', async () => {
-  const response = await getUserOrders();
+export const getUserOrdersAsync = createAsyncThunk('user/getUserOrders', async (user) => {
+  const response = await getUserOrders(user);
   return response.data;
 });
 
-export const updateUserAsync = createAsyncThunk('user/updateUser', async (user) => {
-  const response = await updateUser(user);
+export const updateUserAsync = createAsyncThunk('user/updateUser', async (data) => {
+  const response = await updateUser(data.newUser, data.user);
   return response.data;
 });
 
