@@ -3,6 +3,7 @@ import { addItemInCart, deleteItemFromCart, getItemsByUser, resetCart, updateIte
 
 const initialState = {
   items: [],
+  cartLoaded: false,
   status: 'idle',
 };
 
@@ -49,6 +50,11 @@ export const cartSlice = createSlice({
       .addCase(getItemsByUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.items = action.payload;
+        state.cartLoaded = true;
+      })
+      .addCase(getItemsByUserAsync.rejected, (state, action) => {
+        state.status = 'idle';
+        state.cartLoaded = true;
       })
       .addCase(updateCartAsync.pending, (state) => {
         state.status = 'loading';
@@ -77,5 +83,6 @@ export const cartSlice = createSlice({
 });
 
 export const selectCartItems = (state) => state.cart.items;
+export const selectCartLoaded = (state) => state.cart.cartLoaded;
 
 export default cartSlice.reducer;

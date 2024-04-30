@@ -3,6 +3,7 @@ import { checkAuth, createUser, login, logout } from './authAPI';
 
 const initialState = {
   loggedInUserToken: null,
+  userAuthChecked: false,
   status: 'idle',
   error: null,
 };
@@ -71,11 +72,17 @@ export const authSlice = createSlice({
       .addCase(checkAuthAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.loggedInUserToken = action.payload;
+        state.userAuthChecked = true;
+      })
+      .addCase(checkAuthAsync.rejected, (state) => {
+        state.status = 'idle';
+        state.userAuthChecked = true;
       });
   },
 });
 
 export const selectLoggedInUser = (state) => state.auth.loggedInUserToken;
 export const selectError = (state) => state.auth.error;
+export const selectUserAuthChecked = (state) => state.auth.userAuthChecked;
 
 export default authSlice.reducer;
