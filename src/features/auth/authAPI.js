@@ -14,9 +14,18 @@ const createUser = async (userData) => {
 // function for login is not yet implemented. but will be added in the future.
 const login = async (loginInfo) => {
   try {
-    // const url = `${BASE_URL}user?email=${email}`;
     const url = `http://localhost:8080/user/login`;
     const response = await axios.post(url, loginInfo, { headers: { 'Content-Type': 'application/json' } });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const checkAuth = async (user) => {
+  try {
+    const url = `${BASE_URL}user/check`;
+    const response = await axios.get(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
     return response.data;
   } catch (error) {
     return error;
@@ -33,4 +42,4 @@ const logout = async (user) => {
   }
 };
 
-export { createUser, login, logout };
+export { createUser, login, logout, checkAuth };

@@ -10,7 +10,7 @@ import Checkout from './features/checkout/Checkout';
 import ProductDetails from './features/product-list/product-components/ProductDetails';
 import Protected from './components/auth/Protected';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectLoggedInUser } from './features/auth/authSlice';
+import { checkAuthAsync, selectLoggedInUser } from './features/auth/authSlice';
 import { getItemsByUserAsync } from './features/cart/cartSlice';
 import OrderSuccess from './features/orders/OrderSuccess';
 import UserOrders from './features/user/UserOrders';
@@ -31,10 +31,11 @@ function App() {
   const user = useSelector(selectLoggedInUser);
 
   useEffect(() => {
-    // 'user' variable will now contain the JWT token that is sent by the backend server. Now we can get user from 'req.user' by token on backend, so no need to pass the user?.id in frontend.
-    if (user) {
-      dispatch(getItemsByUserAsync(user));
-    }
+    dispatch(checkAuthAsync(user));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user) dispatch(getItemsByUserAsync(user));
   }, [dispatch, user]);
 
   useEffect(() => {
