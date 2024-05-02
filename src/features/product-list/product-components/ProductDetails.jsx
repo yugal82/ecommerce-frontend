@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from '../../auth/authSlice';
 import { discountedPrice } from '../../../utils/constant';
 import { addItemInWishlistAsync, selectWishlistItems } from '../../wishlist/wishlistSlice';
+import { useAlert } from 'react-alert';
 
 const reviews = { href: '#', average: 4, totalCount: 117 };
 
@@ -26,33 +27,36 @@ const ProductDetails = () => {
   const wishlistItems = useSelector(selectWishlistItems);
 
   const { state } = useLocation();
+  const alert = useAlert();
 
   const handleAddItemInCart = (e, product) => {
     e.preventDefault();
     if (!user) {
-      alert('Log in to add item to cart');
+      alert.error('Log in to add item to cart');
       return;
     }
     if (cart.findIndex((item) => item?.productId.id === product.id) < 0) {
       const newItem = { item: product, productId: product.id, quantity: 1 };
       dispatch(addItemInCartAsync({ newItem, user }));
+      alert.success('Product added to cart');
     } else {
       // that means the product has already been added to cart
-      alert('Product already added in cart');
+      alert.show('Product already added to cart');
     }
   };
 
   const handleAddItemInWishlist = (e, product) => {
     e.preventDefault();
     if (!user) {
-      alert('Login to add product to wishlist');
+      alert.error('Login to add product to wishlist');
       return;
     }
     if (wishlistItems?.findIndex((item) => item?.productId.id === product.id) < 0) {
       const item = { item: product, productId: product.id, userId: user?.id };
       dispatch(addItemInWishlistAsync({ item, user }));
+      alert.success('Product added to wishlist');
     } else {
-      alert('Product already added in wishlist');
+      alert.show('Product already added in wishlist');
     }
   };
 

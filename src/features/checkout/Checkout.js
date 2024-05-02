@@ -10,6 +10,7 @@ import { Navigate } from 'react-router-dom';
 import { discountedPrice } from '../../utils/constant';
 import { selectUserInfo, updateUserAsync } from '../user/userSlice';
 import { selectLoggedInUser } from '../auth/authSlice';
+import { useAlert } from 'react-alert';
 
 const Checkout = () => {
   // redux-toolkit
@@ -24,16 +25,17 @@ const Checkout = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
   const { register, handleSubmit, reset } = useForm();
+  const alert = useAlert();
 
   const onAddressChange = (address) => setSelectedAddress(address);
   const onPaymentChange = (payment) => setSelectedPaymentMethod(payment);
 
   const handleOrderClick = (e) => {
     if (selectedAddress === null) {
-      alert('Select mailing address');
+      alert.error('Select mailing address');
     }
     if (selectedPaymentMethod === null) {
-      alert('Please select payment method');
+      alert.error('Please select payment method');
     }
 
     if (selectedPaymentMethod && selectedAddress) {
@@ -54,6 +56,7 @@ const Checkout = () => {
         status: 'pending',
       };
       dispatch(createOrderAsync({ order, user }));
+      alert.success('Your order has been placed.');
     }
     setSelectedAddress(null);
     setSelectedPaymentMethod(null);
@@ -73,6 +76,7 @@ const Checkout = () => {
             };
             newUser.addresses.push(stringAddress);
             dispatch(updateUserAsync({ newUser, user }));
+            alert.success('Address added successfully');
             reset();
           })}
         >

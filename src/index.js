@@ -5,16 +5,27 @@ import { store } from './app/store';
 import App from './App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
+
+const options = {
+  position: positions.TOP_CENTER,
+  timeout: 5000,
+  offset: '50px',
+  transition: transitions.SCALE,
+};
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <BrowserRouter>
+      <AlertProvider template={AlertTemplate} {...options}>
         <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+      </AlertProvider>
+    </BrowserRouter>
+  </Provider>
+  // </React.StrictMode>
 );

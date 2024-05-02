@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserOrdersAsync, selectUserOrders } from './userSlice';
+import { getUserOrdersAsync, selectUserOrders, selectUserStatus } from './userSlice';
 import { selectLoggedInUser } from '../auth/authSlice';
 import { discountedPrice } from '../../utils/constant';
+import Loader from '../../components/Loader';
 
 const UserOrders = () => {
   const dispatch = useDispatch();
   const userOrders = useSelector(selectUserOrders);
   const user = useSelector(selectLoggedInUser);
+  const orderStatus = useSelector(selectUserStatus);
 
   useEffect(() => {
     dispatch(getUserOrdersAsync(user));
@@ -20,6 +22,7 @@ const UserOrders = () => {
       ) : (
         <div className="px-6 py-8">
           <h1 className="text-4xl block py-4">Your orders</h1>
+          {orderStatus === 'loading' ? <Loader /> : null}
           {userOrders?.map((order) => (
             <div className="my-2 py-4 bg-[#191919]">
               <h2 className="text-3xl font-semibold px-4 sm:px-6">Items in this order</h2>

@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectUserInfo, updateUserAsync } from './userSlice';
 import { useForm } from 'react-hook-form';
 import { selectLoggedInUser } from '../auth/authSlice';
+import { useAlert } from 'react-alert';
+import Footer from '../../components/Footer';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -20,17 +22,21 @@ const UserProfile = () => {
     formState: { errors },
   } = useForm();
 
+  const alert = useAlert();
+
   const handleEdit = (address, index) => {
     const stringAddress = address?.street + ' ' + address?.city + ' ' + address?.state + ' ' + address?.pinCode;
     const newUser = { ...userInfo, addresses: [...userInfo.addresses] };
     newUser.addresses[index] = stringAddress;
     dispatch(updateUserAsync({ newUser, user }));
+    alert.success('Address updated successfully');
     setSelectedEditIndex(-1);
   };
   const handleRemove = (e, index) => {
     const newUser = { ...userInfo, addresses: [...userInfo.addresses] }; // for shallow copy issue
     newUser.addresses.splice(index, 1);
     dispatch(updateUserAsync({ newUser, user }));
+    alert.success('Address removed successfully');
   };
 
   const handleAdd = (address) => {
@@ -41,6 +47,7 @@ const UserProfile = () => {
     };
     newUser.addresses.push(stringAddress);
     dispatch(updateUserAsync({ newUser, user }));
+    alert.success('Address added successfully');
     setShowAddAddressForm(false);
   };
 
@@ -311,6 +318,7 @@ const UserProfile = () => {
           ) : null}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

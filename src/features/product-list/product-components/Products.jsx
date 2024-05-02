@@ -5,8 +5,14 @@ import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/20/solid';
 import ProductsGrid from './ProductsGrid';
 import FilterSidebar from '../../../components/Sidebar/FilterSidebar';
 import FilterSidebarMobile from '../../../components/Sidebar/FilterSidebarMobile';
-import { getProductsByFiltersAsync, selectAllProducts, getProductsBySortFilterAsync } from '../productSlice';
+import {
+  getProductsByFiltersAsync,
+  selectAllProducts,
+  getProductsBySortFilterAsync,
+  selectProductStatus,
+} from '../productSlice';
 import { categories, brands, colors } from '../../../utils/constant';
+import Loader from '../../../components/Loader';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -40,6 +46,7 @@ const ProductList = () => {
   // redux states and dispatch
   const dispatch = useDispatch();
   const products = useSelector(selectAllProducts);
+  const status = useSelector(selectProductStatus);
 
   // states
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -119,7 +126,7 @@ const ProductList = () => {
             <h2 id="products-heading" className="sr-only">
               Products
             </h2>
-
+            {status === 'loading' ? <Loader /> : null}
             <div className="w-full flex justify-center">
               {/* Filters */}
               <FilterSidebar

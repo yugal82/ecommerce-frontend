@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteItemFromCartAsync, selectCartItems, updateCartAsync } from './cartSlice';
+import { deleteItemFromCartAsync, selectCartItems, selectCartStatus, updateCartAsync } from './cartSlice';
 import { discountedPrice } from '../../utils/constant';
 import { selectLoggedInUser } from '../auth/authSlice';
+import Loader from '../../components/Loader';
 
 const Cart = ({ isCheckout }) => {
   // here the quantity of the product is hardcoded. Once the user increases the quantity, we are not handling that API yet. But while implementing, again watch 'Cart Add/Update/Remove items' section of the tutorial.
@@ -14,6 +15,7 @@ const Cart = ({ isCheckout }) => {
     0
   );
   const user = useSelector(selectLoggedInUser);
+  const cartStatus = useSelector(selectCartStatus);
 
   const onQuantityChange = (e, product) => {
     const newProduct = {
@@ -27,6 +29,7 @@ const Cart = ({ isCheckout }) => {
 
   return (
     <div className="w-full px-8">
+      {cartStatus === 'loading' && <Loader />}
       {cartProducts.length === 0 ? (
         <div className="py-6 text-white h-screen">
           <div className="flex items-center justify-center text-xl font-semibold">
