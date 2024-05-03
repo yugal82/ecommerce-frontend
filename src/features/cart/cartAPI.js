@@ -31,7 +31,6 @@ const getItemsByUser = async (user) => {
 
 const updateItemInCart = async (item, user) => {
   try {
-    // const url = `${BASE_URL}cart/${item.id}`;
     const url = `${BASE_URL}cart/update-item/${item.id}`;
     const response = await axios.patch(url, item, {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.jwtToken}` },

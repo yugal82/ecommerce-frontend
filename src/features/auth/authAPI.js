@@ -1,9 +1,8 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:8080/';
+import { BASE_URL } from '../../utils/constant';
 const createUser = async (userData) => {
   try {
-    // const url = `${BASE_URL}user/signup`;
-    const url = `http://localhost:8080/user/signup`;
+    const url = `${BASE_URL}user/signup`;
     const response = await axios.post(url, userData, { headers: { 'Content-Type': 'application/json' } });
     return response;
   } catch (error) {
@@ -14,7 +13,7 @@ const createUser = async (userData) => {
 // function for login is not yet implemented. but will be added in the future.
 const login = async (loginInfo) => {
   try {
-    const url = `http://localhost:8080/user/login`;
+    const url = `${BASE_URL}user/login`;
     const response = await axios.post(url, loginInfo, { headers: { 'Content-Type': 'application/json' } });
     return response.data;
   } catch (error) {
@@ -34,7 +33,7 @@ const checkAuth = async (user) => {
 
 const logout = async (user) => {
   try {
-    const url = `http://localhost:8080/user/logout`;
+    const url = `${BASE_URL}user/logout`;
     const response = await axios.post(url, user, { headers: { 'Content-Type': 'application/json' } });
     return response.data;
   } catch (error) {

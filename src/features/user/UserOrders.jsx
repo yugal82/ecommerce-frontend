@@ -16,11 +16,11 @@ const UserOrders = () => {
   }, [dispatch, user]);
 
   return (
-    <div className="text-white">
+    <div className="min-h-screen text-white">
       {userOrders.length === 0 ? (
         <h2 className="mt-6 text-xl font-medium px-8">You haven't ordered anything before.</h2>
       ) : (
-        <div className="px-6 py-8">
+        <div className="px-6 py-8 min-h-screen">
           <h1 className="text-4xl block py-4">Your orders</h1>
           {orderStatus === 'loading' ? <Loader /> : null}
           {userOrders?.map((order) => (
@@ -46,7 +46,7 @@ const UserOrders = () => {
                           <div>
                             <div className="text-base font-medium">
                               <p>{item?.name}</p>
-                              <p>${discountedPrice(item)}</p>
+                              <p>₹{discountedPrice(item)}</p>
                             </div>
                             <div className="text-gray-300">
                               <p className="text-sm font-medium leading-6">Quantity: {item?.quantity}</p>
@@ -58,7 +58,7 @@ const UserOrders = () => {
                   </div>
                   <div className="flex items-center text-lg font-medium">
                     <p>Total:</p>
-                    <p className="ml-2">${order?.totalAmount}</p>
+                    <p className="ml-2">₹{order?.totalAmount}</p>
                   </div>
                   <div className="flex items-center text-lg font-medium">
                     <p>Billing address:</p>

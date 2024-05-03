@@ -37,12 +37,6 @@ const Payment = ({ onPaymentChange, selectedPaymentMethod }) => {
           </label>
         </div>
       </div>
-      {selectedPaymentMethod === 'card' && (
-        <div>
-          <span className="block text-base font-medium text-white mt-2">Enter your Card details:</span>
-          <form>{/* Render a form that asks for credit/debit card number, name, expiry date, and CVC */}</form>
-        </div>
-      )}
     </div>
   );
 };

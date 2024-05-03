@@ -64,7 +64,10 @@ const Checkout = () => {
 
   return (
     <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
-      {latestOrder && <Navigate to={`/order-success/${latestOrder?.id}`} replace={true} />}
+      {latestOrder && latestOrder.paymentMethod === 'cash' && (
+        <Navigate to={`/order-success/${latestOrder?.id}`} replace={true} />
+      )}
+      {latestOrder && latestOrder.paymentMethod === 'card' && <Navigate to="/payment-checkout" replace={true} />}
       <div className="lg:col-span-3 mt-8">
         <form
           noValidate

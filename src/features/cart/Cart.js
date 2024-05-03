@@ -14,6 +14,11 @@ const Cart = ({ isCheckout }) => {
     (amount, product) => discountedPrice(product?.productId) * product?.quantity + amount,
     0
   );
+
+  const totalAmountWithoutDiscount = cartProducts.reduce(
+    (amount, product) => product?.productId?.price * product?.quantity + amount,
+    0
+  );
   const user = useSelector(selectLoggedInUser);
   const cartStatus = useSelector(selectCartStatus);
 
@@ -40,7 +45,7 @@ const Cart = ({ isCheckout }) => {
           </Link>
         </div>
       ) : (
-        <div className="">
+        <div className="min-h-screen">
           <div className="px-4 py-6 sm:px-6">
             <div className="flex items-start justify-between">
               <h2 className="text-lg font-medium text-white">Shopping cart</h2>
@@ -48,10 +53,10 @@ const Cart = ({ isCheckout }) => {
 
             <div className="mt-8">
               <div className="flow-root">
-                <ul className="-my-6 divide-y divide-gray-200">
+                <ul className="-my-6">
                   {cartProducts.map((product) => (
-                    <li key={product?.productId?.id} className="flex py-6">
-                      <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                    <li key={product?.productId?.id} className="flex py-6 bg-[#191919] px-4 my-2 rounded-md">
+                      <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md">
                         <img
                           src={product?.productId?.imageSrc}
                           alt="product"
@@ -62,10 +67,16 @@ const Cart = ({ isCheckout }) => {
                       <div className="ml-4 flex flex-1 flex-col">
                         <div>
                           <div className="flex justify-between text-base font-medium text-white">
-                            <h3>
-                              <span>{product?.productId?.name}</span>
-                            </h3>
-                            <p className="ml-4">${discountedPrice(product?.productId)}</p>
+                            <div>
+                              <span className="text-xl">{product?.productId?.name}</span>
+                              <p className="text-gray-300">{product?.productId?.description.substr(0, 35)}...</p>
+                            </div>
+                            <div>
+                              <p className="">₹{discountedPrice(product?.productId)}</p>
+                              <p className="text-right line-through text-sm text-gray-300">
+                                ₹{product?.productId?.price}
+                              </p>
+                            </div>
                           </div>
                           {/* <p className="mt-1 text-sm text-white">{product.item.color}</p> */}
                         </div>
@@ -76,7 +87,7 @@ const Cart = ({ isCheckout }) => {
                             </label>
                             <select
                               onChange={(e) => onQuantityChange(e, product)}
-                              className="ml-2 text-xs py-1 px-6 mt-1"
+                              className="ml-2 text-xs py-1 px-6 mt-1 rounded-md"
                               value={product?.quantity}
                             >
                               <option value="1">1</option>
@@ -92,7 +103,7 @@ const Cart = ({ isCheckout }) => {
                                 dispatch(deleteItemFromCartAsync({ id: product?.id, user }));
                               }}
                               type="button"
-                              className="font-medium text-red-700 hover:scale-105"
+                              className="text-red-700 font-bold hover:scale-105"
                             >
                               Remove
                             </button>
@@ -107,11 +118,25 @@ const Cart = ({ isCheckout }) => {
           </div>
 
           <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-            <div className="flex justify-between text-base font-medium text-white">
-              <p>Subtotal</p>
-              <p>${totalAmount}</p>
+            <div className="flex justify-between text-base font-medium text-white mt-1">
+              <p>Total MRP</p>
+              <p>₹{totalAmountWithoutDiscount}</p>
             </div>
-            <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+            <div className="flex justify-between text-base font-medium text-white mt-1">
+              <p>Discount on MRP</p>
+              <p className="text-primary">- ₹{totalAmountWithoutDiscount - totalAmount}</p>
+            </div>
+            <div className="flex justify-between text-base font-medium text-white mt-1">
+              <div>
+                <p>Shipping costs</p>
+                <p className=" text-xs font-bold text-gray-500">No Shipping costs.</p>
+              </div>
+              <p>₹0</p>
+            </div>
+            <div className="text-xl flex justify-between font-medium text-white mt-2">
+              <p>Total Amount</p>
+              <p>₹{totalAmount}</p>
+            </div>
             <div className="mt-6 flex items-center justify-end">
               {!isCheckout && (
                 <Link

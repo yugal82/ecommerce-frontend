@@ -25,6 +25,7 @@ import AdminOrders from './features/admin/AdminOrders';
 import Wishlist from './features/wishlist/Wishlist';
 import { getLoggedInUserAsync } from './features/user/userSlice';
 import AdminOrderDetails from './features/admin/AdminOrderDetails';
+import StripeCheckout from './features/stripe-checkout/StripeCheckout';
 
 function App() {
   const dispatch = useDispatch();
@@ -95,6 +96,15 @@ function App() {
           element={
             <Protected>
               <Wishlist />
+            </Protected>
+          }
+        />
+        <Route
+          exact
+          path="/payment-checkout"
+          element={
+            <Protected>
+              <StripeCheckout />
             </Protected>
           }
         />

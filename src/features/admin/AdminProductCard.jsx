@@ -22,8 +22,8 @@ const AdminProductCard = ({ product }) => {
           <p className="mt-1 text-sm text-white">{product.color}</p>
         </div>
         <div className="flex items-center">
-          <p className="text-base font-semibold text-white">${discountedPrice(product)}</p>
-          <p className=" text-sm ml-1 font-medium text-gray-400 line-through">${product.price}</p>
+          <p className="text-base font-semibold text-white">₹{discountedPrice(product)}</p>
+          <p className=" text-sm ml-1 font-medium text-gray-400 line-through">₹{product.price}</p>
           <small className="text-xs font-semibold ml-1 text-primary">{product?.discountPercentage}% Off</small>
         </div>
       </div>

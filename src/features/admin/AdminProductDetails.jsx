@@ -34,8 +34,8 @@ const AdminProductDetails = () => {
 
           <div className="mt-4 lg:mt-0 lg:col-span-1">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl font-semibold tracking-tight text-white">${discountedPrice(state?.product)}</p>
-            <p className="text-lg font-semibold tracking-tight text-gray-300 line-through">${state?.product?.price}</p>
+            <p className="text-3xl font-semibold tracking-tight text-white">₹{discountedPrice(state?.product)}</p>
+            <p className="text-lg font-semibold tracking-tight text-gray-300 line-through">₹{state?.product?.price}</p>
 
             {/* Reviews */}
             <div className="mt-2">
