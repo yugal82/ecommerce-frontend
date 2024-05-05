@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/20/solid';
@@ -11,6 +11,7 @@ import {
   getProductsBySortFilterAsync,
 } from '../product-list/productSlice';
 import { categories, brands } from '../../utils/constant';
+import Footer from '../../components/Footer';
 
 const sortOptions = [
   { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -139,6 +140,7 @@ const AdminProducts = () => {
           </section>
         </main>
       </div>
+      <Footer />
     </div>
   );
 };
