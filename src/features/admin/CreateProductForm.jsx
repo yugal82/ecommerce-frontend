@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form';
 import ImageUploader from './ImageUploader';
 import { useDispatch } from 'react-redux';
 import { createProductAsync } from '../product-list/productSlice';
+import { useAlert } from 'react-alert';
 
 const CreateProductForm = () => {
   const dispatch = useDispatch();
+  const alert = useAlert();
 
   //states
   const [imageSrc, setImageSrc] = useState(null);
@@ -25,6 +27,8 @@ const CreateProductForm = () => {
     register,
     handleSubmit,
     reset,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm();
 
@@ -32,6 +36,8 @@ const CreateProductForm = () => {
     data = await convertAllImgToB64(data);
     data = converStringToNumber(data);
     dispatch(createProductAsync(data));
+    alert.success('Product was successfully created');
+
     reset();
 
     setImagesAndPreview();
@@ -192,6 +198,8 @@ const CreateProductForm = () => {
                   label="imageSrc"
                   renderImage={renderImage}
                   register={register}
+                  setError={setError}
+                  clearErrors={clearErrors}
                 />
                 <p className="text-red-500 font-semibold text-sm">{errors?.imageSrc?.message}</p>
               </div>
@@ -208,6 +216,8 @@ const CreateProductForm = () => {
                     label="image1"
                     renderImage={renderImage}
                     register={register}
+                    setError={setError}
+                    clearErrors={clearErrors}
                   />
                   <p className="text-red-500 font-semibold text-sm">{errors?.image1?.message}</p>
                 </div>
@@ -221,6 +231,8 @@ const CreateProductForm = () => {
                     label="image2"
                     renderImage={renderImage}
                     register={register}
+                    setError={setError}
+                    clearErrors={clearErrors}
                   />
                   <p className="text-red-500 font-semibold text-sm">{errors?.image2?.message}</p>
                 </div>
@@ -234,6 +246,8 @@ const CreateProductForm = () => {
                     label="image3"
                     renderImage={renderImage}
                     register={register}
+                    setError={setError}
+                    clearErrors={clearErrors}
                   />
                   <p className="text-red-500 font-semibold text-sm">{errors?.image3?.message}</p>
                 </div>
@@ -247,6 +261,8 @@ const CreateProductForm = () => {
                     label="image4"
                     renderImage={renderImage}
                     register={register}
+                    setError={setError}
+                    clearErrors={clearErrors}
                   />
                   <p className="text-red-500 font-semibold text-sm">{errors?.image4?.message}</p>
                 </div>

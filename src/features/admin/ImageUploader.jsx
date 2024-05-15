@@ -1,7 +1,17 @@
 import React from 'react';
 import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
-const ImageUploader = ({ previewImage, setPreviewImage, image, setImage, label, renderImage, register }) => {
+const ImageUploader = ({
+  previewImage,
+  setPreviewImage,
+  image,
+  setImage,
+  label,
+  renderImage,
+  register,
+  setError,
+  clearErrors,
+}) => {
   return (
     <div className="relative mt-2 flex justify-center rounded-lg border-2 border-dashed border-white px-6 py-10">
       {previewImage && (
@@ -24,8 +34,13 @@ const ImageUploader = ({ previewImage, setPreviewImage, image, setImage, label, 
                   required: 'Product must have some extra images',
                   onChange: (e) => {
                     if (e?.target?.files) {
-                      setImage(e.target.files[0]);
-                      setPreviewImage(true);
+                      if (e?.target?.files[0].size > 25 * 1024) {
+                        setError(label, { type: 'manual', message: 'Image size exceeded' });
+                      } else {
+                        clearErrors(label);
+                        setImage(e.target.files[0]);
+                        setPreviewImage(true);
+                      }
                     }
                   },
                 })}
@@ -35,7 +50,7 @@ const ImageUploader = ({ previewImage, setPreviewImage, image, setImage, label, 
               />
             </label>
           </div>
-          <p className="text-xs leading-5 text-white">PNG, JPG, GIF up to 10MB</p>
+          <p className="text-xs leading-5 text-white">PNG, JPG, up to 25kb</p>
         </div>
       )}
       {previewImage && renderImage(image)}

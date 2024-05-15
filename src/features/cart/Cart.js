@@ -10,12 +10,12 @@ const Cart = ({ isCheckout }) => {
 
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectCartItems);
-  const totalAmount = cartProducts.reduce(
+  const totalAmount = cartProducts?.reduce(
     (amount, product) => discountedPrice(product?.productId) * product?.quantity + amount,
     0
   );
 
-  const totalAmountWithoutDiscount = cartProducts.reduce(
+  const totalAmountWithoutDiscount = cartProducts?.reduce(
     (amount, product) => product?.productId?.price * product?.quantity + amount,
     0
   );
@@ -35,7 +35,7 @@ const Cart = ({ isCheckout }) => {
   return (
     <div className="w-full px-8">
       {cartStatus === 'loading' && <Loader />}
-      {cartProducts.length === 0 ? (
+      {cartProducts?.length === 0 ? (
         <div className="py-6 text-white h-screen">
           <div className="flex items-center justify-center text-xl font-semibold">
             <h2>The cart is empty. Nothing to show here!</h2>
@@ -54,7 +54,7 @@ const Cart = ({ isCheckout }) => {
             <div className="mt-8">
               <div className="flow-root">
                 <ul className="-my-6">
-                  {cartProducts.map((product) => (
+                  {cartProducts?.map((product) => (
                     <li key={product?.productId?.id} className="flex py-6 bg-[#191919] px-4 my-2 rounded-md">
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md">
                         <img

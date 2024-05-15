@@ -9,7 +9,7 @@ const addItemInCart = async (item, user) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -25,7 +25,7 @@ const getItemsByUser = async (user) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -37,7 +37,7 @@ const updateItemInCart = async (item, user) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -47,7 +47,7 @@ const deleteItemFromCart = async (itemId, user) => {
     const response = await axios.delete(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
     return response;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -60,7 +60,7 @@ const resetCart = async (user) => {
     }
     return;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 

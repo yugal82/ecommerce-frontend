@@ -4,7 +4,7 @@ import { discountedPrice } from '../../../utils/constant';
 const ProductCard = ({ product }) => {
   return (
     <div
-      key={product.id}
+      key={product?.id}
       className="group relative bg-[#1c1c1c] rounded-md shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out border-none outline-none"
     >
       <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-60 border-none outline-none">

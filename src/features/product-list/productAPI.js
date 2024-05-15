@@ -6,7 +6,7 @@ import { BASE_URL } from '../../utils/constant';
 //     const response = await axios.get(url);
 //     return response;
 //   } catch (error) {
-//     console.log(error);
+//     return error.message
 //   }
 // };
 
@@ -22,7 +22,7 @@ const getProductsByFilters = async (filters) => {
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -32,7 +32,7 @@ const getProductsBySortFilter = async (sortFilter) => {
     const response = await axios.get(url);
     return response;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -42,7 +42,7 @@ const createProduct = async (product) => {
     const response = await axios.post(url, product, { headers: { 'Content-Type': 'application/json' } });
     return response;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -52,7 +52,7 @@ const deleteProduct = async (product) => {
     const response = await axios.patch(url, product, { headers: { 'Content-Type': 'application/json' } });
     return response;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 

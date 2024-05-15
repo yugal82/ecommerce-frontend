@@ -9,7 +9,7 @@ const addItemInWishlist = async (item, user) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -19,7 +19,7 @@ const getWishlistedItemsByUser = async (user) => {
     const response = await axios.get(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -29,7 +29,7 @@ const deleteItemFromWishlist = async (itemId, user) => {
     const response = await axios.delete(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 

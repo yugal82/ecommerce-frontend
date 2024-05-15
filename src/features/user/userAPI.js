@@ -8,7 +8,7 @@ const getLoggedInUser = async (userId) => {
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -18,7 +18,7 @@ const getUserOrders = async (user) => {
     const response = await axios.get(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -31,7 +31,7 @@ const updateUser = async (userData, user) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 

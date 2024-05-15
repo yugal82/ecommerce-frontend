@@ -6,7 +6,7 @@ const createUser = async (userData) => {
     const response = await axios.post(url, userData, { headers: { 'Content-Type': 'application/json' } });
     return response;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -37,7 +37,7 @@ const logout = async (user) => {
     const response = await axios.post(url, user, { headers: { 'Content-Type': 'application/json' } });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 

@@ -9,7 +9,7 @@ const createOrder = async (order, user) => {
     });
     return response;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -19,7 +19,7 @@ const getAllOrders = async (user) => {
     const response = await axios.get(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
@@ -31,7 +31,7 @@ const updateOrder = async (order, user) => {
     });
     return response.data;
   } catch (error) {
-    console.log(error);
+    return error.message;
   }
 };
 
