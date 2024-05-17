@@ -15,6 +15,7 @@ const getProductsByFilters = async (filters) => {
     // filter = {"category": "smartphone"}
     // currently we only support one query at a time. TODO: while implementing the backend, we should be able to add multiple filters.
     let queryString = '';
+    console.log(filters);
     for (let key in filters) {
       queryString += `${key}=${filters[key]}&`;
     }
@@ -28,9 +29,9 @@ const getProductsByFilters = async (filters) => {
 
 const getProductsBySortFilter = async (sortFilter) => {
   try {
-    const url = `${BASE_URL}product?sort=${sortFilter?.sort}`;
+    const url = `${BASE_URL}product?sort=${sortFilter?.sort}&order=${sortFilter?.order}`;
     const response = await axios.get(url);
-    return response;
+    return response.data;
   } catch (error) {
     return error.message;
   }

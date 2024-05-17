@@ -52,6 +52,7 @@ const ProductList = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const handleSortFilterClick = (e, option) => {
+    console.log(option);
     dispatch(getProductsBySortFilterAsync(option));
   };
 
