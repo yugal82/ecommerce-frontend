@@ -20,12 +20,16 @@ const AdminUpdateProductForm = () => {
 
   const updateProductDetails = (data) => {
     data = converStringToNumber(data);
-    console.log(data);
     const newProduct = { ...data, id: state?.product?.id };
+    // newProduct.sizes = convertSizesToNumber(newProduct.sizes);
     dispatch(updateProductAsync(newProduct));
     alert.success('Product updated successfully');
     navigate('/admin');
   };
+
+  // const convertSizesToNumber = (sizes) => {
+  //   return sizes.map((size) => Number(size));
+  // };
 
   const converStringToNumber = (data) => {
     data.price = Number(data.price);
@@ -221,7 +225,7 @@ const AdminUpdateProductForm = () => {
         </div>
 
         <div className="mt-6 flex items-center justify-end gap-x-6">
-          <button onClick={() => setImagesAndPreview()} type="reset" className="text-sm font-semibold leading-6 ">
+          <button type="reset" className="text-sm font-semibold leading-6 ">
             Cancel
           </button>
           <button type="submit" className="rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm">

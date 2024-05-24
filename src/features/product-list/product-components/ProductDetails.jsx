@@ -36,7 +36,7 @@ const ProductDetails = () => {
       return;
     }
     if (cart.findIndex((item) => item?.productId.id === product.id) < 0) {
-      const newItem = { item: product, productId: product.id, quantity: 1 };
+      const newItem = { item: product, productId: product.id, quantity: 1, size: selectedSize };
       dispatch(addItemInCartAsync({ newItem, user }));
       alert.success('Product added to cart');
     } else {
@@ -98,7 +98,7 @@ const ProductDetails = () => {
 
             <form className="mt-6">
               {/* Colors */}
-              <ColorRadio selectedColor={selectedColor} setSelectedColor={setSelectedColor} product={state?.product} />
+              {/* <ColorRadio selectedColor={selectedColor} setSelectedColor={setSelectedColor} product={state?.product} /> */}
 
               {/* Sizes */}
               <SizesRadio selectedSize={selectedSize} setSelectedSize={setSelectedSize} product={state?.product} />

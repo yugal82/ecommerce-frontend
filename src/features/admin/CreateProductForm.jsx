@@ -318,13 +318,13 @@ const CreateProductForm = () => {
                   {sizes?.map((size) => (
                     <div key={size} className="flex h-6 items-center mx-2">
                       <input
-                        id="size"
-                        {...register('size', { required: 'Product must have size' })}
+                        id="sizes"
+                        {...register('sizes', { required: 'Product must have size' })}
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-primary"
                         value={size}
                       />
-                      <label htmlFor="size" className="font-medium ml-2">
+                      <label htmlFor="sizes" className="font-medium ml-2">
                         {size}
                       </label>
                     </div>
