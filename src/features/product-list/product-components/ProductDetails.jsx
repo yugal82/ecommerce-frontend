@@ -111,13 +111,19 @@ const ProductDetails = () => {
                 >
                   Add to wishlist
                 </button>
-                <button
-                  type="button"
-                  onClick={(e) => handleAddItemInCart(e, state?.product)}
-                  className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white"
-                >
-                  Add to cart
-                </button>
+                {state?.product?.stock === 0 ? (
+                  <p className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-red-500 px-8 py-3 text-base font-medium text-white cursor-not-allowed">
+                    Product out of stock
+                  </p>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={(e) => handleAddItemInCart(e, state?.product)}
+                    className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white"
+                  >
+                    Add to cart
+                  </button>
+                )}
               </div>
             </form>
           </div>

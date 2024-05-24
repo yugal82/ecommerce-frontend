@@ -63,7 +63,7 @@ const AdminUpdateProductForm = () => {
                 </button>
               </p>
             )}
-
+            {state?.product?.stock === 0 && <p className="mt-4 text-red-700 font-semibold">Product out of stock</p>}
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-4">
                 <label htmlFor="name" className="block text-sm font-medium leading-6 ">

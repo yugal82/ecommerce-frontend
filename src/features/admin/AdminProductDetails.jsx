@@ -73,12 +73,18 @@ const AdminProductDetails = () => {
               {/* Sizes */}
               <SizesRadio selectedSize={selectedSize} setSelectedSize={setSelectedSize} product={state?.product} />
 
-              <button
-                type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white"
-              >
-                Add to cart
-              </button>
+              {state?.product?.stock === 0 ? (
+                <p className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-red-500 px-8 py-3 text-base font-medium text-white cursor-not-allowed">
+                  Product out of stock
+                </p>
+              ) : (
+                <button
+                  type="button"
+                  className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white"
+                >
+                  Add to cart
+                </button>
+              )}
             </form>
           </div>
         </div>

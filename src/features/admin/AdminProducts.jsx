@@ -10,7 +10,7 @@ import {
   selectAllProducts,
   getProductsBySortFilterAsync,
 } from '../product-list/productSlice';
-import { categories, brands } from '../../utils/constant';
+import { categories, brands, colors } from '../../utils/constant';
 import Footer from '../../components/Footer';
 
 const sortOptions = [
@@ -23,14 +23,7 @@ const filters = [
   {
     id: 'color',
     name: 'Color',
-    options: [
-      { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: false },
-      { value: 'brown', label: 'Brown', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
-    ],
+    options: colors,
   },
   {
     id: 'category',

@@ -17,14 +17,14 @@ const UserOrders = () => {
 
   return (
     <div className="min-h-screen text-white">
-      {userOrders.length === 0 ? (
+      {userOrders?.length === 0 ? (
         <h2 className="mt-6 text-xl font-medium px-8">You haven't ordered anything before.</h2>
       ) : (
         <div className="px-6 py-8 min-h-screen">
           <h1 className="text-4xl block py-4">Your orders</h1>
           {orderStatus === 'loading' ? <Loader /> : null}
           {userOrders?.map((order) => (
-            <div className="my-2 py-4 bg-[#191919]">
+            <div key={order?.id} className="my-2 py-4 bg-[#191919]">
               <h2 className="text-3xl font-semibold px-4 sm:px-6">Items in this order</h2>
               <h2 className="text-lg font-semibold px-4 sm:px-6 capitalize">
                 Order stauts: <span className="text-primary">{order?.status}</span>

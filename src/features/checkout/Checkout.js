@@ -45,7 +45,7 @@ const Checkout = () => {
       );
       const items = [];
       cartProducts?.map((product) => {
-        items.push(product?.productId);
+        items.push({ ...product?.productId, quantity: product?.quantity });
       });
       const order = {
         items: items,

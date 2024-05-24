@@ -28,11 +28,12 @@ const AdminProductsGrid = ({ products }) => {
           </Link>
           <div className="grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 mt-6">
             {products.map((product, idx) => (
-              <div key={product.id}>
+              <div key={product?.id}>
                 <Link key={idx} to={`/admin/product-details/${product?.id}`} state={{ product }}>
                   <AdminProductCard product={product} />
                 </Link>
-                {product.deleted && <div className="text-sm text-red-700 font-bold">Product is deleted</div>}
+                {product?.deleted && <div className="text-sm text-red-700 font-bold">Product is deleted</div>}
+                {product?.stock === 0 && <div className="text-sm text-red-700 font-bold">Out of Stock</div>}
                 <div className="mt-2 flex items-center justify-between">
                   <Link
                     to={`/admin/update-product/${product?.id}`}
