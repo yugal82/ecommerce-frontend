@@ -26,6 +26,7 @@ import Wishlist from './features/wishlist/Wishlist';
 import { getLoggedInUserAsync } from './features/user/userSlice';
 import AdminOrderDetails from './features/admin/AdminOrderDetails';
 import StripeCheckout from './features/stripe-checkout/StripeCheckout';
+import AdminUpdateProductForm from './features/admin/AdminUpdateProductForm';
 
 function App() {
   const dispatch = useDispatch();
@@ -134,6 +135,15 @@ function App() {
           element={
             <AdminProtected>
               <CreateProductForm />
+            </AdminProtected>
+          }
+        />
+        <Route
+          exact
+          path="/admin/update-product/:id"
+          element={
+            <AdminProtected>
+              <AdminUpdateProductForm />
             </AdminProtected>
           }
         />

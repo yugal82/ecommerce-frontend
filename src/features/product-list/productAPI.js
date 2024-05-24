@@ -57,4 +57,14 @@ const deleteProduct = async (product) => {
   }
 };
 
-export { getProductsByFilters, getProductsBySortFilter, createProduct, deleteProduct };
+const updateProduct = async (product) => {
+  try {
+    const url = `${BASE_URL}product/${product.id}`;
+    const response = await axios.patch(url, product, { headers: { 'Content-Type': 'application/json' } });
+    return response.data;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export { getProductsByFilters, getProductsBySortFilter, createProduct, deleteProduct, updateProduct };

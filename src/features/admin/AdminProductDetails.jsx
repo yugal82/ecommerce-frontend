@@ -23,7 +23,6 @@ const AdminProductDetails = () => {
   const user = useSelector(selectLoggedInUser);
 
   const { state } = useLocation();
-  console.log(state);
   return (
     <div className="">
       <div className="pt-6 px-8">

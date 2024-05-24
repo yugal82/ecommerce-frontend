@@ -1,16 +1,21 @@
 import React from 'react';
 import AdminProductCard from './AdminProductCard';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteProductAsync } from '../product-list/productSlice';
+import { useAlert } from 'react-alert';
 
 const AdminProductsGrid = ({ products }) => {
   const dispatch = useDispatch();
+  const alert = useAlert();
+  const navigate = useNavigate();
 
   const handleDelete = (product) => {
     const selectedProduct = { ...product };
     selectedProduct.deleted = true;
     dispatch(deleteProductAsync(selectedProduct));
+    alert.success('product deleted successfully');
+    window.location.reload();
   };
 
   return (
@@ -29,15 +34,21 @@ const AdminProductsGrid = ({ products }) => {
                 </Link>
                 {product.deleted && <div className="text-sm text-red-700 font-bold">Product is deleted</div>}
                 <div className="mt-2 flex items-center justify-between">
-                  <button className="text-white bg-primary px-2 py-1 rounded text-xs font-semibold">
-                    Edit product
-                  </button>
-                  <button
-                    onClick={() => handleDelete(product)}
-                    className="text-white bg-red-700 px-2 py-1 rounded text-xs font-semibold"
+                  <Link
+                    to={`/admin/update-product/${product?.id}`}
+                    state={{ product: product }}
+                    className="text-white bg-primary px-2 py-1 rounded text-xs font-semibold"
                   >
-                    Delete product
-                  </button>
+                    Edit product
+                  </Link>
+                  {!product?.deleted && (
+                    <button
+                      onClick={() => handleDelete(product)}
+                      className="text-white bg-red-700 px-2 py-1 rounded text-xs font-semibold"
+                    >
+                      Delete product
+                    </button>
+                  )}
                 </div>
               </div>
             ))}

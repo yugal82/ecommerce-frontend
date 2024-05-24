@@ -4,6 +4,7 @@ import {
   deleteProduct,
   getProductsByFilters,
   getProductsBySortFilter,
+  updateProduct,
 } from '../product-list/productAPI';
 
 // initial states
@@ -30,6 +31,11 @@ export const createProductAsync = createAsyncThunk('product/createProduct', asyn
 
 export const deleteProductAsync = createAsyncThunk('product/deleteProduct', async (product) => {
   const response = await deleteProduct(product);
+  return response.data;
+});
+
+export const updateProductAsync = createAsyncThunk('product/updateProduct', async (product) => {
+  const response = await updateProduct(product);
   return response.data;
 });
 
@@ -66,6 +72,14 @@ export const productSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(deleteProductAsync.fulfilled, (state, action) => {
+        state.status = 'idle';
+        const idx = state.products.findIndex((item) => item.id === action.payload.id);
+        state.products[idx] = action.payload;
+      })
+      .addCase(updateProductAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateProductAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         const idx = state.products.findIndex((item) => item.id === action.payload.id);
         state.products[idx] = action.payload;
