@@ -11,6 +11,7 @@ import { discountedPrice } from '../../utils/constant';
 import { selectUserInfo, updateUserAsync } from '../user/userSlice';
 import { selectLoggedInUser } from '../auth/authSlice';
 import { useAlert } from 'react-alert';
+import axios from 'axios';
 
 const Checkout = () => {
   // redux-toolkit
@@ -23,6 +24,7 @@ const Checkout = () => {
   // states
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
+  const [razorpayPaymentSuccess, setRazorpayPaymentSuccess] = useState(false);
 
   const { register, handleSubmit, reset } = useForm();
   const alert = useAlert();
@@ -30,7 +32,7 @@ const Checkout = () => {
   const onAddressChange = (address) => setSelectedAddress(address);
   const onPaymentChange = (payment) => setSelectedPaymentMethod(payment);
 
-  const handleOrderClick = (e) => {
+  const handleOrderClick = async (e) => {
     if (selectedAddress === null) {
       alert.error('Select mailing address');
     }
@@ -55,11 +57,61 @@ const Checkout = () => {
         totalAmount,
         status: 'pending',
       };
-      dispatch(createOrderAsync({ order, user }));
-      alert.success('Your order has been placed.');
+
+      // if the payment option is Razorpay, then don't directly create an order.
+      if (selectedPaymentMethod === 'card') {
+        // first do some processing for razorpay payment
+        await createOrderByRazorpay(totalAmount);
+        dispatch(createOrderAsync({ order, user }));
+        alert.success('Your order has been placed.');
+      } else {
+        dispatch(createOrderAsync({ order, user }));
+        alert.success('Your order has been placed.');
+      }
     }
     setSelectedAddress(null);
     setSelectedPaymentMethod(null);
+  };
+
+  const createOrderByRazorpay = async (totalAmount) => {
+    const response = await axios.get('http://localhost:8080/payment/get-key');
+    const razorpay_key = response?.data?.key;
+
+    const orderResponse = await axios.post('http://localhost:8080/payment/checkout', { amount: totalAmount });
+    const order = orderResponse?.data?.data;
+    const options = {
+      key: razorpay_key,
+      amount: order?.amount,
+      currency: 'INR',
+      name: 'Ecommerce App',
+      description: 'Test Transaction',
+      image: 'https://example.com/your_logo',
+      order_id: order?.id,
+      // callback_url: 'http://localhost:8080/payment/verify',
+      handler: async function (response) {
+        const verifyRes = await axios.post('http://localhost:8080/payment/verify', {
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_signature: response.razorpay_signature,
+        });
+        if (verifyRes.status === 200) setRazorpayPaymentSuccess(true);
+        else alert.error('Payment request failed');
+      },
+      prefill: {
+        // details of the logged in user
+        name: userInfo?.name,
+        email: userInfo?.email,
+        contact: userInfo?.phone,
+      },
+      notes: {
+        address: 'Razorpay Corporate Office',
+      },
+      theme: {
+        color: '#43a08f',
+      },
+    };
+    const razor = new window.Razorpay(options);
+    razor.open();
   };
 
   return (
@@ -67,7 +119,9 @@ const Checkout = () => {
       {latestOrder && latestOrder.paymentMethod === 'cash' && (
         <Navigate to={`/order-success/${latestOrder?.id}`} replace={true} />
       )}
-      {latestOrder && latestOrder.paymentMethod === 'card' && <Navigate to="/payment-checkout" replace={true} />}
+      {latestOrder && razorpayPaymentSuccess && <Navigate to={`/order-success/${latestOrder?.id}`} replace={true} />}
+      {/* Stripe payment */}
+      {/* {latestOrder && latestOrder.paymentMethod === 'card' && <Navigate to="/payment-checkout" replace={true} />} */}
       <div className="lg:col-span-3 mt-8">
         <form
           noValidate
@@ -218,7 +272,7 @@ const Checkout = () => {
       </div>
       <div className="lg:col-span-2">
         <Cart isCheckout={true} />
-        {cartProducts.length > 0 && (
+        {cartProducts?.length > 0 && (
           <div className="w-full px-8">
             <button
               onClick={(e) => handleOrderClick(e)}

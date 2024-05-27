@@ -1,6 +1,3 @@
 MAKE THE ECOMMERCE PLATFORM PURELY FOR CLOTHING.
 - For filtering, for now we can only send one query filter, that is because of dummy server. When we build the server in Nodejs, we should be able to send multiple queries. Check filter product API functionality. (Cannot send multiple queries together)
 - Forgot password functionality not yet implemented. Implement through backend.
-- Add color checkboxes in admin product create form
-- Edit product functionality by admin.
-- Check create product error of payload too large.

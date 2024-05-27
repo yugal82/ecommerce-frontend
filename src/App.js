@@ -100,7 +100,7 @@ function App() {
             </Protected>
           }
         />
-        <Route
+        {/* <Route
           exact
           path="/payment-checkout"
           element={
@@ -108,7 +108,7 @@ function App() {
               <StripeCheckout />
             </Protected>
           }
-        />
+        /> */}
 
         {/* Admin routes */}
         <Route
