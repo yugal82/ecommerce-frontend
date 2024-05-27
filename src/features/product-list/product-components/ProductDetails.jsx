@@ -35,13 +35,27 @@ const ProductDetails = () => {
       alert.error('Log in to add item to cart');
       return;
     }
-    if (cart.findIndex((item) => item?.productId.id === product.id) < 0) {
+
+    if (selectedSize === null) {
+      alert.error('Please select a size');
+      return;
+    }
+
+    const isProductInCart = cart.findIndex((item) => item?.productId?.id === product?.id);
+    if (isProductInCart < 0) {
       const newItem = { item: product, productId: product.id, quantity: 1, size: selectedSize };
       dispatch(addItemInCartAsync({ newItem, user }));
       alert.success('Product added to cart');
     } else {
       // that means the product has already been added to cart
-      alert.show('Product already added to cart');
+      if (cart[isProductInCart].size !== selectedSize) {
+        // if the product is already in the cart but the size is different
+        const newItem = { item: product, productId: product.id, quantity: 1, size: selectedSize };
+        dispatch(addItemInCartAsync({ newItem, user }));
+        alert.success('Product added to cart');
+      } else {
+        alert.show('Product already added to cart');
+      }
     }
   };
 

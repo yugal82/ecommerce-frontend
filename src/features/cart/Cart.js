@@ -81,20 +81,25 @@ const Cart = ({ isCheckout }) => {
                           {/* <p className="mt-1 text-sm text-white">{product.item.color}</p> */}
                         </div>
                         <div className="flex flex-1 items-end justify-between text-sm">
-                          <div className="text-gray-500">
-                            <label htmlFor="quantity" className="text-sm font-medium leading-6 text-gray-400">
-                              Quantity:
-                            </label>
-                            <select
-                              onChange={(e) => onQuantityChange(e, product)}
-                              className="ml-2 text-xs py-1 px-6 mt-1 rounded-md"
-                              value={product?.quantity}
-                            >
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                            </select>
+                          <div>
+                            <div className="text-gray-500">
+                              <label htmlFor="quantity" className="text-sm font-medium leading-6 text-gray-400">
+                                Quantity:
+                              </label>
+                              <select
+                                onChange={(e) => onQuantityChange(e, product)}
+                                className="ml-2 text-xs py-1 px-6 mt-1 rounded-md"
+                                value={product?.quantity}
+                              >
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                              </select>
+                            </div>
+                            <div className="text-base text-gray-400">
+                              <p>Size: {product?.size}</p>
+                            </div>
                           </div>
 
                           <div className="flex">

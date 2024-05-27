@@ -31,7 +31,7 @@ const UserOrders = () => {
               </h2>
               <div className="" key={order?.id}>
                 <div className="px-4 sm:px-6">
-                  <div className="grid grid-cols-2 sm:grid-cols-5">
+                  <div className="grid grid-cols-2 sm:grid-cols-4">
                     {order?.items?.map((item) => (
                       <li key={item.id} className="flex items-center py-6 list-none">
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md shadow-md">
@@ -50,6 +50,7 @@ const UserOrders = () => {
                             </div>
                             <div className="text-gray-300">
                               <p className="text-sm font-medium leading-6">Quantity: {item?.quantity}</p>
+                              <p className="text-sm font-medium leading-6">Size: {item?.size}</p>
                             </div>
                           </div>
                         </div>

@@ -45,7 +45,7 @@ const Checkout = () => {
       );
       const items = [];
       cartProducts?.map((product) => {
-        items.push({ ...product?.productId, quantity: product?.quantity });
+        items.push({ ...product?.productId, quantity: product?.quantity, size: product?.size });
       });
       const order = {
         items: items,
