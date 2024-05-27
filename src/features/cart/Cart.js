@@ -6,8 +6,6 @@ import { selectLoggedInUser } from '../auth/authSlice';
 import Loader from '../../components/Loader';
 
 const Cart = ({ isCheckout }) => {
-  // here the quantity of the product is hardcoded. Once the user increases the quantity, we are not handling that API yet. But while implementing, again watch 'Cart Add/Update/Remove items' section of the tutorial.
-
   const dispatch = useDispatch();
   const cartProducts = useSelector(selectCartItems);
   const totalAmount = cartProducts?.reduce(
@@ -30,6 +28,14 @@ const Cart = ({ isCheckout }) => {
       quantity: e.target.value,
     };
     dispatch(updateCartAsync({ newProduct, user }));
+  };
+
+  const renderQuantityOptionTag = (stock) => {
+    let optiontags = [];
+    for (let i = 1; i <= stock; i++) {
+      optiontags.push(<option value={i}>{i}</option>);
+    }
+    return optiontags;
   };
 
   return (
@@ -91,10 +97,7 @@ const Cart = ({ isCheckout }) => {
                                 className="ml-2 text-xs py-1 px-6 mt-1 rounded-md"
                                 value={product?.quantity}
                               >
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                                {renderQuantityOptionTag(product?.productId?.stock)}
                               </select>
                             </div>
                             <div className="text-base text-gray-400">

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid';
 import ImageSlider from '../../../components/product-details-components/ImageSlider';
 import SizesRadio from '../../../components/product-details-components/SizesRadio';
-import ColorRadio from '../../../components/product-details-components/ColorRadio';
 import ProductDesc from '../../../components/product-details-components/ProductDesc';
 import { useLocation } from 'react-router-dom';
 import { addItemInCartAsync, selectCartItems } from '../../cart/cartSlice';
@@ -20,7 +19,6 @@ function classNames(...classes) {
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
-  const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const user = useSelector(selectLoggedInUser);
   const cart = useSelector(selectCartItems);
@@ -111,9 +109,6 @@ const ProductDetails = () => {
             </div>
 
             <form className="mt-6">
-              {/* Colors */}
-              {/* <ColorRadio selectedColor={selectedColor} setSelectedColor={setSelectedColor} product={state?.product} /> */}
-
               {/* Sizes */}
               <SizesRadio selectedSize={selectedSize} setSelectedSize={setSelectedSize} product={state?.product} />
 
