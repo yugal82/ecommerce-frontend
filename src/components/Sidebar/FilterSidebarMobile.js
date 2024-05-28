@@ -13,7 +13,18 @@ const FilterSidebarMobile = ({
   const [queryFilters, setQueryFilters] = useState({});
 
   const handleFilters = (e, section, option) => {
-    const newFilters = { ...queryFilters, [section.id]: option };
+    const isChecked = e.target.checked;
+    let newFilters = { ...queryFilters };
+    if (isChecked) {
+      if (newFilters[section.id]) {
+        newFilters[section.id].push(option);
+      } else {
+        newFilters[section.id] = [option];
+      }
+    } else {
+      const idx = newFilters[section.id].findIndex((filter) => filter === option);
+      newFilters[section.id].splice(idx, 1);
+    }
     setQueryFilters(newFilters);
     dispatch(getProductsByFiltersAsync(newFilters));
   };

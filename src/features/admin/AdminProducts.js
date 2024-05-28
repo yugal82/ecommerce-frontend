@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/20/solid';
@@ -52,6 +52,10 @@ const AdminProducts = () => {
   const handleSortFilterClick = (e, option) => {
     dispatch(getProductsBySortFilterAsync(option));
   };
+
+  useEffect(() => {
+    dispatch(getProductsByFiltersAsync({}));
+  }, [dispatch]);
 
   return (
     <div className="">

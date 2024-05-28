@@ -9,17 +9,18 @@ const FilterSidebar = ({ filters, getProductsByFiltersAsync, dispatch }) => {
     const isChecked = e.target.checked;
     let newFilters = { ...queryFilters };
     if (isChecked) {
-      newFilters[section.id] = option;
+      if (newFilters[section.id]) {
+        newFilters[section.id].push(option);
+      } else {
+        newFilters[section.id] = [option];
+      }
     } else {
-      delete newFilters[section.id];
+      const idx = newFilters[section.id].findIndex((filter) => filter === option);
+      newFilters[section.id].splice(idx, 1);
     }
     setQueryFilters(newFilters);
     dispatch(getProductsByFiltersAsync(newFilters));
   };
-
-  useEffect(() => {
-    dispatch(getProductsByFiltersAsync(queryFilters));
-  }, [dispatch, queryFilters]);
 
   return (
     <form className="hidden lg:block w-3/12">

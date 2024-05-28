@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/20/solid';
@@ -52,9 +52,12 @@ const ProductList = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const handleSortFilterClick = (e, option) => {
-    console.log(option);
     dispatch(getProductsBySortFilterAsync(option));
   };
+
+  useEffect(() => {
+    dispatch(getProductsByFiltersAsync({}));
+  }, [dispatch]);
 
   return (
     <div className="">

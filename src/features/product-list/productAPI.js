@@ -13,9 +13,7 @@ import { BASE_URL } from '../../utils/constant';
 const getProductsByFilters = async (filters) => {
   try {
     // filter = {"category": "smartphone"}
-    // currently we only support one query at a time. TODO: while implementing the backend, we should be able to add multiple filters.
     let queryString = '';
-    console.log(filters);
     for (let key in filters) {
       queryString += `${key}=${filters[key]}&`;
     }
