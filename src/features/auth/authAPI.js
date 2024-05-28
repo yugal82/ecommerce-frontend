@@ -31,11 +31,12 @@ const checkAuth = async (user) => {
   }
 };
 
-const logout = async (user) => {
+const logout = async () => {
   try {
     const url = `${BASE_URL}user/logout`;
-    const response = await axios.post(url, user, { headers: { 'Content-Type': 'application/json' } });
-    return response.data;
+    const response = await axios.get(url);
+    if (response.status === 200) return response.status;
+    else throw new Error("Couldn't log out");
   } catch (error) {
     return error.message;
   }
