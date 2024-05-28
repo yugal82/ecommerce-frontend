@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkAuthAsync, selectLoggedInUser } from './features/auth/authSlice';
+import { getItemsByUserAsync } from './features/cart/cartSlice';
 
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
@@ -9,9 +12,6 @@ import Signup from './components/auth/Signup';
 import Checkout from './features/checkout/Checkout';
 import ProductDetails from './features/product-list/product-components/ProductDetails';
 import Protected from './components/auth/Protected';
-import { useDispatch, useSelector } from 'react-redux';
-import { checkAuthAsync, selectLoggedInUser } from './features/auth/authSlice';
-import { getItemsByUserAsync } from './features/cart/cartSlice';
 import OrderSuccess from './features/orders/OrderSuccess';
 import UserOrders from './features/user/UserOrders';
 import UserProfile from './features/user/UserProfile';
@@ -23,10 +23,10 @@ import AdminProductDetails from './features/admin/AdminProductDetails';
 import CreateProductForm from './features/admin/CreateProductForm';
 import AdminOrders from './features/admin/AdminOrders';
 import Wishlist from './features/wishlist/Wishlist';
-import { getLoggedInUserAsync } from './features/user/userSlice';
 import AdminOrderDetails from './features/admin/AdminOrderDetails';
-import StripeCheckout from './features/stripe-checkout/StripeCheckout';
+// import StripeCheckout from './features/stripe-checkout/StripeCheckout';
 import AdminUpdateProductForm from './features/admin/AdminUpdateProductForm';
+import { getLoggedInUserAsync } from './features/user/userSlice';
 
 function App() {
   const dispatch = useDispatch();
