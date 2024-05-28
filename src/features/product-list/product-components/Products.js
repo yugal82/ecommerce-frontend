@@ -11,7 +11,7 @@ import {
   getProductsBySortFilterAsync,
   selectProductStatus,
 } from '../productSlice';
-import { categories, brands, colors } from '../../../utils/constant';
+import { categories, brands } from '../../../utils/constant';
 import Loader from '../../../components/Loader';
 
 const sortOptions = [
