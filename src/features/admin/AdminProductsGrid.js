@@ -1,6 +1,6 @@
 import React from 'react';
 import AdminProductCard from './AdminProductCard';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteProductAsync } from '../product-list/productSlice';
 import { useAlert } from 'react-alert';
@@ -8,7 +8,7 @@ import { useAlert } from 'react-alert';
 const AdminProductsGrid = ({ products }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleDelete = (product) => {
     const selectedProduct = { ...product };

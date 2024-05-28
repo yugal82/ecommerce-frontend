@@ -9,7 +9,7 @@ const Protected = ({ children }) => {
   const alert = useAlert();
   useEffect(() => {
     if (!user) alert.error('Please login');
-  }, []);
+  }, [user]);
 
   if (!user) return <Navigate to="/login" replace={true} />;
 

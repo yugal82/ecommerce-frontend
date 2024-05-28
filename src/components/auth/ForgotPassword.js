@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectLoggedInUser } from '../../features/auth/authSlice';
 
 const ForgotPassword = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const user = useSelector(selectLoggedInUser);
 
   const {

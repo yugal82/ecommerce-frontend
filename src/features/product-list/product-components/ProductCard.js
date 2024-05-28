@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
       <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-60 border-none outline-none">
         <img
           src={product?.imageSrc}
-          // alt={product.imageAlt}
+          alt={''}
           className="h-full w-full object-cover object-center lg:h-full lg:w-full"
         />
       </div>
