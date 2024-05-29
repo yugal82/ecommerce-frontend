@@ -14,7 +14,10 @@ const login = async (loginInfo) => {
   return new Promise(async (resolve, reject) => {
     try {
       const url = `${BASE_URL}user/login`;
-      const response = await axios.post(url, loginInfo, { headers: { 'Content-Type': 'application/json' } });
+      const response = await axios.post(url, loginInfo, {
+        withCredentials: true,
+        headers: { 'Content-Type': 'application/json' },
+      });
       if (response.status === 200) {
         const data = await response.data;
         resolve({ data });
