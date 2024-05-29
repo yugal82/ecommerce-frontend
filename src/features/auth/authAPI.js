@@ -4,8 +4,8 @@ const createUser = async (userData) => {
   try {
     const url = `${BASE_URL}user/signup`;
     const response = await axios.post(url, userData, {
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: true,
+      // headers: { 'Content-Type': 'application/json' },
+      // withCredentials: true,
     });
     return response;
   } catch (error) {
@@ -18,8 +18,8 @@ const login = async (loginInfo) => {
     try {
       const url = `${BASE_URL}user/login`;
       const response = await axios.post(url, loginInfo, {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true,
+        // headers: { 'Content-Type': 'application/json' },
+        // withCredentials: true,
       });
       if (response.status === 200) {
         const data = await response.data;
