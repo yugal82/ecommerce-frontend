@@ -3,7 +3,10 @@ import { BASE_URL } from '../../utils/constant';
 const createUser = async (userData) => {
   try {
     const url = `${BASE_URL}user/signup`;
-    const response = await axios.post(url, userData, { headers: { 'Content-Type': 'application/json' } });
+    const response = await axios.post(url, userData, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    });
     return response;
   } catch (error) {
     return error.message;
@@ -14,7 +17,10 @@ const login = async (loginInfo) => {
   return new Promise(async (resolve, reject) => {
     try {
       const url = `${BASE_URL}user/login`;
-      const response = await axios.post(url, loginInfo, { headers: { 'Content-Type': 'application/json' } });
+      const response = await axios.post(url, loginInfo, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      });
       if (response.status === 200) {
         const data = await response.data;
         resolve({ data });
