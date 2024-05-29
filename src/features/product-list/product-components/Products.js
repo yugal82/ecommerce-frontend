@@ -56,7 +56,7 @@ const ProductList = () => {
   };
 
   useEffect(() => {
-    dispatch(getProductsByFiltersAsync({}));
+    dispatch(getProductsByFiltersAsync());
   }, [dispatch]);
 
   return (

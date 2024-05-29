@@ -54,7 +54,7 @@ export default function CheckoutForm({ clientSecret }) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `http://localhost:8080/order-success/${latestOrder?.id}`,
+        return_url: `https://ecommerce-clothing-api.vercel.app/order-success/${latestOrder?.id}`,
       },
     });
 

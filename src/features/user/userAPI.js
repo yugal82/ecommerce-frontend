@@ -1,10 +1,10 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:8080/';
+import { BASE_URL } from '../../utils/constant';
 
 const getLoggedInUser = async (userId) => {
   try {
     // const url = `${BASE_URL}user`;
-    const url = `http://localhost:8080/user/own/${userId}`;
+    const url = `${BASE_URL}user/own/${userId}`;
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
@@ -25,7 +25,7 @@ const getUserOrders = async (user) => {
 const updateUser = async (userData, user) => {
   try {
     // const url = `${BASE_URL}user/${user.id}`;
-    const url = `http://localhost:8080/user/update-user`;
+    const url = `${BASE_URL}user/update-user`;
     const response = await axios.patch(url, userData, {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.jwtToken}` },
     });

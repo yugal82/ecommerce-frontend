@@ -22,7 +22,7 @@ const StripeCheckout = () => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch('http://localhost:8080/create-payment-intent', {
+    fetch('https://ecommerce-clothing-api.vercel.app/create-payment-intent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ totalAmount: latestOrder.totalAmount, orderId: latestOrder?.id }),

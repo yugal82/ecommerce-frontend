@@ -78,10 +78,12 @@ const Checkout = () => {
   };
 
   const createOrderByRazorpay = async (totalAmount) => {
-    const response = await axios.get('http://localhost:8080/payment/get-key');
+    const response = await axios.get('https://ecommerce-clothing-api.vercel.app/payment/get-key');
     const razorpay_key = response?.data?.key;
 
-    const orderResponse = await axios.post('http://localhost:8080/payment/checkout', { amount: totalAmount });
+    const orderResponse = await axios.post('https://ecommerce-clothing-api.vercel.app/payment/checkout', {
+      amount: totalAmount,
+    });
     const order = orderResponse?.data?.data;
 
     const options = {
@@ -94,7 +96,7 @@ const Checkout = () => {
       order_id: order?.id,
       // callback_url: 'http://localhost:8080/payment/verify',
       handler: async function (response) {
-        const verifyRes = await axios.post('http://localhost:8080/payment/verify', {
+        const verifyRes = await axios.post('https://ecommerce-clothing-api.vercel.app/payment/verify', {
           razorpay_payment_id: response.razorpay_payment_id,
           razorpay_order_id: response.razorpay_order_id,
           razorpay_signature: response.razorpay_signature,

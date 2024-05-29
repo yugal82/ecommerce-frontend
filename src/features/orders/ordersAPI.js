@@ -25,7 +25,7 @@ const getAllOrders = async (user) => {
 
 const updateOrder = async (order, user) => {
   try {
-    const url = `http://localhost:8080/order/update-order/${order.id}`;
+    const url = `${BASE_URL}order/update-order/${order.id}`;
     const response = await axios.patch(url, order, {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.jwtToken}` },
     });

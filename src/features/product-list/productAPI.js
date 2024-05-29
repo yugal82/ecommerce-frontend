@@ -17,7 +17,13 @@ const getProductsByFilters = async (filters) => {
     for (let key in filters) {
       queryString += `${key}=${filters[key]}&`;
     }
-    const url = `${BASE_URL}product?` + queryString;
+    let url = `${BASE_URL}product?` + queryString;
+    // let url;
+    // if (filters) {
+    //   url = `${BASE_URL}product?` + queryString;
+    // } else {
+    //   url = `${BASE_URL}product`;
+    // }
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
