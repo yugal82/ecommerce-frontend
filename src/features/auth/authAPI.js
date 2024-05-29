@@ -5,6 +5,7 @@ const createUser = async (userData) => {
     const url = `${BASE_URL}user/signup`;
     const response = await axios.post(url, userData, {
       headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
     });
     return response;
   } catch (error) {
@@ -18,6 +19,7 @@ const login = async (loginInfo) => {
       const url = `${BASE_URL}user/login`;
       const response = await axios.post(url, loginInfo, {
         headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
       });
       if (response.status === 200) {
         const data = await response.data;
@@ -35,7 +37,10 @@ const login = async (loginInfo) => {
 const checkAuth = async (user) => {
   try {
     const url = `${BASE_URL}user/check`;
-    const response = await axios.get(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${user?.jwtToken}` },
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     return error;
@@ -45,7 +50,7 @@ const checkAuth = async (user) => {
 const logout = async () => {
   try {
     const url = `${BASE_URL}user/logout`;
-    const response = await axios.get(url);
+    const response = await axios.get(url, { withCredentials: true });
     if (response.status === 200) return response.status;
     else throw new Error("Couldn't log out");
   } catch (error) {

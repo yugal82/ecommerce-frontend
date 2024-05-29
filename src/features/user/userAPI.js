@@ -5,7 +5,7 @@ const getLoggedInUser = async (userId) => {
   try {
     // const url = `${BASE_URL}user`;
     const url = `${BASE_URL}user/own/${userId}`;
-    const response = await axios.get(url);
+    const response = await axios.get(url, { withCredentials: true });
     return response.data;
   } catch (error) {
     return error.message;
@@ -15,7 +15,10 @@ const getLoggedInUser = async (userId) => {
 const getUserOrders = async (user) => {
   try {
     const url = `${BASE_URL}order/my-orders`;
-    const response = await axios.get(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${user?.jwtToken}` },
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     return error.message;
@@ -28,6 +31,7 @@ const updateUser = async (userData, user) => {
     const url = `${BASE_URL}user/update-user`;
     const response = await axios.patch(url, userData, {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.jwtToken}` },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {

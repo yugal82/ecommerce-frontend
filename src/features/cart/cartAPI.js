@@ -6,6 +6,7 @@ const addItemInCart = async (item, user) => {
     const url = `${BASE_URL}cart/add-item`;
     const response = await axios.post(url, item, {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.jwtToken}` },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -22,6 +23,7 @@ const getItemsByUser = async (user) => {
       headers: {
         Authorization: `Bearer ${user?.jwtToken}`,
       },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -34,6 +36,7 @@ const updateItemInCart = async (item, user) => {
     const url = `${BASE_URL}cart/update-item/${item.id}`;
     const response = await axios.patch(url, item, {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.jwtToken}` },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -44,7 +47,10 @@ const updateItemInCart = async (item, user) => {
 const deleteItemFromCart = async (itemId, user) => {
   try {
     const url = `${BASE_URL}cart/delete-item/${itemId}`;
-    const response = await axios.delete(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
+    const response = await axios.delete(url, {
+      headers: { Authorization: `Bearer ${user?.jwtToken}` },
+      withCredentials: true,
+    });
     return response;
   } catch (error) {
     return error.message;

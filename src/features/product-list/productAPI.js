@@ -24,7 +24,7 @@ const getProductsByFilters = async (filters) => {
     // } else {
     //   url = `${BASE_URL}product`;
     // }
-    const response = await axios.get(url);
+    const response = await axios.get(url, { withCredentials: true });
     return response.data;
   } catch (error) {
     return error.message;
@@ -34,7 +34,7 @@ const getProductsByFilters = async (filters) => {
 const getProductsBySortFilter = async (sortFilter) => {
   try {
     const url = `${BASE_URL}product?sort=${sortFilter?.sort}&order=${sortFilter?.order}`;
-    const response = await axios.get(url);
+    const response = await axios.get(url, { withCredentials: true });
     return response.data;
   } catch (error) {
     return error.message;
@@ -44,7 +44,10 @@ const getProductsBySortFilter = async (sortFilter) => {
 const createProduct = async (product) => {
   try {
     const url = `${BASE_URL}product/create-product`;
-    const response = await axios.post(url, product, { headers: { 'Content-Type': 'application/json' } });
+    const response = await axios.post(url, product, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    });
     return response;
   } catch (error) {
     return error.message;
@@ -54,7 +57,10 @@ const createProduct = async (product) => {
 const deleteProduct = async (product) => {
   try {
     const url = `${BASE_URL}product/${product.id}`;
-    const response = await axios.patch(url, product, { headers: { 'Content-Type': 'application/json' } });
+    const response = await axios.patch(url, product, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    });
     return response;
   } catch (error) {
     return error.message;
@@ -64,7 +70,10 @@ const deleteProduct = async (product) => {
 const updateProduct = async (product) => {
   try {
     const url = `${BASE_URL}product/${product.id}`;
-    const response = await axios.patch(url, product, { headers: { 'Content-Type': 'application/json' } });
+    const response = await axios.patch(url, product, {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     return error.message;

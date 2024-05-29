@@ -6,6 +6,7 @@ const addItemInWishlist = async (item, user) => {
     const url = `${BASE_URL}wishlist/add-item`;
     const response = await axios.post(url, item, {
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.jwtToken}` },
+      withCredentials: true,
     });
     return response.data;
   } catch (error) {
@@ -16,7 +17,10 @@ const addItemInWishlist = async (item, user) => {
 const getWishlistedItemsByUser = async (user) => {
   try {
     const url = `${BASE_URL}wishlist`;
-    const response = await axios.get(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${user?.jwtToken}` },
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     return error.message;
@@ -26,7 +30,10 @@ const getWishlistedItemsByUser = async (user) => {
 const deleteItemFromWishlist = async (itemId, user) => {
   try {
     const url = `${BASE_URL}wishlist/delete-item/${itemId}`;
-    const response = await axios.delete(url, { headers: { Authorization: `Bearer ${user?.jwtToken}` } });
+    const response = await axios.delete(url, {
+      headers: { Authorization: `Bearer ${user?.jwtToken}` },
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     return error.message;
