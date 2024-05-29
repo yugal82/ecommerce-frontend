@@ -10,15 +10,22 @@ const createUser = async (userData) => {
   }
 };
 
-// function for login is not yet implemented. but will be added in the future.
 const login = async (loginInfo) => {
-  try {
-    const url = `${BASE_URL}user/login`;
-    const response = await axios.post(url, loginInfo, { headers: { 'Content-Type': 'application/json' } });
-    return response.data;
-  } catch (error) {
-    return error;
-  }
+  return new Promise(async (resolve, reject) => {
+    try {
+      const url = `${BASE_URL}user/login`;
+      const response = await axios.post(url, loginInfo, { headers: { 'Content-Type': 'application/json' } });
+      if (response.status === 200) {
+        const data = await response.data;
+        resolve({ data });
+      } else {
+        const error = response.statusText;
+        reject(error);
+      }
+    } catch (error) {
+      reject(error.response.statusText);
+    }
+  });
 };
 
 const checkAuth = async (user) => {

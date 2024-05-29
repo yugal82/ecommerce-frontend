@@ -7,7 +7,7 @@ import Footer from '../Footer';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const error = useSelector(selectError);
+  const loginError = useSelector(selectError);
   const user = useSelector(selectLoggedInUser);
 
   const {
@@ -76,7 +76,7 @@ const Login = () => {
                   className="block w-full rounded-md border-0 py-1.5 text-black shadow-sm sm:text-sm sm:leading-6"
                 />
                 <p className="text-red-500 font-semibold text-sm">{errors?.password?.message}</p>
-                {error && <p className="text-red-500 font-semibold text-sm">{error.message}</p>}
+                {loginError && <p className="text-red-500 font-semibold text-sm">{loginError}</p>}
               </div>
             </div>
 

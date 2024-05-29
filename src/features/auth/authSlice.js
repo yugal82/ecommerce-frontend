@@ -13,12 +13,12 @@ export const createUserAsync = createAsyncThunk('user/createUser', async (userDa
   return response.data;
 });
 
-export const loginAsync = createAsyncThunk('user/login', async (loginInfo) => {
+export const loginAsync = createAsyncThunk('user/login', async (loginInfo, { rejectWithValue }) => {
   try {
-    const data = await login(loginInfo);
-    return data.user;
+    const res = await login(loginInfo);
+    return res?.data?.user;
   } catch (error) {
-    return error;
+    return rejectWithValue(error);
   }
 });
 
@@ -57,7 +57,7 @@ export const authSlice = createSlice({
       })
       .addCase(loginAsync.rejected, (state, action) => {
         state.status = 'idle';
-        state.error = action.error;
+        state.error = action.payload;
       })
       .addCase(logoutAsync.pending, (state) => {
         state.status = 'loading';
