@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuthAsync, selectLoggedInUser } from './features/auth/authSlice';
 import { getItemsByUserAsync } from './features/cart/cartSlice';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Home from './pages/Home';
 import Navbar from './components/Navbar';

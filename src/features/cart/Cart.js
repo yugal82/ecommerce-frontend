@@ -4,6 +4,7 @@ import { deleteItemFromCartAsync, selectCartItems, selectCartStatus, updateCartA
 import { discountedPrice } from '../../utils/constant';
 import { selectLoggedInUser } from '../auth/authSlice';
 import Loader from '../../components/Loader';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Cart = ({ isCheckout }) => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const Cart = ({ isCheckout }) => {
 
   return (
     <div className="w-full px-8">
+      <ToastContainer theme="dark" />
       {cartStatus === 'loading' && <Loader />}
       {cartProducts?.length === 0 ? (
         <div className="py-6 text-white h-screen">
@@ -52,6 +54,7 @@ const Cart = ({ isCheckout }) => {
         </div>
       ) : (
         <div className="min-h-screen">
+          <ToastContainer theme="dark" />
           <div className="px-4 py-6 sm:px-6">
             <div className="flex items-start justify-between">
               <h2 className="text-lg font-medium text-white">Shopping cart</h2>
@@ -109,6 +112,11 @@ const Cart = ({ isCheckout }) => {
                             <button
                               onClick={() => {
                                 dispatch(deleteItemFromCartAsync({ id: product?.id, user }));
+                                toast.success('Item successfully removed from cart.', {
+                                  position: 'bottom-right',
+                                  autoClose: true,
+                                  delay: 3000,
+                                });
                               }}
                               type="button"
                               className="text-red-700 font-bold hover:scale-105"

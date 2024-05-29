@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from '../../auth/authSlice';
 import { discountedPrice } from '../../../utils/constant';
 import { addItemInWishlistAsync, selectWishlistItems } from '../../wishlist/wishlistSlice';
-import { useAlert } from 'react-alert';
+import { ToastContainer, toast } from 'react-toastify';
 
 const reviews = { href: '#', average: 4, totalCount: 117 };
 
@@ -25,17 +25,16 @@ const ProductDetails = () => {
   const wishlistItems = useSelector(selectWishlistItems);
 
   const { state } = useLocation();
-  const alert = useAlert();
 
   const handleAddItemInCart = (e, product) => {
     e.preventDefault();
     if (!user) {
-      alert.error('Log in to add item to cart');
+      toast.error('Log in to add item to cart', { position: 'bottom-right', autoClose: true, delay: 3000 });
       return;
     }
 
     if (selectedSize === null) {
-      alert.error('Please select a size');
+      toast.info('Please select a size', { position: 'bottom-right', autoClose: true, delay: 3000 });
       return;
     }
 
@@ -43,16 +42,16 @@ const ProductDetails = () => {
     if (isProductInCart < 0) {
       const newItem = { item: product, productId: product.id, quantity: 1, size: selectedSize };
       dispatch(addItemInCartAsync({ newItem, user }));
-      alert.success('Product added to cart');
+      toast.success('Product added to cart', { position: 'bottom-right', autoClose: true, delay: 3000 });
     } else {
       // that means the product has already been added to cart
       if (cart[isProductInCart].size !== selectedSize) {
         // if the product is already in the cart but the size is different
         const newItem = { item: product, productId: product.id, quantity: 1, size: selectedSize };
         dispatch(addItemInCartAsync({ newItem, user }));
-        alert.success('Product added to cart');
+        toast.success('Product added to cart', { position: 'bottom-right', autoClose: true, delay: 3000 });
       } else {
-        alert.show('Product already added to cart');
+        toast.info('Product already added to cart', { position: 'bottom-right', autoClose: true, delay: 3000 });
       }
     }
   };
@@ -60,20 +59,27 @@ const ProductDetails = () => {
   const handleAddItemInWishlist = (e, product) => {
     e.preventDefault();
     if (!user) {
-      alert.error('Login to add product to wishlist');
+      toast.error('Login to add product to wishlist', { position: 'bottom-right', autoClose: true, delay: 3000 });
       return;
     }
+
+    if (selectedSize === null) {
+      toast.info('Please select a size', { position: 'bottom-right', autoClose: true, delay: 3000 });
+      return;
+    }
+
     if (wishlistItems?.findIndex((item) => item?.productId.id === product.id) < 0) {
       const item = { item: product, productId: product.id, userId: user?.id };
       dispatch(addItemInWishlistAsync({ item, user }));
-      alert.success('Product added to wishlist');
+      toast.success('Product added to wishlist', { position: 'bottom-right', autoClose: true, delay: 3000 });
     } else {
-      alert.show('Product already added in wishlist');
+      toast.info('Product already added in wishlist', { position: 'bottom-right', autoClose: true, delay: 3000 });
     }
   };
 
   return (
     <div className="">
+      <ToastContainer theme="dark" />
       <div className="pt-6 px-8">
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="lg:col-span-2">

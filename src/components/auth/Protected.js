@@ -2,16 +2,22 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { selectUserInfo } from '../../features/user/userSlice';
-import { useAlert } from 'react-alert';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Protected = ({ children }) => {
   const user = useSelector(selectUserInfo);
-  const alert = useAlert();
+
   useEffect(() => {
-    if (!user) alert.error('Please login');
+    if (!user) toast.error('Please login', { position: 'bottom-right', autoClose: true, delay: 3000 });
   }, [user]);
 
-  if (!user) return <Navigate to="/login" replace={true} />;
+  if (!user)
+    return (
+      <div>
+        <Navigate to="/login" replace={true} />
+        <ToastContainer theme="dark" />
+      </div>
+    );
 
   return children;
 };

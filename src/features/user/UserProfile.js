@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectUserInfo, updateUserAsync } from './userSlice';
 import { useForm } from 'react-hook-form';
 import { selectLoggedInUser } from '../auth/authSlice';
-import { useAlert } from 'react-alert';
 import Footer from '../../components/Footer';
+import { ToastContainer, toast } from 'react-toastify';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -20,21 +20,19 @@ const UserProfile = () => {
     formState: { errors },
   } = useForm();
 
-  const alert = useAlert();
-
   const handleEdit = (address, index) => {
     const stringAddress = address?.street + ' ' + address?.city + ' ' + address?.state + ' ' + address?.pinCode;
     const newUser = { ...userInfo, addresses: [...userInfo.addresses] };
     newUser.addresses[index] = stringAddress;
     dispatch(updateUserAsync({ newUser, user }));
-    alert.success('Address updated successfully');
+    toast.success('Address updated successfully', { position: 'bottom-right', autoClose: true, delay: 3000 });
     setSelectedEditIndex(-1);
   };
   const handleRemove = (e, index) => {
     const newUser = { ...userInfo, addresses: [...userInfo.addresses] }; // for shallow copy issue
     newUser.addresses.splice(index, 1);
     dispatch(updateUserAsync({ newUser, user }));
-    alert.success('Address removed successfully');
+    toast.success('Address removed successfully', { position: 'bottom-right', autoClose: true, delay: 3000 });
   };
 
   const handleAdd = (address) => {
@@ -45,12 +43,13 @@ const UserProfile = () => {
     };
     newUser.addresses.push(stringAddress);
     dispatch(updateUserAsync({ newUser, user }));
-    alert.success('Address added successfully');
+    toast.success('Address added successfully', { position: 'bottom-right', autoClose: true, delay: 3000 });
     setShowAddAddressForm(false);
   };
 
   return (
     <div>
+      <ToastContainer theme="dark" />
       <div className="mx-auto mt-12 bg-background max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
           <h1 className="text-4xl my-5 font-bold tracking-tight text-white">

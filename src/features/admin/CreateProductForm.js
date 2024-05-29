@@ -4,11 +4,10 @@ import { useForm } from 'react-hook-form';
 import ImageUploader from './ImageUploader';
 import { useDispatch } from 'react-redux';
 import { createProductAsync } from '../product-list/productSlice';
-import { useAlert } from 'react-alert';
+import { ToastContainer, toast } from 'react-toastify';
 
 const CreateProductForm = () => {
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   //states
   const [imageSrc, setImageSrc] = useState(null);
@@ -36,7 +35,7 @@ const CreateProductForm = () => {
     data = await convertAllImgToB64(data);
     data = converStringToNumber(data);
     dispatch(createProductAsync(data));
-    alert.success('Product was successfully created');
+    toast.success('Product was successfully created', { position: 'bottom-right', autoClose: true, delay: 3000 });
 
     reset();
 
@@ -102,6 +101,7 @@ const CreateProductForm = () => {
 
   return (
     <div className="text-white mx-auto max-w-7xl py-6 sm:py-12 px-4 sm:px-16 lg:px-24">
+      <ToastContainer theme="dark" />
       <form onSubmit={handleSubmit((data) => handleFormSumbit(data))}>
         <div className="">
           <div className="border-b border-gray-900/10 pb-6">

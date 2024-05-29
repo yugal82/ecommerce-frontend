@@ -3,24 +3,24 @@ import AdminProductCard from './AdminProductCard';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteProductAsync } from '../product-list/productSlice';
-import { useAlert } from 'react-alert';
+import { ToastContainer, toast } from 'react-toastify';
 
 const AdminProductsGrid = ({ products }) => {
   const dispatch = useDispatch();
-  const alert = useAlert();
   // const navigate = useNavigate();
 
   const handleDelete = (product) => {
     const selectedProduct = { ...product };
     selectedProduct.deleted = true;
     dispatch(deleteProductAsync(selectedProduct));
-    alert.success('product deleted successfully');
+    toast.success('product deleted successfully', { position: 'bottom-right', autoClose: true, delay: 3000 });
     window.location.reload();
   };
 
   return (
     /* Product grid */
     <div className="w-full lg:col-span-3">
+      <ToastContainer theme="dark" />
       <div className="">
         <div className="px-4 py-8 sm:px-6 sm:py-6 lg:px-8">
           <Link to="/admin/create-product" className="text-white bg-primary p-2 font-semibold rounded">

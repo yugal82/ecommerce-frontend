@@ -20,11 +20,11 @@ const sortOptions = [
 ];
 
 const filters = [
-  {
-    id: 'color',
-    name: 'Color',
-    options: colors,
-  },
+  // {
+  //   id: 'color',
+  //   name: 'Color',
+  //   options: colors,
+  // },
   {
     id: 'category',
     name: 'Category',
