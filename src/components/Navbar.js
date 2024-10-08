@@ -45,7 +45,7 @@ const Navbar = () => {
                         to="/"
                         className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-bold text-2xl md:text-3xl"
                       >
-                        Ecommerce
+                        FashionFusion
                       </Link>
                     </div>
                     <div className="relative hidden md:block">
